@@ -1,0 +1,18 @@
+### SIGNUP USER
+POST http://localhost:8000/api/auth/signup
+content-type: application/json
+
+{
+  "firstName": "Lars-Åke",
+  "lastName": "Andersson",
+  "email": "gunnar@bertilsson.se"
+}
+
+### LOGIN USER
+POST http://localhost:8000/api/auth/login
+content-type: application/json
+
+{
+  "email": "gunnar@bertilsson.se",
+  "password": "1234"
+}

@@ -5,7 +5,6 @@ const EMAIL_VALIDATION_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 // Create User Schema
 const userSchema = new mongoose.Schema({
-	_id: mongoose.Schema.Types.ObjectId,
 	firstName: {
 		type: String,
 		required: [true, "Please enter a first name..."],
