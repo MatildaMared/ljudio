@@ -35,7 +35,6 @@ const userSchema = new mongoose.Schema({
 
 // Run this function before user is saved/re-saved
 userSchema.pre("save", async function (next) {
-	console.log("Hejhej nu ska du sparas 😻");
 	const saltRounds = 10;
 
 	// If the password wasn't modified, exit the function
