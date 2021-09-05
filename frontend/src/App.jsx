@@ -1,21 +1,27 @@
 import React, { useContext } from "react";
-import Player from "./components/Player";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { UserContext } from "../context/UserContext";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
-	const [context, updateContext] = useContext(UserContext);
-	console.log(context);
 
 	return (
 		<div className="App">
-			<button
-				onClick={() => {
-					updateContext({ isAuthenticated: true });
-				}}>
-				Click to authenticate
-			</button>
-			<Player videoId="z4WCaWJgOqM" />
+			<Router>
+				<Switch>
+					<Route path="/" exact>
+						<HomePage />
+					</Route>
+					<Route path="/login">
+						<LoginPage />
+					</Route>
+					<Route path="/signup">
+						<SignupPage />
+					</Route>
+				</Switch>
+			</Router>
 		</div>
 	);
 }
