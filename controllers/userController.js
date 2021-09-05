@@ -20,7 +20,6 @@ async function getUser(req, res, next) {
 			// If there was no error, set userId equal to
 			// the id from the decoded JWT
 			userId = decoded.id;
-			console.log("User id is: ", userId);
 		});
 
 		// Tries to find user in database
@@ -33,7 +32,13 @@ async function getUser(req, res, next) {
 
 		res.status(200).json({
 			success: true,
-			user,
+			user: {
+				id: user._id,
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email,
+				playlists: user.playlists,
+			},
 		});
 	} catch (err) {
 		next(err);
