@@ -50,7 +50,7 @@ function SignupPage() {
         history.push('/');
         updateContext({
           isAuthenticated: true,
-          use: data.user,
+          user: data.user,
         });
       } else {
         updateContext({
