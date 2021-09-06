@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import '../../styles/signup.css';
 
 function SignupPage() {
   const [firstName, setFirstName] = useState('');
@@ -49,43 +50,53 @@ function SignupPage() {
   return (
     <div>
       <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="text">First name: </label>
-        <input
-          type="text"
-          className="firstName"
-          name="firstName"
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <label htmlFor="text">Last name: </label>
-        <input
-          type="text"
-          className="lastName"
-          name="lastName"
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <label htmlFor="email">Email: </label>
-        <input
-          type="email"
-          className="email"
-          type="email"
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password: </label>
-        <input
-          type="password"
-          name="password"
-          className="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label htmlFor="password">Password again: </label>
-        <input
-          type="password"
-          name="password"
-          className="password"
-          onChange={(e) => setCheckPassword(e.target.value)}
-        />
+      <form onSubmit={handleSubmit} className="form">
+        <div className="controlling-form">
+          <label htmlFor="text">First name: </label>
+          <input
+            type="text"
+            className="firstName"
+            name="firstName"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div className="controlling-form">
+          <label htmlFor="text">Last name: </label>
+          <input
+            type="text"
+            className="lastName"
+            name="lastName"
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div className="controlling-form">
+          <label htmlFor="email">Email: </label>
+          <input
+            type="email"
+            className="email"
+            type="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="controlling-form">
+          <label htmlFor="password">Password: </label>
+          <input
+            type="password"
+            name="password"
+            className="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="controlling-form">
+          <label htmlFor="password">Password again: </label>
+          <input
+            type="password"
+            name="password"
+            className="password"
+            onChange={(e) => setCheckPassword(e.target.value)}
+          />
+        </div>
         <input type="submit" className="form__btn" value="Create account" />
       </form>
     </div>
