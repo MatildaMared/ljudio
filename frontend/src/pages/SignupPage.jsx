@@ -7,11 +7,12 @@ function SignupPage() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checkPassword, setCheckPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    passwordIdentical(password, checkPassword);
+    passwordIdentical(password, confirmPassword);
   };
 
   const passwordIdentical = (pass1, pass2) => {
@@ -41,7 +42,11 @@ function SignupPage() {
       });
 
       const data = await res.json();
-      console.log(data);
+
+      if (data.success) {
+        localStorage.setItem('token', data.user.token);
+        history.push('/');
+      }
     } catch (err) {
       console.log(err);
     }
@@ -89,15 +94,22 @@ function SignupPage() {
           />
         </div>
         <div className="controlling-form">
-          <label htmlFor="password">Password again: </label>
+          <label htmlFor="password">Confirm password: </label>
           <input
             type="password"
             name="password"
             className="password"
-            onChange={(e) => setCheckPassword(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
         <input type="submit" className="form__btn" value="Create account" />
+
+        <p className="form__text">
+          Already have an account?{' '}
+          <Link to="/login" className="form__link">
+            Log in
+          </Link>
+        </p>
       </form>
     </div>
   );
