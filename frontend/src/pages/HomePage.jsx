@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "./../context/UserContext";
 import { useHistory } from "react-router-dom";
 
 import Player from "../components/Player";

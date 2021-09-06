@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PrivateRoute from "../routing/PrivateRoute";
-import { UserProvider } from "../context/UserContext";
+import PrivateRoute from "./routing/PrivateRoute";
+import { UserProvider } from "./context/UserContext";
 
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
