@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 import '../../styles/signup.css';
 
 function SignupPage() {
+  const [context, updateContext] = useContext(UserContext);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -46,6 +48,14 @@ function SignupPage() {
       if (data.success) {
         localStorage.setItem('token', data.user.token);
         history.push('/');
+        updateContext({
+          isAuthenticated: true,
+          use: data.user,
+        });
+      } else {
+        updateContext({
+          isAuthenticated: false,
+        });
       }
     } catch (err) {
       console.log(err);
