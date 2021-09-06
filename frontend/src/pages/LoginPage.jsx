@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 function LoginPage() {
 	const [email, setEmail] = useState("");
@@ -38,26 +38,40 @@ function LoginPage() {
 	return (
 		<div>
 			<h1>Log in</h1>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="email">
-					Email:
+			<form className="form" onSubmit={handleSubmit}>
+				<div className="form__form-control">
+					<label htmlFor="email" className="form__label">
+						Email:{" "}
+					</label>
 					<input
+						className="form__input"
 						type="email"
 						name="email"
 						id="email"
 						onChange={(e) => setEmail(e.target.value)}
 					/>
-				</label>
-				<label htmlFor="password">
-					Password:
+				</div>
+				<div className="form__form-control">
+					<label htmlFor="password" className="form__label">
+						Password:{" "}
+					</label>
 					<input
+						className="form__input"
 						type="password"
 						name="password"
 						id="password"
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-				</label>
-				<input type="submit" value="Log in" />
+				</div>
+				<input className="form__btn" type="submit" value="Log in" />
+				<p className="form__text">
+					Don't have an account yet?
+					<Link to="/signup" className="form__link">
+						{" "}
+						Click here
+					</Link>
+					to sign up!
+				</p>
 			</form>
 		</div>
 	);
