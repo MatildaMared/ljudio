@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import '../../styles/signup.css';
