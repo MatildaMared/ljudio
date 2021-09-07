@@ -69,7 +69,7 @@ function LoginPage() {
           <Link to="/signup" className="form__link">
             {' '}
             Click here
-          </Link>{' '}
+          </Link>
           to sign up!
         </p>
       </form>
