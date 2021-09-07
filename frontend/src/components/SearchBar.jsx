@@ -8,7 +8,7 @@ const searchResult = (event) => {
 
     return (
         <div>
-            <input type="submit" placeholder="Search" onChange= { searchResult } />
+            <input type="text" placeholder="Search" onChange= { searchResult } />
         </div>
     )
 }
