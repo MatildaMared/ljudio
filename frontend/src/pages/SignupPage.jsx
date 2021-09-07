@@ -17,13 +17,13 @@ function SignupPage() {
     passwordIdentical(password, confirmPassword);
   };
 
-  const passwordIdentical = (pass1, pass2) => {
-    if (pass1 !== pass2) {
+  const passwordIdentical = (pass, confirmPass) => {
+    if (pass !== confirmPass) {
       console.log(
-        `Password don't match 💥 First: '${pass1}', Second: '${pass2}'`
+        `Password don't match 💥 First: '${pass}', Second: '${confirmPass}'`
       );
-    } else if (pass1 === pass2) {
-      console.log(`It's a match!! 😀 ${pass1} = ${pass2}`);
+    } else if (pass === confirmPass) {
+      console.log(`It's a match!! 😀 ${pass} = ${confirmPass}`);
       createAccount(firstName, lastName, email, password);
     }
   };
@@ -44,6 +44,7 @@ function SignupPage() {
       });
 
       const data = await res.json();
+      console.log(data);
 
       if (data.success) {
         localStorage.setItem('token', data.user.token);
