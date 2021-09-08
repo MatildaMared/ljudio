@@ -37,16 +37,16 @@ app.use(errorHandler);
 // ### START SERVER AND CONNECT O DATABASE ###
 
 app.listen(PORT, () => {
-	console.log(`Server up and running on port ${PORT} 🌈`);
+  console.log(`Server up and running on port ${PORT} 🌈`);
 });
 
 mongoose
-	.connect(
-		`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.p5bqh.mongodb.net/ljudio-database`
-	)
-	.then(() => {
-		console.log("Connected to database... 🦄");
-	})
-	.catch((err) => {
-		console.log("There was an error connecting to database: ", err);
-	});
+  .connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.p5bqh.mongodb.net/ljudio-database`
+  )
+  .then(() => {
+    console.log('Connected to database... 🦄');
+  })
+  .catch((err) => {
+    console.log('There was an error connecting to database: ', err);
+  });
