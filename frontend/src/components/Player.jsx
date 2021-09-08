@@ -1,5 +1,6 @@
 import React from "react";
 import YouTube from "react-youtube";
+import SearchBar from './Searchbar';
 
 class Player extends React.Component {
 
@@ -23,11 +24,14 @@ class Player extends React.Component {
     const { videoId } = this.props;
 
     return (
-      <YouTube
-        videoId={ videoId } 
-        opts={opts} 
-        onReady={this._onReady} 
-      />
+    <div>
+        <SearchBar />
+        <YouTube
+            videoId={ videoId } 
+            opts={opts} 
+            onReady={this._onReady} 
+        />
+    </div>
     );
   }
 }
