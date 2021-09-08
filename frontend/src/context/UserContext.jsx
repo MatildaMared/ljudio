@@ -8,7 +8,12 @@ export const UserProvider = ({ children }) => {
 	const [context, setContext] = useState({
 		isAuthenticated: null,
 		user: {},
+		fetchResult: null,
 	});
+
+	useEffect(() => {
+		console.log(context);;
+	}, [context.fetchResult]);
 
 	const history = useHistory();
 
