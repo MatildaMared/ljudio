@@ -4,6 +4,24 @@ const Playlist = require("../models/playlistModel");
 const User = require("../models/userModel");
 const mongoose = require("mongoose");
 
+// Get single playlist from DB based on URL parameter
+function getPlaylist(req, res, next) {
+	const playlistId = req.params.id;
+	Playlist.findById(playlistId, (err, playlist) => {
+		if (err) {
+			return next(
+				new ErrorResponse("Could not find a playlist with that ID...", 400)
+			);
+		}
+		res.status(200).json({
+			success: true,
+			playlist,
+		});
+	});
+}
+
+// Creates a new playlist,
+// requires the user to be signed in
 async function createPlaylist(req, res, next) {
 	try {
 		const { title } = req.body;
@@ -26,29 +44,35 @@ async function createPlaylist(req, res, next) {
 			userId = decoded.id;
 		});
 
-		console.log("User id is: ", userId);
+		// Finds user in database based on id in decoded JWT token
 		const user = await User.findById(userId);
-		console.log("User is: ", user);
 
+		// Creates new empty playlist with the title
+		// provided by the user
 		const playlist = await Playlist.create({
 			_id: new mongoose.Types.ObjectId(),
 			userId: user._id,
 			title,
 		});
 
+		// Push the playlist ID into the user playlists array
 		user.playlists.push(playlist._id);
-		console.log("User before save: ", user);
 
+		// Save changes in user to database
 		await user.save();
 
+		// Send back the created playlist
+		// and user in the response
 		res.status(200).json({
 			success: true,
 			playlist,
 			user,
 		});
 	} catch (err) {
-		next(err);
+		next(
+			new ErrorResponse("Could not create playlist, please try again...", 400)
+		);
 	}
 }
 
-module.exports = { createPlaylist };
+module.exports = { createPlaylist, getPlaylist };

@@ -6,7 +6,7 @@ const router = new Router();
 router.post("/", playlistController.createPlaylist);
 
 // Get playlist by ID
-router.get("/:id");
+router.get("/:id", playlistController.getPlaylist);
 
 // Add song to playlist
 router.post("/:id");
