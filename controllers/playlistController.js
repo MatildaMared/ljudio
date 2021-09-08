@@ -1,9 +1,13 @@
 const jwt = require("jsonwebtoken");
 const ErrorResponse = require("../utilites/errorResponse");
+const Playlist = require("../models/playlistModel");
 const User = require("../models/userModel");
+const mongoose = require("mongoose");
 
-async function getUser(req, res, next) {
+async function createPlaylist(req, res, next) {
 	try {
+		const { title } = req.body;
+
 		// grabs the JWT token from the http request headers
 		const token = req.headers.authorization.split(" ")[1];
 
@@ -22,29 +26,29 @@ async function getUser(req, res, next) {
 			userId = decoded.id;
 		});
 
-		// Tries to find user in database
+		console.log("User id is: ", userId);
 		const user = await User.findById(userId);
+		console.log("User is: ", user);
 
-		await user.populate("playlists");
+		const playlist = await Playlist.create({
+			_id: new mongoose.Types.ObjectId(),
+			userId: user._id,
+			title,
+		});
 
-		// If no user is found, return error response to user
-		if (!user) {
-			return next(new ErrorResponse("User not found... Please try again", 400));
-		}
+		user.playlists.push(playlist._id);
+		console.log("User before save: ", user);
+
+		await user.save();
 
 		res.status(200).json({
 			success: true,
-			user: {
-				id: user._id,
-				firstName: user.firstName,
-				lastName: user.lastName,
-				email: user.email,
-				playlists: user.playlists,
-			},
+			playlist,
+			user,
 		});
 	} catch (err) {
 		next(err);
 	}
 }
 
-module.exports = { getUser };
+module.exports = { createPlaylist };

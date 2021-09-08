@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const EMAIL_VALIDATION_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 // Create User Schema
-const userSchema = new mongoose.Schema({
+const userSchema = Schema({
+	_id: Schema.Types.ObjectId,
 	firstName: {
 		type: String,
 		required: [true, "Please enter a first name..."],
@@ -27,7 +29,7 @@ const userSchema = new mongoose.Schema({
 	},
 	playlists: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
+			type: Schema.Types.ObjectId,
 			ref: "Playlist",
 		},
 	],

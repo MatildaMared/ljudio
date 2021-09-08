@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const playlistRoutes = require("./routes/playlistRoutes");
 const errorHandler = require("./middleware/errorHandler");
 const PORT = process.env.port || 8000;
 
@@ -20,14 +21,17 @@ app.use(cors());
 
 // ### ROUTES ###
 
-app.get("/", (req, res) => {
-	res.send("DET FUNKAR!!!");
-});
-
+// Auth Routes
 app.use("/api/auth", authRoutes);
+
+// User Routes
 app.use("/api/user", userRoutes);
 
-// Error Middleware - placeras alltid sist!
+// Playlist Routes
+app.use("/api/playlist", playlistRoutes);
+
+// Error Middleware - always keep this one LAST,
+// before starting the server!
 app.use(errorHandler);
 
 // ### START SERVER AND CONNECT O DATABASE ###
