@@ -12,6 +12,7 @@ function SearchBar() {
       `https://yt-music-api.herokuapp.com/api/yt/songs/${searchInput}`
     );
     const data = await response.json();
+    console.log(data);
     updateContext({ fetchResult: data.content });
   }
 

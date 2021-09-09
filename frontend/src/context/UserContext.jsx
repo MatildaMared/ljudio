@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
 		isAuthenticated: null,
 		user: {},
 		fetchResult: null,
+		nowPlaying: null,
 	});
 
 	useEffect(() => {
