@@ -2,7 +2,6 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const playlistRoutes = require("./routes/playlistRoutes");
@@ -15,9 +14,6 @@ const app = express();
 
 // To be able to parse body object
 app.use(express.json());
-
-// Enabling CORS
-app.use(cors());
 
 // ### ROUTES ###
 
