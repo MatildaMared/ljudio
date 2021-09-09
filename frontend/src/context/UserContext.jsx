@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		console.log(context);;
+		console.log(context);
 	}, [context.fetchResult]);
 
 	const history = useHistory();

@@ -1,17 +1,15 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "./../context/UserContext";
+import SearchResult from "./SearchResult";
 
 function SearchBar() {
-  //let result = [];
-  const [data, setData] = useState(null);
   const [searchInput, setSearchInput] = useState();
-  const [error, setError] = useState(null);
   const [context, updateContext] = useContext(UserContext);
 
   async function getSongs(e) {
     e.preventDefault();
     const response = await fetch(
-      `https://yt-music-api.herokuapp.com/api/yt/artists/${searchInput}`
+      `https://yt-music-api.herokuapp.com/api/yt/songs/${searchInput}`
     );
     const data = await response.json();
     updateContext({ fetchResult: data.content });
@@ -27,6 +25,7 @@ function SearchBar() {
         />
         <input type="submit" value="Search..." />
       </form>
+			<SearchResult />
     </div>
   );
 }
