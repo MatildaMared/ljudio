@@ -25,6 +25,8 @@ async function getUser(req, res, next) {
 		// Tries to find user in database
 		const user = await User.findById(userId);
 
+		await user.populate("playlists");
+
 		// If no user is found, return error response to user
 		if (!user) {
 			return next(new ErrorResponse("User not found... Please try again", 400));
