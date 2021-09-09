@@ -1,11 +1,11 @@
 // To be able to use variables from .env file
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const errorHandler = require('./middleware/errorHandler');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const playlistRoutes = require("./routes/playlistRoutes");
+const errorHandler = require("./middleware/errorHandler");
 const PORT = process.env.port || 8000;
 
 const app = express();
@@ -15,19 +15,19 @@ const app = express();
 // To be able to parse body object
 app.use(express.json());
 
-// Enabling CORS
-app.use(cors());
-
 // ### ROUTES ###
 
-app.get('/', (req, res) => {
-  res.send('DET FUNKAR!!!');
-});
+// Auth Routes
+app.use("/api/auth", authRoutes);
 
-app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
+// User Routes
+app.use("/api/user", userRoutes);
 
-// Error Middleware - placeras alltid sist!
+// Playlist Routes
+app.use("/api/playlist", playlistRoutes);
+
+// Error Middleware - always keep this one LAST,
+// before starting the server!
 app.use(errorHandler);
 
 // ### START SERVER AND CONNECT O DATABASE ###
