@@ -6,6 +6,7 @@ import { UserProvider } from './context/UserContext';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import ArtistPage from './pages/ArtistPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <PrivateRoute path="/" exact component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={SignupPage} />
+            <PrivateRoute path="/artist/:browseId" component={ArtistPage} />
           </Switch>
         </UserProvider>
       </Router>
