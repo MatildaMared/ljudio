@@ -2,8 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import Player from "../components/Player";
-import SearchResult from "../components/SearchResult";
 import { getArtistById, getSongsByString } from "../services/musicService";
+import ResultList from '../components/ResultList';
+
 
 const ArtistPage = () => {
 	const [context, updateContext] = useContext(UserContext);
@@ -62,7 +63,7 @@ const ArtistPage = () => {
 						))}
 					</ul>
 					<Player />
-					<SearchResult />
+					<ResultList />
 				</div>
 			)}
 		</div>

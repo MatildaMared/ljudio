@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { UserContext } from "./../context/UserContext";
+import { UserContext } from "../context/UserContext";
 
-function SearchResult() {
+function SongsResults() {
 	const [context, updateContext] = useContext(UserContext);
 	const searchResult = context.fetchResult;
+
+	// musicContext.fetchResult.type => "songs"
 
 	function clickHandler(e) {
 		console.log(e.target.dataset.key);
@@ -27,4 +29,4 @@ function SearchResult() {
 	);
 }
 
-export default SearchResult;
+export default SongsResults;

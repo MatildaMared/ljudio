@@ -1,0 +1,25 @@
+h2 {
+	color: mediumpurple;
+	margin-left: 2.5rem;
+}
+
+ul {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+
+	li {
+		background-color: #eee;
+		padding: 0.5rem;
+		border: 1px solid;
+		border-radius: 1rem;
+		display: inline-block;
+		width: 30rem;
+		margin-bottom: 0.5rem;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #ddd;
+		}
+	}
+}

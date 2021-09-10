@@ -1,34 +1,39 @@
 import React, { useState, useContext } from "react";
+import { MusicContext } from "./../context/MusicContext";
+import {
+	getSongsByString,
+	getAllMusicByString,
+} from "../services/musicService";
 import { UserContext } from "./../context/UserContext";
-import SearchResult from "./SearchResult";
 
 function SearchBar() {
-  const [searchInput, setSearchInput] = useState();
-  const [context, updateContext] = useContext(UserContext);
+	const [searchInput, setSearchInput] = useState("");
+	const [musicContext, updateMusicContext] = useContext(MusicContext);
 
-  async function getSongs(e) {
-    e.preventDefault();
-    const response = await fetch(
-      `https://yt-music-api.herokuapp.com/api/yt/songs/${searchInput}`
-    );
-    const data = await response.json();
-    console.log(data);
-    updateContext({ fetchResult: data.content });
-  }
+	async function getAllMusic(e) {
+		e.preventDefault();
+		const data = await getAllMusicByString(searchInput);
+		updateMusicContext({
+			fetchResult: {
+				type: "all",
+				data,
+			},
+		});
+	}
 
-  return (
-    <div>
-      <form onSubmit={getSongs}>
-        <input
-          type="text"
-          placeholder="Search for artists"
-          onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
-        />
-        <input type="submit" value="Search..." />
-      </form>
-			<SearchResult />
-    </div>
-  );
+	return (
+		<div>
+			<form onSubmit={getAllMusic}>
+				<input
+					type="text"
+					placeholder="Search for artists"
+					value={searchInput}
+					onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
+				/>
+				<input type="submit" value="Search..." />
+			</form>
+		</div>
+	);
 }
 
 export default SearchBar;

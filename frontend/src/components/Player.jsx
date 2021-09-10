@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "./../context/UserContext";
+import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
 
 const Player = () => {
-  const [context, updateContext] = useContext(UserContext);
+  const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [player, setPlayer] = useState(null);
 	const [isPlaying, setIsPlaying] = useState(true);
 
@@ -53,7 +53,7 @@ const Player = () => {
 	return (
 		<div>
 			<YouTube
-				videoId={context.nowPlaying}
+				videoId={musicContext.nowPlaying}
 				opts={opts}
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}

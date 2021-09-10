@@ -12,10 +12,6 @@ export const UserProvider = ({ children }) => {
 		nowPlaying: null,
 	});
 
-	useEffect(() => {
-		console.log(context);
-	}, [context.fetchResult]);
-
 	const history = useHistory();
 
 	// Tries to set user data on initial page load
