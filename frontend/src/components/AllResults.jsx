@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { MusicContext } from "./../context/MusicContext";
-import "./../../styles/AllResults.scss";
 
 function AllResults() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -54,7 +53,7 @@ function AllResults() {
 					songsArray.map((item) => (
 						<li
 							key={item.videoId}
-							onClick={() => updateMusicContext({ nowPlaying: item.videoId })}>
+							onClick={() => updateMusicContext({ nowPlaying: item })}>
 							<p>{item.name}</p>
 						</li>
 					))}

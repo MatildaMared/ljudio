@@ -11,7 +11,7 @@ export const MusicProvider = ({ children }) => {
 
 	useEffect(() => {
 		console.log(context);
-	}, [context.fetchResult]);
+	}, [context.nowPlaying]);
 
 	function updateContext(updates) {
 		setContext((prevState) => {

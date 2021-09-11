@@ -3,7 +3,7 @@ import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
 
 const Player = () => {
-  const [musicContext, updateMusicContext] = useContext(MusicContext);
+	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [player, setPlayer] = useState(null);
 	const [isPlaying, setIsPlaying] = useState(true);
 
@@ -51,9 +51,15 @@ const Player = () => {
 	}
 
 	return (
-		<div>
+		<section className="player">
+			{musicContext.nowPlaying && (
+				<div className="player__header">
+					<h2>{musicContext.nowPlaying?.artist.name}</h2>
+					<h3>{musicContext.nowPlaying?.name}</h3>
+				</div>
+			)}
 			<YouTube
-				videoId={musicContext.nowPlaying}
+				videoId={musicContext.nowPlaying?.videoId}
 				opts={opts}
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}
@@ -61,7 +67,7 @@ const Player = () => {
 			<button onClick={isPlaying ? pause : play}>Play/Pause</button>
 			<button onClick={volumeUp}>Volume Up</button>
 			<button onClick={volumeDown}>Volume Down</button>
-		</div>
+		</section>
 	);
 };
 

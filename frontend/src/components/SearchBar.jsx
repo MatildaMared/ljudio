@@ -18,7 +18,7 @@ function SearchBar() {
 	}
 
 	return (
-		<div>
+		<section className="search">
 			<form onSubmit={getAllMusic}>
 				<input
 					type="text"
@@ -28,7 +28,7 @@ function SearchBar() {
 				/>
 				<input type="submit" value="Search..." />
 			</form>
-		</div>
+		</section>
 	);
 }
 
