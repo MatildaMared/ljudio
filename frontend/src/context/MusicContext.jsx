@@ -1,4 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 export const MusicContext = createContext();
 
@@ -10,9 +12,20 @@ export const MusicProvider = ({ children }) => {
 		isLoading: false,
 	});
 
+	const [userContext] = useContext(UserContext);
+	const history = useHistory();
+
 	useEffect(() => {
 		console.log(context);
 	}, [context.nowPlaying]);
+
+	// Makes sure, with every update to the state,
+	// that the user is still logged in
+	useEffect(() => {
+		if (context.isAuthenticated === false || !localStorage.getItem("token")) {
+			history.push("/login");
+		}
+	}, [context]);
 
 	function updateContext(updates) {
 		setContext((prevState) => {

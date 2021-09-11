@@ -20,10 +20,10 @@ export const UserProvider = ({ children }) => {
 	// If the user is not authenticated,
 	// redirect to Login page
 	useEffect(() => {
-		if (context.isAuthenticated === false) {
+		if (context.isAuthenticated === false || !localStorage.getItem("token")) {
 			history.push("/login");
 		}
-	}, [context.isAuthenticated]);
+	}, [context]);
 
 	async function setUserData() {
 		try {
