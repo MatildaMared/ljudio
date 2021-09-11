@@ -5,10 +5,8 @@ export const MusicContext = createContext();
 export const MusicProvider = ({ children }) => {
 	const [context, setContext] = useState({
 		nowPlaying: null,
-		fetchResult: {
-			type: "",
-			data: null,
-		},
+		fetchResult: null,
+		resultType: null,
 	});
 
 	useEffect(() => {

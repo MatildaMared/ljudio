@@ -8,8 +8,6 @@ export const UserProvider = ({ children }) => {
 	const [context, setContext] = useState({
 		isAuthenticated: null,
 		user: {},
-		fetchResult: null,
-		nowPlaying: null,
 	});
 
 	const history = useHistory();

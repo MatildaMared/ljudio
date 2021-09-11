@@ -4,7 +4,7 @@ import "./../../styles/AllResults.scss";
 
 function AllResults() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
-	console.log(musicContext.fetchResult.data);
+	console.log(musicContext.fetchResult);
 	let songsArray = [];
 	let artistsArray = [];
 	let albumsArray = [];
@@ -25,7 +25,7 @@ function AllResults() {
 		console.log("Albums: ", albumsArray);
 	}
 
-	sortResults(musicContext.fetchResult.data.content);
+	sortResults(musicContext.fetchResult.content);
 
 	return (
 		<div className="all-results">

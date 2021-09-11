@@ -3,7 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import Player from "../components/Player";
 import { getArtistById, getSongsByString } from "../services/musicService";
-import ResultList from '../components/ResultList';
+import Result from '../components/Result';
 
 
 const ArtistPage = () => {
@@ -63,7 +63,7 @@ const ArtistPage = () => {
 						))}
 					</ul>
 					<Player />
-					<ResultList />
+					<Result />
 				</div>
 			)}
 		</div>

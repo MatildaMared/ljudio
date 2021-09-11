@@ -1,10 +1,8 @@
 import React, { useState, useContext } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import {
-	getSongsByString,
 	getAllMusicByString,
 } from "../services/musicService";
-import { UserContext } from "./../context/UserContext";
 
 function SearchBar() {
 	const [searchInput, setSearchInput] = useState("");
@@ -12,12 +10,10 @@ function SearchBar() {
 
 	async function getAllMusic(e) {
 		e.preventDefault();
-		const data = await getAllMusicByString(searchInput);
+		const data = await getAllMusicByString(searchInput.toLowerCase());
 		updateMusicContext({
-			fetchResult: {
-				type: "all",
-				data,
-			},
+			resultType: "all",
+			fetchResult: data,
 		});
 	}
 
@@ -28,7 +24,7 @@ function SearchBar() {
 					type="text"
 					placeholder="Search for artists"
 					value={searchInput}
-					onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
+					onChange={(e) => setSearchInput(e.target.value)}
 				/>
 				<input type="submit" value="Search..." />
 			</form>

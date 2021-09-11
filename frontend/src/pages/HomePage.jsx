@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import Player from "../components/Player";
 import SearchBar from "../components/SearchBar";
-import ResultList from "../components/ResultList";
+import Result from '../components/Result';
 
 function HomePage() {
 	const [context, updateContext] = useContext(UserContext);
@@ -18,7 +18,7 @@ function HomePage() {
 	return (
 		<div className="player-component">
       <SearchBar />
-      <ResultList />
+      <Result />
 			<Player videoId="z4WCaWJgOqM" />
 			<button onClick={logoutHandler}>Log out</button>
 		</div>
