@@ -45,7 +45,7 @@ input[type="submit"] {
 }
 
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 ol,
@@ -106,49 +106,28 @@ h1,
 h2,
 h3 {
 	font-weight: 800;
-  margin-bottom: 1rem;
-}
-
-// Search-komponenten
-.search {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-
-	input[type="text"] {
-		min-width: 30rem;
-		padding: 1rem 2rem;
-		font: inherit;
-		border: none;
-		border-radius: 0.5rem;
-		background-color: #eee;
-		outline: none;
-
-		&:focus {
-			background-color: #dadada;
-		}
-	}
-
-	input[type="submit"] {
-		padding: 1rem 2rem;
-    cursor: pointer;
-	}
+	margin-bottom: 1rem;
 }
 
 ul {
-  margin-bottom: 1rem;
-  li {
-    padding: 1rem;
-    background-color: rgb(245, 245, 245);
-    border-bottom: 1px solid #ddd;
+	margin-bottom: 1rem;
+	li {
+		padding: 1rem;
+		background-color: rgb(245, 245, 245);
+		border-bottom: 1px solid #ddd;
 
-    &:first-of-type {
-      border-top: 1px solid #ddd;
-    }
+		&:first-of-type {
+			border-top: 1px solid #ddd;
+		}
 
-    cursor: pointer;
+		cursor: pointer;
 
-    &:hover {
-      background-color: #eee;
-    }
-  }
+		&:hover {
+			background-color: #eee;
+		}
+	}
+}
+
+.result {
+	max-width: 40rem;
 }

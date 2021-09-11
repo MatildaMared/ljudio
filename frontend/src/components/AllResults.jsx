@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { MusicContext } from "./../context/MusicContext";
+import { getArtistById, getAlbumById } from "./../services/musicService";
 
 function AllResults() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -8,6 +9,9 @@ function AllResults() {
 	let artistsArray = [];
 	let albumsArray = [];
 
+	// Takes in a single array of items and
+	// sorts items into on of three arrays
+	// based on type (album, song, artist)
 	function sortResults(array) {
 		array.forEach((item) => {
 			if (item.type === "song") {
@@ -18,22 +22,31 @@ function AllResults() {
 				albumsArray.push(item);
 			}
 		});
-
-		console.log("Songs: ", songsArray);
-		console.log("Artists: ", artistsArray);
-		console.log("Albums: ", albumsArray);
 	}
 
 	sortResults(musicContext.fetchResult.content);
 
+	async function displaySingleAlbum(browseId) {
+		console.log(browseId);
+		const data = await getAlbumById(browseId);
+		console.log(data);
+	}
+
+	async function displaySingleArtist(browseId) {
+		const data = await getArtistById(browseId);
+		console.log(data);
+	}
+
 	return (
 		<div className="all-results">
-			<h1>Alla Resultat</h1>
+			<h1>All Results</h1>
 			<h2>Artists</h2>
 			<ul>
 				{artistsArray &&
 					artistsArray.map((item) => (
-						<li>
+						<li
+							key={item.browseId}
+							onClick={() => displaySingleArtist(item.browseId)}>
 							<p>{item.name}</p>
 						</li>
 					))}
@@ -42,7 +55,9 @@ function AllResults() {
 			<ul>
 				{albumsArray &&
 					albumsArray.map((item) => (
-						<li>
+						<li
+							key={item.browseId}
+							onClick={() => displaySingleAlbum(item.browseId)}>
 							<p>{item.name}</p>
 						</li>
 					))}

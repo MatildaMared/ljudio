@@ -7,6 +7,7 @@ export const MusicProvider = ({ children }) => {
 		nowPlaying: null,
 		fetchResult: null,
 		resultType: null,
+		isLoading: false,
 	});
 
 	useEffect(() => {

@@ -1,31 +1,27 @@
 import React, { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { MusicContext } from "../context/MusicContext";
 
 function SongsResults() {
-	const [context, updateContext] = useContext(UserContext);
-	const searchResult = context.fetchResult;
+	const [musicContext, updateMusicContext] = useContext(MusicContext);
 
-	// musicContext.fetchResult.type => "songs"
-
-	function clickHandler(e) {
-		console.log(e.target.dataset.key);
-		updateContext({
-			nowPlaying: e.target.dataset.key,
+	function playSong(song) {
+		console.log(song);
+		updateMusicContext({
+			nowPlaying: song,
 		});
 	}
 
 	return (
-		searchResult && (
+		<section className="result">
+			<h1>Songs</h1>
 			<ul>
-				{searchResult.map((item) => (
-					<li key={item.videoId} data-key={item.videoId} onClick={clickHandler}>
-                        {`${item.name} by ${item.artist.name}`}
-                        <button>Play Now</button>
-                        <button>Queue Song</button>
+				{musicContext.fetchResult.content.map((item) => (
+					<li key={item.videoId} onClick={() => playSong(item)}>
+						{`${item.name} by ${item.artist.name}`}
 					</li>
 				))}
 			</ul>
-		)
+		</section>
 	);
 }
 

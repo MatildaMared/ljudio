@@ -59,6 +59,7 @@ const Player = () => {
 				</div>
 			)}
 			<YouTube
+				className="youtube-player"
 				videoId={musicContext.nowPlaying?.videoId}
 				opts={opts}
 				onReady={videoOnReady}
