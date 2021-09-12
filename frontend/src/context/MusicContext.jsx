@@ -15,10 +15,6 @@ export const MusicProvider = ({ children }) => {
 	const [userContext] = useContext(UserContext);
 	const history = useHistory();
 
-	useEffect(() => {
-		console.log(context);
-	}, [context.nowPlaying]);
-
 	// Makes sure, with every update to the state,
 	// that the user is still logged in
 	useEffect(() => {

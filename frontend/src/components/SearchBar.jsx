@@ -16,7 +16,6 @@ function SearchBar() {
 	const inputRef = useRef();
 
 	useEffect(() => {
-		console.log("Inside use effect for active type");
 		if (searchString.length > 0) {
 			fetchMusic();
 		}
@@ -24,7 +23,6 @@ function SearchBar() {
 
 	function onSubmitHandler(e) {
 		e.preventDefault();
-		console.log("Searchinput is: ", searchInput.trim().toLowerCase());
 		setSearchString(searchInput.trim().toLowerCase());
 	}
 
@@ -40,7 +38,6 @@ function SearchBar() {
 		});
 
 		let data;
-		console.log("SearchString is: ", searchString);
 
 		if (activeType === "all") {
 			data = await getAllMusicByString(searchString);
@@ -51,8 +48,6 @@ function SearchBar() {
 		} else if (activeType === "albums") {
 			data = await getAlbumsByString(searchString);
 		}
-
-		console.log(data);
 
 		updateMusicContext({
 			resultType: activeType,

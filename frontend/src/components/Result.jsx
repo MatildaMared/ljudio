@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { MusicContext } from "../context/MusicContext";
 import AllResults from "./AllResults";
 import SongsResults from "./SongsResults";
+import ArtistsResults from './ArtistsResults';
+import AlbumsResults from './AlbumsResults';
 
 function Result() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
-	console.log(musicContext.resultType);
 
 	return (
 		<div className="result">
@@ -15,6 +16,12 @@ function Result() {
 			)}
 			{!musicContext.isLoading && musicContext.resultType === "songs" && (
 				<SongsResults />
+			)}
+			{!musicContext.isLoading && musicContext.resultType === "artists" && (
+				<ArtistsResults />
+			)}
+			{!musicContext.isLoading && musicContext.resultType === "albums" && (
+				<AlbumsResults />
 			)}
 		</div>
 	);

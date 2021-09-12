@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import { getArtistById, getAlbumById } from "./../services/musicService";
 
 function AllResults() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
-	console.log(musicContext.fetchResult);
 	let songsArray = [];
 	let artistsArray = [];
 	let albumsArray = [];
@@ -23,7 +22,7 @@ function AllResults() {
 			}
 		});
 	}
-
+	
 	sortResults(musicContext.fetchResult.content);
 
 	async function displaySingleAlbum(browseId) {
@@ -46,8 +45,13 @@ function AllResults() {
 					artistsArray.map((item) => (
 						<li
 							key={item.browseId}
-							onClick={() => displaySingleArtist(item.browseId)}>
-							<p>{item.name}</p>
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}>
+							<p>{`${item.name}`}</p>
+							<img src={item.thumbnails[0].url} alt={item.name}></img>
 						</li>
 					))}
 			</ul>
@@ -57,8 +61,13 @@ function AllResults() {
 					albumsArray.map((item) => (
 						<li
 							key={item.browseId}
-							onClick={() => displaySingleAlbum(item.browseId)}>
-							<p>{item.name}</p>
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}>
+							<p>{`${item.name}`}</p>
+							<img src={item.thumbnails[0].url} alt={item.name}></img>
 						</li>
 					))}
 			</ul>
