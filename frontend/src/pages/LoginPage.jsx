@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
+import "../../styles/signup.css";
 
 function LoginPage() {
 	const [email, setEmail] = useState("");
@@ -36,7 +37,7 @@ function LoginPage() {
 	}
 
 	return (
-		<div>
+		<div className="container">
 			<h1>Log in</h1>
 			<form className="form" onSubmit={handleSubmit}>
 				<div className="form__form-control">
@@ -68,7 +69,8 @@ function LoginPage() {
 					Don't have an account yet?
 					<Link to="/signup" className="form__link">
 						{" "}
-						Click here
+						Click here 
+						{" "}
 					</Link>
 					to sign up!
 				</p>
