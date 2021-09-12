@@ -70,7 +70,7 @@ header {
 	}
 }
 
-.app {
+.App {
 	min-height: 100vh;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
@@ -90,16 +90,41 @@ footer {
 	}
 }
 
-main {
+.main {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-gap: 2rem;
+	max-width: 1600px;
 	margin: 0 auto;
-	max-width: 2000px;
-	padding: 1rem;
+	width: 100%;
 }
 
 .content-wrapper {
 	display: grid;
+	grid-template-columns: auto 1fr;
 	grid-gap: 1rem;
-	grid-template-columns: 1fr 1fr;
+	overflow: auto;
+}
+
+.search-content {
+	padding: 1rem 0;
+	width: 100%;
+}
+
+.result {
+	width: 100%;
+}
+
+.navigation {
+	min-width: 10rem;
+	padding: 1rem;
+}
+
+.player {
+	margin-top: 6rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 h1,

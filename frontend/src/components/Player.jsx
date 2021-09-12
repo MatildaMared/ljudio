@@ -65,9 +65,11 @@ const Player = () => {
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}
 			/>
-			<button onClick={isPlaying ? pause : play}>Play/Pause</button>
-			<button onClick={volumeUp}>Volume Up</button>
-			<button onClick={volumeDown}>Volume Down</button>
+			<div className="buttons">
+				<button onClick={isPlaying ? pause : play}>Play/Pause</button>
+				<button onClick={volumeUp}>Volume Up</button>
+				<button onClick={volumeDown}>Volume Down</button>
+			</div>
 		</section>
 	);
 };

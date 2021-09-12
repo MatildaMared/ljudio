@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { MusicContext } from "./../context/MusicContext";
-import { getArtistById, getAlbumById } from "./../services/musicService";
+import { useHistory } from "react-router-dom";
 
 function AllResults() {
+	const history = useHistory();
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	let songsArray = [];
 	let artistsArray = [];
@@ -22,19 +23,8 @@ function AllResults() {
 			}
 		});
 	}
-	
+
 	sortResults(musicContext.fetchResult.content);
-
-	async function displaySingleAlbum(browseId) {
-		console.log(browseId);
-		const data = await getAlbumById(browseId);
-		console.log(data);
-	}
-
-	async function displaySingleArtist(browseId) {
-		const data = await getArtistById(browseId);
-		console.log(data);
-	}
 
 	return (
 		<div className="all-results">
@@ -45,6 +35,7 @@ function AllResults() {
 					artistsArray.map((item) => (
 						<li
 							key={item.browseId}
+							onClick={() => history.push(`/artist/${item.browseId}`)}
 							style={{
 								display: "flex",
 								justifyContent: "space-between",
