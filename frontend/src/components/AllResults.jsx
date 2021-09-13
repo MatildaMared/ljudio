@@ -68,7 +68,12 @@ function AllResults() {
 					songsArray.map((item) => (
 						<li
 							key={item.videoId}
-							onClick={() => updateMusicContext({ nowPlaying: item })}>
+							onClick={() =>
+								updateMusicContext({
+									queue: [...musicContext.queue, item],
+									nowPlayingIndex: (musicContext.queue.length > 0) ? musicContext.nowPlayingIndex++ : 0,
+								})
+							}>
 							<p>{item.name}</p>
 						</li>
 					))}

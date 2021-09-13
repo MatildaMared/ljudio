@@ -60,7 +60,7 @@ const Player = () => {
 			)}
 			<YouTube
 				className="youtube-player"
-				videoId={musicContext.nowPlaying?.videoId}
+				videoId={musicContext.queue[musicContext.nowPlayingIndex]?.videoId}
 				opts={opts}
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}
