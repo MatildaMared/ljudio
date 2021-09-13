@@ -5,40 +5,40 @@ const User = require("../models/userModel");
 const mongoose = require("mongoose");
 
 async function getUserIdFromToken(token) {
-	try {
-		let userId = null;
-		// tries to decode the JWT token
-		jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-			// If there was an error trying to decode the JWT,
-			// return an error response
-			if (err) {
-				return next(new ErrorResponse("Invalid token", 400));
-			}
+	let userId = null;
+	// tries to decode the JWT token
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+		// If there was an error trying to decode the JWT,
+		// return an error response
+		if (err) {
+			return null;
+		}
 
-			userId = decoded.id;
-		});
-		// If there was no error, return
-		// the id from the decoded JWT
-		return userId;
-	} catch (err) {
-		console.log(err);
-	}
+		userId = decoded.id;
+	});
+	// If there was no error, return
+	// the id from the decoded JWT
+	return userId;
 }
 
 // Get single playlist from DB based on URL parameter
 function getPlaylist(req, res, next) {
-	const playlistId = req.params.id;
-	Playlist.findById(playlistId, (err, playlist) => {
-		if (err) {
-			return next(
-				new ErrorResponse("Could not find a playlist with that ID...", 400)
-			);
-		}
-		res.status(200).json({
-			success: true,
-			playlist,
+	try {
+		const playlistId = req.params.id;
+		Playlist.findById(playlistId, (err, playlist) => {
+			if (err) {
+				return next(
+					new ErrorResponse("Could not find a playlist with that ID...", 400)
+				);
+			}
+			res.status(200).json({
+				success: true,
+				playlist,
+			});
 		});
-	});
+	} catch (err) {
+		next(err);
+	}
 }
 
 // Creates a new playlist,
@@ -50,7 +50,13 @@ async function createPlaylist(req, res, next) {
 		// grabs the JWT token from the http request headers
 		const token = req.headers.authorization.split(" ")[1];
 
+		// gets userId based on decoded jwt
 		const userId = await getUserIdFromToken(token);
+
+		// Return error if jwt token could not be decoded
+		if (userId === null) {
+			return next(new ErrorResponse("Unauthorized", 400));
+		}
 
 		// Finds user in database based on id in decoded JWT token
 		const user = await User.findById(userId);
@@ -77,9 +83,7 @@ async function createPlaylist(req, res, next) {
 			user,
 		});
 	} catch (err) {
-		next(
-			new ErrorResponse("Could not create playlist, please try again...", 400)
-		);
+		next(err);
 	}
 }
 
@@ -93,6 +97,11 @@ async function addSongToPlaylist(req, res, next) {
 
 		// gets userId based on decoded jwt
 		const userId = await getUserIdFromToken(token);
+
+		// Return error if jwt token could not be decoded
+		if (userId === null) {
+			return next(new ErrorResponse("Unauthorized", 400));
+		}
 
 		// Finds user in database
 		const user = await User.findById(userId);
@@ -128,16 +137,71 @@ async function addSongToPlaylist(req, res, next) {
 
 		res.status(200).json({
 			success: true,
-			playlist
+			playlist,
 		});
 	} catch (err) {
-		next(
-			new ErrorResponse(
-				"Could not add song to playlist, please try again...",
-				400
-			)
-		);
+		next(err);
 	}
 }
 
-module.exports = { createPlaylist, getPlaylist, addSongToPlaylist };
+async function removePlaylist(req, res, next) {
+	try {
+		playlistId = req.params.id;
+		console.log("Playlist id is: ", playlistId);
+
+		// grabs the JWT token from the http request headers
+		const token = req.headers.authorization.split(" ")[1];
+
+		// gets userId based on decoded jwt
+		const userId = await getUserIdFromToken(token);
+
+		// Return error if jwt token could not be decoded
+		if (userId === null) {
+			return next(new ErrorResponse("Unauthorized", 400));
+		}
+
+		// Finds user in database
+		const user = await User.findById(userId);
+
+		// Return error if user was not found
+		if (!user) {
+			return next(
+				new ErrorResponse(
+					"Could not find user in database, please try again...",
+					400
+				)
+			);
+		}
+
+		// const removedPlaylist = await Playlist.findByIdAndDelete(playlistId);
+
+		// console.log("Removed playlist is: ", removedPlaylist);
+
+		const updatedPlaylists = user.playlists.map((playlist) => {
+			if (playlist._id.equals(mongoose.Types.ObjectId(playlistId))) {
+				console.log("Returning this playlist");
+				return playlist;
+			}
+		});
+
+		console.log("updatedPlaylists is: ", updatedPlaylists);
+
+		const updatedUser = await user.save();
+
+		console.log("Updated user is: ", updatedUser);
+
+		res.status(200).json({
+			success: true,
+			user: updatedUser,
+		});
+	} catch (err) {
+		next(err);
+	}
+}
+
+module.exports = {
+	createPlaylist,
+	getPlaylist,
+	addSongToPlaylist,
+	removePlaylist,
+};
