@@ -10,27 +10,28 @@ import "./../../styles/SearchBar.scss";
 
 function SearchBar() {
 	const [searchInput, setSearchInput] = useState("");
-	const [searchString, setSearchString] = useState("");
 	const [activeType, setActiveType] = useState("all");
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const inputRef = useRef();
 
 	useEffect(() => {
-		if (searchString.length > 0) {
+		if (musicContext.searchString.length > 0) {
 			fetchMusic();
 		}
 	}, [activeType]);
 
 	function onSubmitHandler(e) {
 		e.preventDefault();
-		setSearchString(searchInput.trim().toLowerCase());
+		updateMusicContext({
+			searchString: searchInput.trim().toLowerCase(),
+		});
 	}
 
 	useEffect(() => {
-		if (searchString.length > 0) {
+		if (musicContext.searchString.length > 0) {
 			fetchMusic();
 		}
-	}, [searchString]);
+	}, [musicContext.searchString]);
 
 	async function fetchMusic() {
 		updateMusicContext({
@@ -40,13 +41,13 @@ function SearchBar() {
 		let data;
 
 		if (activeType === "all") {
-			data = await getAllMusicByString(searchString);
+			data = await getAllMusicByString(musicContext.searchString);
 		} else if (activeType === "songs") {
-			data = await getSongsByString(searchString);
+			data = await getSongsByString(musicContext.searchString);
 		} else if (activeType === "artists") {
-			data = await getArtistsByString(searchString);
+			data = await getArtistsByString(musicContext.searchString);
 		} else if (activeType === "albums") {
-			data = await getAlbumsByString(searchString);
+			data = await getAlbumsByString(musicContext.searchString);
 		}
 
 		updateMusicContext({

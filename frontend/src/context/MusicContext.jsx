@@ -10,6 +10,7 @@ export const MusicProvider = ({ children }) => {
 		fetchResult: null,
 		resultType: null,
 		isLoading: false,
+		searchString: "",
 	});
 
 	const [userContext] = useContext(UserContext);

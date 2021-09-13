@@ -42,7 +42,7 @@ const ArtistPage = () => {
 	}
 
 	return (
-		<div className="artist-info" style={{ padding: "2rem 0rem"}}>
+		<div className="artist-info" style={{ padding: "2rem 0rem" }}>
 			{isLoading ? (
 				<h3>Loading...</h3>
 			) : (
@@ -55,23 +55,34 @@ const ArtistPage = () => {
 							style={{ marginBottom: "1rem" }}
 						/>
 					)}
-					<p style={{ fontSize: "1.2rem", marginBottom: "1rem", lineHeight: "1.5", maxWidth: "45rem" }}>
+					<p
+						style={{
+							fontSize: "1.2rem",
+							marginBottom: "1rem",
+							lineHeight: "1.5",
+							maxWidth: "45rem",
+						}}>
 						{artistData.description}
 					</p>
 					<h2>Albums</h2>
 					<ul>
-						{artistData.products.albums.content.map((album) => (
-							<li
-								key={album.browseId}
-								style={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}>
-								<p>{`${album.name}`}</p>
-								<img src={album.thumbnails[0].url} alt={album.name} style={{maxWidth: "60px", maxHeight: "60px"}}></img>
-							</li>
-						))}
+						{artistData.products.albums && artistData.products.albums.content.map(
+							(album) => (
+								<li
+									key={album.browseId}
+									style={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+									}}>
+									<p>{`${album.name}`}</p>
+									<img
+										src={album.thumbnails[0].url}
+										alt={album.name}
+										style={{ maxWidth: "60px", maxHeight: "60px" }}></img>
+								</li>
+							)
+						)}
 					</ul>
 					<h2>Songs</h2>
 					<ul>
