@@ -9,6 +9,9 @@ router.post("/", playlistController.createPlaylist);
 router.get("/:id", playlistController.getPlaylist);
 
 // Add song to playlist
-router.post("/:id");
+router.post("/:id", playlistController.addSongToPlaylist);
+
+// Remove playlist
+router.delete("/:id", playlistController.removePlaylist);
 
 module.exports = router;

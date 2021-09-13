@@ -1,23 +1,17 @@
 import React, { useContext } from "react";
 import { MusicContext } from "../context/MusicContext";
 
-function SongsResults() {
+function ArtistsResults() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
-
-	function playSong(song) {
-		console.log(song);
-		updateMusicContext({
-			nowPlaying: song,
-		});
-	}
 
 	return (
 		<section className="result">
-			<h1>Songs</h1>
+			<h1>Artists</h1>
 			<ul>
 				{musicContext.fetchResult.content.map((item) => (
-					<li key={item.videoId} onClick={() => playSong(item)}>
-						{`${item.name} by ${item.artist.name}`}
+					<li key={item.browseId} style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <p>{`${item.name}`}</p>
+            <img src={item.thumbnails[0].url} alt={item.name}></img>
 					</li>
 				))}
 			</ul>
@@ -25,4 +19,4 @@ function SongsResults() {
 	);
 }
 
-export default SongsResults;
+export default ArtistsResults;

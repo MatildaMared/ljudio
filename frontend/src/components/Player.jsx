@@ -69,17 +69,18 @@ const Player = () => {
 				</div>
 			)}
 			<YouTube
+				className="youtube-player"
 				videoId={musicContext.nowPlaying?.videoId}
 				opts={opts}
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}
 			/>
-			<article className="playButtons">
+			<article className="playButtons buttons">
 				<button onClick={previousSong}><MdSkipPrevious /></button>
 				<button onClick={isPlaying ? pause : play}><FaPlay /> <FaPause /></button>
 				<button onClick={nextSong}><MdSkipNext /></button>
 			</article>
-			<article className="volumeButtons">
+			<article className="volumeButtons buttons">
 				<button onClick={volumeDown}><FaVolumeDown /></button>
 				<button onClick={volumeUp}><FaVolumeUp /></button>
 			</article>

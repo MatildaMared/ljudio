@@ -1,16 +1,30 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { MusicContext } from "../context/MusicContext";
 import AllResults from "./AllResults";
+import SongsResults from "./SongsResults";
+import ArtistsResults from './ArtistsResults';
+import AlbumsResults from './AlbumsResults';
 
 function Result() {
-  const [musicContext, updateMusicContext] = useContext(MusicContext);
-  console.log(musicContext.resultType);
+	const [musicContext, updateMusicContext] = useContext(MusicContext);
 
-  return (
-    <div>
-      {musicContext.resultType === "all" && <AllResults />}
-    </div>
-  )
+	return (
+		<div className="result">
+			{musicContext.isLoading && <h3>Loading...</h3>}
+			{!musicContext.isLoading && musicContext.resultType === "all" && (
+				<AllResults />
+			)}
+			{!musicContext.isLoading && musicContext.resultType === "songs" && (
+				<SongsResults />
+			)}
+			{!musicContext.isLoading && musicContext.resultType === "artists" && (
+				<ArtistsResults />
+			)}
+			{!musicContext.isLoading && musicContext.resultType === "albums" && (
+				<AlbumsResults />
+			)}
+		</div>
+	);
 }
 
 export default Result;

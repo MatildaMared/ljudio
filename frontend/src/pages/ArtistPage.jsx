@@ -1,13 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { MusicContext } from "../context/MusicContext";
 import { useParams } from "react-router-dom";
-import Player from "../components/Player";
 import { getArtistById, getSongsByString } from "../services/musicService";
-import Result from '../components/Result';
-
 
 const ArtistPage = () => {
-	const [context, updateContext] = useContext(UserContext);
+	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [artist, setArtist] = useState(null);
 	const { browseId } = useParams();
 	const [artistData, setArtistData] = useState(null);
@@ -19,51 +16,85 @@ const ArtistPage = () => {
 
 	async function getArtistData(browseId) {
 		const data = await getArtistById(browseId);
+		console.log(data);
 		setArtistData(data);
 		setArtist(data.name);
 		setIsLoading(false);
 	}
 
-  async function getSong(songName) {
-    // Make a fetch request to return 
-    // an array of songs by a search string
+	async function playSong(songName) {
+		// Make a fetch request to return
+		// an array of songs by a search string
 		const data = await getSongsByString(songName);
 
-    // Iterate over the array
+		// Iterate over the array
 		for (const song of data.content) {
-      // If the artist name of the song is the same
-      // as the current artist, update the context
-      // and break out of the loop
+			// If the artist name of the song is the same
+			// as the current artist, update the context
+			// and break out of the loop
 			if (song.artist.name.toLowerCase() === artist.toLowerCase()) {
-				updateContext({
-					nowPlaying: song.videoId,
-        });
-        break;
+				updateMusicContext({
+					nowPlaying: song,
+				});
+				break;
 			}
 		}
 	}
 
-	function playSong(e) {
-		getSong(e.target.dataset.name);
-	}
-
 	return (
-		<div>
+		<div className="artist-info" style={{ padding: "2rem 0rem" }}>
 			{isLoading ? (
-				<p>Loading...</p>
+				<h3>Loading...</h3>
 			) : (
 				<div>
 					<h1>{artistData.name}</h1>
-					<p>{artistData.description}</p>
+					{artistData.thumbnails && (
+						<img
+							src={artistData.thumbnails[0].url}
+							alt={artistData.name}
+							style={{ marginBottom: "1rem" }}
+						/>
+					)}
+					<p
+						style={{
+							fontSize: "1.2rem",
+							marginBottom: "1rem",
+							lineHeight: "1.5",
+							maxWidth: "45rem",
+						}}>
+						{artistData.description}
+					</p>
+					<h2>Albums</h2>
+					<ul>
+						{artistData.products.albums && artistData.products.albums.content.map(
+							(album) => (
+								<li
+									key={album.browseId}
+									style={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+									}}>
+									<p>{`${album.name}`}</p>
+									<img
+										src={album.thumbnails[0].url}
+										alt={album.name}
+										style={{ maxWidth: "60px", maxHeight: "60px" }}></img>
+								</li>
+							)
+						)}
+					</ul>
+					<h2>Songs</h2>
 					<ul>
 						{artistData.products.songs.content.map((song) => (
-							<li key={song.name} data-name={song.name} onClick={playSong}>
+							<li
+								key={song.name}
+								data-name={song.name}
+								onClick={() => playSong(song.name)}>
 								{song.name}
 							</li>
 						))}
 					</ul>
-					<Player />
-					<Result />
 				</div>
 			)}
 		</div>

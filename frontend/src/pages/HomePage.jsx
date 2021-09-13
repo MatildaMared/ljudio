@@ -1,24 +1,12 @@
-import React from "react";
-
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Player from "../components/Player";
-import SearchBar from "../components/SearchBar";
-import Result from "../components/Result";
+import React, {useContext} from "react";
+import { UserContext } from "./../context/UserContext";
 
 function HomePage() {
-
+	const [userContext, updateUserContext] = useContext(UserContext);
 	return (
-		<div className="app">
-			<Header />
-			<main className="main">
-				<SearchBar />
-				<div className="content-wrapper">
-				<Result />
-				<Player videoId="z4WCaWJgOqM" />
-				</div>
-			</main>
-			<Footer />
+		<div className="home-page" style={{padding: "2rem 0rem"}}>
+			<h1 style={{marginBottom: "1rem"}}>Welcome back, {userContext.user.firstName}! 👋</h1>
+			<p>What music are you in the mood for today? 🥳</p>
 		</div>
 	);
 }

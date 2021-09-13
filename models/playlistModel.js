@@ -11,13 +11,10 @@ const playlistSchema = Schema({
 		type: Schema.Types.ObjectId,
 		ref: "User",
 	},
-	songs: [
-		{
-			videoId: {
-				type: String,
-			},
-		},
-	],
+	songs: {
+		type: Array,
+		default: [],
+	},
 });
 
 const Playlist = mongoose.model("Playlist", playlistSchema);
