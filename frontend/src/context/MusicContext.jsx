@@ -8,7 +8,6 @@ export const MusicProvider = ({ children }) => {
 	const [context, setContext] = useState({
 		nowPlayingIndex: null,
 		queue: [],
-		nowPlaying: null,
 		fetchResult: null,
 		resultType: null,
 		isLoading: false,

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
-import { FaPlay, FaPause, FaVolumeDown, FaVolumeUp } from 'react-icons/fa';
-import { MdSkipPrevious, MdSkipNext } from 'react-icons/md';
+import { FaPlay, FaPause, FaVolumeDown, FaVolumeUp } from "react-icons/fa";
+import { MdSkipPrevious, MdSkipNext } from "react-icons/md";
 
 const Player = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -53,11 +53,19 @@ const Player = () => {
 	}
 
 	function nextSong() {
-
+		updateMusicContext({
+			nowPlayingIndex:
+				musicContext.nowPlayingIndex < musicContext.queue.length - 1
+					? musicContext.nowPlayingIndex + 1
+					: musicContext.nowPlayingIndex,
+		});
 	}
 
 	function previousSong() {
-
+		updateMusicContext({
+			nowPlayingIndex:
+				musicContext.nowPlayingIndex > 0 ? musicContext.nowPlayingIndex - 1 : 0,
+		});
 	}
 
 	return (
@@ -76,17 +84,24 @@ const Player = () => {
 				onStateChange={videoStateChange}
 			/>
 			<article className="playButtons buttons">
-				<button onClick={previousSong}><MdSkipPrevious /></button>
-				<button onClick={isPlaying ? pause : play}><FaPlay /> <FaPause /></button>
-				<button onClick={nextSong}><MdSkipNext /></button>
+				<button onClick={previousSong}>
+					<MdSkipPrevious />
+				</button>
+				<button onClick={isPlaying ? pause : play}>
+					<FaPlay /> <FaPause />
+				</button>
+				<button onClick={nextSong}>
+					<MdSkipNext />
+				</button>
 			</article>
 			<article className="volumeButtons buttons">
-				<button onClick={volumeDown}><FaVolumeDown /></button>
-				<button onClick={volumeUp}><FaVolumeUp /></button>
+				<button onClick={volumeDown}>
+					<FaVolumeDown />
+				</button>
+				<button onClick={volumeUp}>
+					<FaVolumeUp />
+				</button>
 			</article>
-			
-			
-			
 		</section>
 	);
 };
