@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
+import { FaPlay, FaPause, FaVolumeDown, FaVolumeUp } from 'react-icons/fa';
+import { MdSkipPrevious, MdSkipNext } from 'react-icons/md';
 
 const Player = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -50,6 +52,14 @@ const Player = () => {
 		console.log(player.getVolume());
 	}
 
+	function nextSong() {
+
+	}
+
+	function previousSong() {
+
+	}
+
 	return (
 		<section className="player">
 			{musicContext.nowPlaying && (
@@ -65,11 +75,18 @@ const Player = () => {
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}
 			/>
-			<div className="buttons">
-				<button onClick={isPlaying ? pause : play}>Play/Pause</button>
-				<button onClick={volumeUp}>Volume Up</button>
-				<button onClick={volumeDown}>Volume Down</button>
-			</div>
+			<article className="playButtons buttons">
+				<button onClick={previousSong}><MdSkipPrevious /></button>
+				<button onClick={isPlaying ? pause : play}><FaPlay /> <FaPause /></button>
+				<button onClick={nextSong}><MdSkipNext /></button>
+			</article>
+			<article className="volumeButtons buttons">
+				<button onClick={volumeDown}><FaVolumeDown /></button>
+				<button onClick={volumeUp}><FaVolumeUp /></button>
+			</article>
+			
+			
+			
 		</section>
 	);
 };
