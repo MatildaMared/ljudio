@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
+import "./../../styles/SeekSlider.css";
 
 const Player = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -50,6 +51,16 @@ const Player = () => {
 		console.log(player.getVolume());
 	}
 
+	const sliderSpan = document.querySelector('#seek-slider span');
+	
+	musicContext.ontimeupdate = function(){
+		let percentage = ( musicContext.currentTime / musicContext.duration ) * 100;
+		sliderSpan.css("width", percentage+"%");
+		console.log("Video time update: ");
+	}
+
+	
+
 	return (
 		<section className="player">
 			{musicContext.nowPlaying && (
@@ -69,6 +80,10 @@ const Player = () => {
 				<button onClick={isPlaying ? pause : play}>Play/Pause</button>
 				<button onClick={volumeUp}>Volume Up</button>
 				<button onClick={volumeDown}>Volume Down</button>
+				<br></br>
+				<div id="seek-slider">
+					<span></span>
+				</div>
 			</div>
 		</section>
 	);
