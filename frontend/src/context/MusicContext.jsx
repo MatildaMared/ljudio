@@ -6,7 +6,8 @@ export const MusicContext = createContext();
 
 export const MusicProvider = ({ children }) => {
 	const [context, setContext] = useState({
-		nowPlaying: null,
+		nowPlayingIndex: null,
+		queue: [],
 		fetchResult: null,
 		resultType: null,
 		isLoading: false,
@@ -15,6 +16,10 @@ export const MusicProvider = ({ children }) => {
 
 	const [userContext] = useContext(UserContext);
 	const history = useHistory();
+
+	useEffect(() => {
+		console.log(context);
+	}, [context]);
 
 	// Makes sure, with every update to the state,
 	// that the user is still logged in

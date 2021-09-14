@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import { useHistory } from "react-router-dom";
+import { FaPlay } from "react-icons/fa";
+import { playSong } from "./../utilities/musicUtils";
 
 function AllResults() {
 	const history = useHistory();
@@ -25,6 +27,22 @@ function AllResults() {
 	}
 
 	sortResults(musicContext.fetchResult.content);
+
+	function playSong(item) {
+		if (musicContext.queue.length === 0) {
+			updateMusicContext({
+				queue: [...musicContext.queue, item],
+				nowPlayingIndex: 0,
+			});
+		} else {
+			const newPlayQueue = [...musicContext.queue];
+			newPlayQueue.splice(musicContext.nowPlayingIndex + 1, 0, item);
+			updateMusicContext({
+				queue: newPlayQueue,
+				nowPlayingIndex: musicContext.nowPlayingIndex + 1,
+			});
+		}
+	}
 
 	return (
 		<div className="all-results">
@@ -66,10 +84,20 @@ function AllResults() {
 			<ul>
 				{songsArray &&
 					songsArray.map((item) => (
-						<li
-							key={item.videoId}
-							onClick={() => updateMusicContext({ nowPlaying: item })}>
-							<p>{item.name}</p>
+						<li key={item.videoId}>
+							<p style={{ marginBottom: ".5rem" }}>{item.name}</p>
+							<button
+								onClick={() => playSong(item)}>
+								<FaPlay />
+							</button>
+							<button
+								onClick={() => {
+									updateMusicContext({
+										queue: [...musicContext.queue, item],
+									});
+								}}>
+								Add to queue
+							</button>
 						</li>
 					))}
 			</ul>
