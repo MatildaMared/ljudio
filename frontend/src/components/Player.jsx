@@ -31,6 +31,10 @@ const Player = () => {
 		console.log(player);
 	}
 
+	function ontimeupdate(event) {
+		console.log("Update!");
+	}
+
 	function play() {
 		player.playVideo();
 		setIsPlaying(true);
@@ -52,15 +56,6 @@ const Player = () => {
 		player.setVolume(currentVolume - 10);
 		console.log(player.getVolume());
 	}
-
-	const sliderSpan = document.querySelector('#seek-slider span');
-	
-	musicContext.ontimeupdate = function(){
-		let percentage = ( musicContext.currentTime / musicContext.duration ) * 100;
-		sliderSpan.css("width", percentage+"%");
-		console.log("Video time update: ");
-	}
-
 	
 	function nextSong() {
 		updateMusicContext({
@@ -92,6 +87,7 @@ const Player = () => {
 				opts={opts}
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}
+				onUpdate={ontimeupdate}
 			/>
 			<div className="buttons">
 				<button onClick={isPlaying ? pause : play}>Play/Pause</button>
