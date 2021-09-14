@@ -17,6 +17,10 @@ export const UserProvider = ({ children }) => {
 		setUserData();
 	}, []);
 
+	useEffect(() => {
+		console.log("New User Context is: ", context);
+	}, [context]);
+
 	// If the user is not authenticated,
 	// redirect to Login page
 	useEffect(() => {

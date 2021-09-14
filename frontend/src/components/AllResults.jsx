@@ -44,6 +44,12 @@ function AllResults() {
 		}
 	}
 
+	function addToQueue(item) {
+		updateMusicContext({
+			queue: [...musicContext.queue, item],
+		});
+	}
+
 	return (
 		<div className="all-results">
 			<h1>All Results</h1>
@@ -86,15 +92,12 @@ function AllResults() {
 					songsArray.map((item) => (
 						<li key={item.videoId}>
 							<p style={{ marginBottom: ".5rem" }}>{item.name}</p>
-							<button
-								onClick={() => playSong(item)}>
+							<button onClick={() => playSong(item)}>
 								<FaPlay />
 							</button>
 							<button
 								onClick={() => {
-									updateMusicContext({
-										queue: [...musicContext.queue, item],
-									});
+									addToQueue(item);
 								}}>
 								Add to queue
 							</button>

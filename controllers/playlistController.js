@@ -70,7 +70,7 @@ async function createPlaylist(req, res, next) {
 		});
 
 		// Push the playlist ID into the user playlists array
-		user.playlists.push(playlist._id);
+		user.playlists.unshift(playlist._id);
 
 		// Save changes in user to database
 		await user.save();
@@ -154,7 +154,6 @@ async function addSongToPlaylist(req, res, next) {
 async function removePlaylist(req, res, next) {
 	try {
 		playlistId = req.params.id;
-		console.log("Playlist id is: ", playlistId);
 
 		// grabs the JWT token from the http request headers
 		const token = req.headers.authorization.split(" ")[1];
