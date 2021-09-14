@@ -154,7 +154,6 @@ async function addSongToPlaylist(req, res, next) {
 async function removePlaylist(req, res, next) {
 	try {
 		playlistId = req.params.id;
-		console.log("Playlist id is: ", playlistId);
 
 		// grabs the JWT token from the http request headers
 		const token = req.headers.authorization.split(" ")[1];
