@@ -11,6 +11,7 @@ import SearchPage from "./pages/SearchPage";
 import ArtistPage from "./pages/ArtistPage";
 import Layout from "./pages/Layout";
 import PlaylistsPage from './pages/PlaylistsPage';
+import PlaylistPage from './pages/PlaylistPage';
 
 function App() {
 	return (
@@ -36,6 +37,9 @@ function App() {
 							</Route>
 							<PrivateRoute path="/artist/:browseId">
 								<Layout component={ArtistPage} />
+							</PrivateRoute>
+							<PrivateRoute path="/playlist/:playlistId">
+								<Layout component={PlaylistPage} />
 							</PrivateRoute>
 						</Switch>
 					</MusicProvider>

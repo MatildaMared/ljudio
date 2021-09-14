@@ -70,7 +70,7 @@ async function createPlaylist(req, res, next) {
 		});
 
 		// Push the playlist ID into the user playlists array
-		user.playlists.push(playlist._id);
+		user.playlists.unshift(playlist._id);
 
 		// Save changes in user to database
 		await user.save();
