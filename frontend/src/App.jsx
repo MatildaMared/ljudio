@@ -12,6 +12,7 @@ import ArtistPage from "./pages/ArtistPage";
 import Layout from "./pages/Layout";
 import PlaylistsPage from './pages/PlaylistsPage';
 import PlaylistPage from './pages/PlaylistPage';
+import QueuePage from "./pages/QueuePage";
 
 function App() {
 	return (
@@ -28,6 +29,9 @@ function App() {
 							</PrivateRoute>
 							<PrivateRoute path="/playlists" exact>
 								<Layout component={PlaylistsPage} />
+							</PrivateRoute>
+							<PrivateRoute path="/queue" exact>
+								<Layout component={QueuePage} />
 							</PrivateRoute>
 							<Route path="/login">
 								<LoginPage />
