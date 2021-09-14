@@ -14,4 +14,7 @@ router.post("/:id", playlistController.addSongToPlaylist);
 // Remove playlist
 router.delete("/:id", playlistController.removePlaylist);
 
+// Remove song from playlist
+router.delete("/:playlistId/:videoId", playlistController.removeSongFromPlaylist);
+
 module.exports = router;

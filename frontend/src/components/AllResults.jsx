@@ -30,7 +30,6 @@ function AllResults() {
 
 	function playSong(item) {
 		if (musicContext.queue.length === 0) {
-			console.log("musicContext queue is empty!");
 			updateMusicContext({
 				queue: [...musicContext.queue, item],
 				nowPlayingIndex: 0,
