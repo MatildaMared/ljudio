@@ -55,9 +55,6 @@ function SignupPage() {
 			} else {
 				setShow(true);
 				setErrorMessage(data.error);
-				updateContext({
-					isAuthenticated: false,
-				});
 			}
 		} catch (err) {
 			console.log('Error fetching: ', err);

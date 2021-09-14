@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
 	// redirect to Login page
 	useEffect(() => {
 		if (context.isAuthenticated === false || !localStorage.getItem("token")) {
-			//history.push("/login");
+			history.push("/login");
 		}
 	}, [context]);
 
