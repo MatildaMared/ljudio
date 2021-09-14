@@ -6,15 +6,21 @@ function Navigation() {
 		<nav className="navigation">
 			<h1>Menu</h1>
 			<ul>
-				<li>
-					<Link to="/">Home</Link>
-				</li>
-				<li>
-					<Link to="/search">Search</Link>
-				</li>
-				<li>
-					<Link to="/playlists">Playlists</Link>
-				</li>
+				<Link to="/">
+					<li>
+						Home
+					</li>
+				</Link>
+				<Link to="/search">
+					<li>
+						Search
+					</li>
+				</Link>
+				<Link to="/playlists">
+					<li>
+						Playlists
+					</li>
+				</Link>
 				<li>Queue</li>
 			</ul>
 		</nav>
