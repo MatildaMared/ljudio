@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import ErrorModal from "../modal/ErrorModal";
 import "../../styles/signup.css";
 
 function SignupPage() {
@@ -10,7 +11,8 @@ function SignupPage() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const history = useHistory();
+	const [show, setShow] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -19,11 +21,9 @@ function SignupPage() {
 
 	const passwordIdentical = (pass, confirmPass) => {
 		if (pass !== confirmPass) {
-			console.log(
-				`Password don't match 💥 First: '${pass}', Second: '${confirmPass}'`
-			);
+			setShow(true);
+			setErrorMessage(`Passwords don't match`);
 		} else if (pass === confirmPass) {
-			console.log(`It's a match!! 😀 ${pass} = ${confirmPass}`);
 			createAccount(firstName, lastName, email, password);
 		}
 	};
@@ -44,7 +44,6 @@ function SignupPage() {
 			});
 
 			const data = await res.json();
-			console.log(data);
 
 			if (data.success) {
 				localStorage.setItem("token", data.user.token);
@@ -54,12 +53,14 @@ function SignupPage() {
 					user: data.user,
 				});
 			} else {
+				setShow(true);
+				setErrorMessage(data.error);
 				updateContext({
 					isAuthenticated: false,
 				});
 			}
 		} catch (err) {
-			console.log(err);
+			console.log('Error fetching: ', err);
 		}
 	}
 
@@ -122,6 +123,9 @@ function SignupPage() {
 					</Link>
 				</p>
 			</form>
+			<ErrorModal title="Error" onClose={() => setShow(false)} show={show}>
+				<p>{errorMessage}</p>
+			</ErrorModal>
 		</div>
 	);
 }
