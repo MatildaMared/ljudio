@@ -11,6 +11,7 @@ function QueuePage() {
         const newList = list.filter((item) => item.videoId !== itemId);
 
         setList(newList);
+        updateMusicContext({queue: newList});
     }
  
     return (
