@@ -91,7 +91,7 @@ function AllResults() {
 				{songsArray &&
 					songsArray.map((item) => (
 						<li key={item.videoId}>
-							<p style={{ marginBottom: ".5rem" }}>{item.name}</p>
+							<p style={{ marginBottom: ".5rem" }}>{item.name} by {item.artist.name}</p>
 							<button onClick={() => playSong(item)}>
 								<FaPlay />
 							</button>
