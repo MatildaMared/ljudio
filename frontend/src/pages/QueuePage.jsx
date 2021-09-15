@@ -1,31 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { MusicContext } from "./../context/MusicContext";
 
 function QueuePage() {
     const [musicContext, updateMusicContext] = useContext(MusicContext);
     const musicQueue = musicContext.queue;
     const nowPlayingIndex = musicContext.nowPlayingIndex;
-    let items = [];
+    const [list, setList] = useState(musicQueue);
 
-    console.log('nowPlayingindex: ', nowPlayingIndex);
-    console.log('musicqueue: ', musicQueue);
-    console.log('items before ', items);
- 
-    for (let i = nowPlayingIndex; i < (musicQueue - nowPlayingIndex); i++) {
-        console.log('nowPlayingindex in loop: ', nowPlayingIndex);
-        console.log('musicqueue in loop: ', musicQueue);
-        items.push(<li key={nowPlayingIndex}>
-            {musicQueue.name} by {musicQueue.artist.name}
-        </li>) 
+    const handleDelete = (itemId) => {
+        const newList = list.filter((item) => item.videoId !== itemId);
+
+        setList(newList);
     }
-
-    console.log('items after ', items);
  
     return (
         <section className="result">
 			<h1>Queue</h1>
-			<ul>           
-                {items}
+			<ul>    
+                {
+                    list.map((item, index) => {
+                        if (index >= nowPlayingIndex) {
+                            return (
+                                <li key={`${item.videoId}`}>
+                                {`${item.name} by ${item.artist.name}`}
+                                <button className="buttons" onClick={() => handleDelete(item.videoId)}>Delete</button>
+                                </li>
+                            )
+                        }
+                    })
+                }
 			</ul>
 		</section>
     )
