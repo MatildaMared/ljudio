@@ -21,7 +21,11 @@ function Navigation() {
 						Playlists
 					</li>
 				</Link>
-				<li>Queue</li>
+				<Link to="/queue">
+					<li>
+						Queue
+					</li>
+				</Link>
 			</ul>
 		</nav>
 	);
