@@ -3,7 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import '../../styles/signup.css';
 import { createAccountFetch } from '../services/authService';
-import ErrorModal from '../modal/ErrorModal';
+import ErrorModal from '../modals/ErrorModal';
 
 function SignupPage() {
   const [context, updateContext] = useContext(UserContext);
@@ -12,6 +12,7 @@ function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  	//Show or hide modal that displays an error message when user typed something wrong
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
