@@ -70,10 +70,13 @@ async function createPlaylist(req, res, next) {
 		});
 
 		// Push the playlist ID into the user playlists array
-		user.playlists.push(playlist._id);
+		user.playlists.unshift(playlist._id);
 
 		// Save changes in user to database
 		await user.save();
+
+		// Populate the playlists array before sending data back to user
+		await user.populate("playlists");
 
 		// Send back the created playlist
 		// and user in the response
@@ -135,9 +138,13 @@ async function addSongToPlaylist(req, res, next) {
 		// Save changes to database
 		await playlist.save();
 
+		// Populate playlists array inside user document
+		await user.populate("playlists");
+
 		res.status(200).json({
 			success: true,
 			playlist,
+			updatedUser: user,
 		});
 	} catch (err) {
 		next(err);
@@ -147,7 +154,6 @@ async function addSongToPlaylist(req, res, next) {
 async function removePlaylist(req, res, next) {
 	try {
 		playlistId = req.params.id;
-		console.log("Playlist id is: ", playlistId);
 
 		// grabs the JWT token from the http request headers
 		const token = req.headers.authorization.split(" ")[1];
@@ -173,26 +179,100 @@ async function removePlaylist(req, res, next) {
 			);
 		}
 
-		// const removedPlaylist = await Playlist.findByIdAndDelete(playlistId);
+		// Remove playlist from playlist collection
+		await Playlist.findByIdAndDelete(playlistId);
 
-		// console.log("Removed playlist is: ", removedPlaylist);
-
-		const updatedPlaylists = user.playlists.map((playlist) => {
-			if (playlist._id.equals(mongoose.Types.ObjectId(playlistId))) {
-				console.log("Returning this playlist");
-				return playlist;
-			}
+		// Create a new array based on the playlists array in
+		// the user document, and filter out the deleted playlist
+		const updatedPlaylists = user.playlists.filter((playlist) => {
+			return !playlist._id.equals(mongoose.Types.ObjectId(playlistId));
 		});
 
-		console.log("updatedPlaylists is: ", updatedPlaylists);
+		// Sets the user playlists array equal to the
+		// new filtered array
+		user.playlists = updatedPlaylists;
 
+		// Save user to the database
 		const updatedUser = await user.save();
 
-		console.log("Updated user is: ", updatedUser);
+		// Populate the user document with the playlists
+		await updatedUser.populate("playlists");
 
+		// Send response back to user
 		res.status(200).json({
 			success: true,
 			user: updatedUser,
+		});
+	} catch (err) {
+		next(err);
+	}
+}
+
+async function removeSongFromPlaylist(req, res, next) {
+	try {
+		playlistId = req.params.playlistId;
+		const videoId = req.params.videoId;
+		console.log("Playlist id is: ", playlistId);
+		console.log("Video id is: ", videoId);
+
+		// grabs the JWT token from the http request headers
+		const token = req.headers.authorization.split(" ")[1];
+
+		// gets userId based on decoded jwt
+		const userId = await getUserIdFromToken(token);
+
+		// Return error if jwt token could not be decoded
+		if (userId === null) {
+			return next(new ErrorResponse("Unauthorized", 400));
+		}
+
+		// Finds user in database
+		const user = await User.findById(userId);
+
+		// Return error if user was not found
+		if (!user) {
+			return next(
+				new ErrorResponse(
+					"Could not find user in database, please try again...",
+					400
+				)
+			);
+		}
+
+		// Finds playlist in database
+		const playlist = await Playlist.findById(playlistId);
+
+		// Return error if playlist was not found
+		if (!playlist) {
+			return next(
+				new ErrorResponse(
+					"Could not find playlist in database, please try again...",
+					400
+				)
+			);
+		}
+
+		// Create new array based on playlist.songs
+		// and filter out the song that is supposed to
+		// be deleted
+		const updatedSongs = playlist.songs.filter(
+			(song) => song.videoId !== videoId
+		);
+
+		// Set playlist.songs equal to the filtered array
+		playlist.songs = updatedSongs;
+
+		// Save playlist to the database
+		const updatedPlaylist = await playlist.save();
+
+		// Populate the playlists array in user document
+		await user.populate("playlists");
+
+		// Send response back to user
+		res.status(200).json({
+			success: true,
+			updatedPlaylist,
+			user,
 		});
 	} catch (err) {
 		next(err);
@@ -204,4 +284,5 @@ module.exports = {
 	getPlaylist,
 	addSongToPlaylist,
 	removePlaylist,
+	removeSongFromPlaylist,
 };

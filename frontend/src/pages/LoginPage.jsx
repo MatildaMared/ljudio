@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import '../../styles/signup.css';
+import ErrorModal from '../modal/ErrorModal';
 import { loginFetch } from '../services/authService';
+import '../../styles/signup.css';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  const [show, setShow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,22 +23,12 @@ function LoginPage() {
     };
     try {
       const data = await loginFetch(obj);
-      //   const response = await fetch('/api/auth/login', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({
-      //       email,
-      //       password,
-      //     }),
-      //   });
-
-      //   const data = await response.json();
-
       if (data.success) {
         localStorage.setItem('token', data.token);
         history.push('/');
+      } else {
+        setShow(true);
+        setErrorMessage(data.error);
       }
     } catch (err) {
       console.log(err);
@@ -80,6 +73,9 @@ function LoginPage() {
           to sign up!
         </p>
       </form>
+      <ErrorModal title="Error" onClose={() => setShow(false)} show={show}>
+        <p>{errorMessage}</p>
+      </ErrorModal>
     </div>
   );
 }

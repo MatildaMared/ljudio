@@ -15,6 +15,10 @@ const playlistSchema = Schema({
 		type: Array,
 		default: [],
 	},
+	createdAt: {
+		type: Date,
+		default: new Date(),
+	},
 });
 
 const Playlist = mongoose.model("Playlist", playlistSchema);
