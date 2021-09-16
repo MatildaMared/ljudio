@@ -1,1 +1,52 @@
 @use "../abstracts/variables" as var;
+
+.navigation {
+	min-width: 14rem;
+	background-color: rgba(255, 255, 255, 0.03);
+	border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+	&__list {
+		width: 100%;
+	}
+
+	&__icon {
+		font-size: 1.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: 1rem;
+		color: rgba(255, 255, 255, 0.3);
+		transition: all 0.3s;
+	}
+
+	&__text {
+		flex: 1;
+		transform: translateY(1px);
+		transition: all 0.3s;
+	}
+
+	&__item {
+		background-color: rgba(255, 255, 255, 0.03);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+		padding: 1rem 1rem;
+		color: var.$color-light;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		transition: all 0.3s;
+
+		&--active,
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.1);
+
+			.navigation__text {
+				color: var.$color-primary-light;
+			}
+
+			.navigation__icon {
+				color: var.$color-primary;
+			}
+		}
+	}
+}

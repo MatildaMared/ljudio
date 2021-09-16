@@ -16,9 +16,9 @@ function Header() {
 	}
 
 	return (
-		<header>
-			<h1>Ljudio</h1>
-			<button onClick={logoutHandler}>Log Out</button>
+		<header className="header">
+			<h1 className="header__heading">Ljudio</h1>
+			{/* <button onClick={logoutHandler}>Log Out</button> */}
 		</header>
 	);
 }
