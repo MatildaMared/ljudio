@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdHome, MdSearch, MdQueueMusic, MdList } from "react-icons/md";
+import LogoutBtn from './LogoutBtn';
 
 function Navigation() {
 	const location = useLocation();
-	console.log(location);
+
 	return (
 		<nav className="navigation">
 			<ul className="navigation__list">
@@ -53,6 +54,7 @@ function Navigation() {
 					</li>
 				</Link>
 			</ul>
+			<LogoutBtn />
 		</nav>
 	);
 }

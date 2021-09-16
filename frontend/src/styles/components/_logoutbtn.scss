@@ -1,0 +1,33 @@
+@use "../abstracts/variables" as var;
+
+.logoutbtn {
+	background-color: var.$color-primary;
+	outline: none;
+	border: none;
+	border-radius: 0.5rem;
+	font: inherit;
+	padding: 0.75rem 1rem 0.75rem 1.5rem;
+	margin-top: 2rem;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+  color: rgba(0, 0, 0, .8);
+  transition: all .3s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, .15);
+    color: rgba(255, 255, 255, .6);
+
+    .logoutbtn__icon {
+      margin-left: 1rem;
+      margin-right: 0;
+    }
+  }
+
+	&__icon {
+		margin-left: 0.5rem;
+    margin-right: .5rem;
+		transform: translateY(-1px);
+    transition: margin .3s;
+	}
+}

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { MusicContext } from './../context/MusicContext';
+import { MdDeleteForever } from 'react-icons/md';
 
 function QueuePage() {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -15,21 +16,18 @@ function QueuePage() {
   };
 
   return (
-    <section className="result">
-      <h1>Queue</h1>
-      <ul>
+    <section className="queue-page">
+      <h1 className="queue-page__header">Queue</h1>
+      <ul className="queue-page__list">
         {list.map((item, index) => {
           if (index >= nowPlayingIndex) {
             return (
-              <li key={`${item.videoId}`}>
-                <button
-                  style={{ marginRight: '.5rem' }}
-                  className="buttons"
-                  onClick={() => handleDelete(item.videoId)}
-                >
-                  Delete
-                </button>
+              <li key={`${item.videoId}`} className="queue-page__list__item">
                 {`${item.name} by ${item.artist.name}`}
+                <MdDeleteForever
+                  className="queue-page__list__btn"
+                  onClick={() => handleDelete(item.videoId)}
+                />
               </li>
             );
           }

@@ -1,1 +1,60 @@
 @use "../abstracts/variables" as var;
+
+.search {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+
+  &__form {
+    margin-bottom: .5rem;
+  }
+
+	&__types {
+		display: flex;
+	}
+
+	&__type {
+		padding: 0.5rem 1rem;
+		background-color: var.$color-light-gray;
+		margin-right: 0.5rem;
+		border-radius: 0.5rem;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&--active {
+			background-color: var.$color-dark-gray;
+            
+		}
+
+		&:hover {
+			background-color: var.$color-dark-gray;
+		}
+
+		p {
+			vertical-align: middle;
+		}
+	}
+
+	input[type="text"] {
+		min-width: 30rem;
+		padding: 1rem 2rem;
+		font: inherit;
+		border: none;
+		border-radius: 0.5rem;
+		background-color: var.$color-light-gray;
+		outline: none;
+        color: var.$color-light;
+
+		&:focus {
+			background-color: var.$color-dark-gray;
+		}
+	}
+
+	input[type="submit"] {
+		padding: 1rem 2rem;
+		cursor: pointer;
+        border-radius: 0.5rem;
+        background-color: var.$color-primary;
+	}
+}

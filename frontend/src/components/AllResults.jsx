@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { MusicContext } from './../context/MusicContext';
 import { useHistory } from 'react-router-dom';
 import { FaPlay } from 'react-icons/fa';
-import { playSong } from './../utilities/musicUtils';
+import { MdPlayCircleFilled, MdPlaylistAdd } from 'react-icons/md';
 import AddToPlayQueue from './AddToPlayQueue';
 
 function AllResults() {
@@ -53,57 +53,56 @@ function AllResults() {
 
   return (
     <div className="all-results">
-      <h1>All Results</h1>
-      <h2>Artists</h2>
-      <ul>
-        {artistsArray &&
-          artistsArray.map((item) => (
-            <li
-              key={item.browseId}
-              onClick={() => history.push(`/artist/${item.browseId}`)}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <p>{`${item.name}`}</p>
-              <img src={item.thumbnails[0].url} alt={item.name}></img>
-            </li>
-          ))}
-      </ul>
-      <h2>Albums</h2>
-      <ul>
-        {albumsArray &&
-          albumsArray.map((item) => (
-            <li
-              key={item.browseId}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <p>{`${item.name}`}</p>
-              <img src={item.thumbnails[0].url} alt={item.name}></img>
-            </li>
-          ))}
-      </ul>
-      <h2>Songs</h2>
-      <ul>
-        {songsArray &&
-          songsArray.map((item) => (
-            <li key={item.videoId}>
-              <p style={{ marginBottom: '.5rem' }}>
-                {item.name} by {item.artist.name}
-              </p>
-              <button onClick={() => playSong(item)}>
-                <FaPlay />
-              </button>
-              <AddToPlayQueue item={item} />
-            </li>
-          ))}
-      </ul>
+      <h2 className="all-results__heading">Artists</h2>
+      <div className="results">
+        <ul className="results__list">
+          {artistsArray &&
+            artistsArray.map((item) => (
+              <li
+                className="results__list__item"
+                key={item.browseId}
+                onClick={() => history.push(`/artist/${item.browseId}`)}
+              >
+                <p>{`${item.name}`}</p>
+                <img src={item.thumbnails[0].url} alt={item.name}></img>
+              </li>
+            ))}
+        </ul>
+        {/* <h2>Albums</h2>
+			<ul>
+				{albumsArray &&
+					albumsArray.map((item) => (
+						<li
+							key={item.browseId}
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}>
+							<p>{`${item.name}`}</p>
+							<img src={item.thumbnails[0].url} alt={item.name}></img>
+						</li>
+					))}
+			</ul> */}
+        <h2 className="all-results__heading">Songs</h2>
+        <ul className="results__list">
+          {songsArray &&
+            songsArray.map((item) => (
+              <li className="results__list__item" key={item.videoId}>
+                <p style={{ marginBottom: '.5rem' }}>
+                  {item.name} by {item.artist.name}
+                </p>
+                <div className="results__icon-wrapper">
+                  <MdPlayCircleFilled
+                    className="results__list__icon"
+                    onClick={() => playSong(item)}
+                  />
+                  <AddToPlayQueue item={item} />
+                </div>
+              </li>
+            ))}
+        </ul>
+      </div>
     </div>
   );
 }
