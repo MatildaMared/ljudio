@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { MusicContext } from '../context/MusicContext';
-import { FaPlay } from 'react-icons/fa';
+import PlaySongBtn from './PlaySongBtn';
 import AddToPlayQueue from '../components/AddToPlayQueue';
 
 function SongsResults() {
@@ -28,12 +28,7 @@ function SongsResults() {
       <ul>
         {musicContext.fetchResult.content.map((item) => (
           <li key={item.videoId}>
-            <button
-              onClick={() => playSong(item)}
-              style={{ marginRight: '.3rem' }}
-            >
-              <FaPlay />
-            </button>
+            <PlaySongBtn item={item} />
             <AddToPlayQueue item={item} />
             {`${item.name} by ${item.artist.name}`}
           </li>

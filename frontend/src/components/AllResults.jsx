@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { MusicContext } from './../context/MusicContext';
 import { useHistory } from 'react-router-dom';
-import { MdPlayCircleFilled } from 'react-icons/md';
 import PlaySongBtn from './PlaySongBtn';
 import AddToPlayQueue from './AddToPlayQueue';
 
