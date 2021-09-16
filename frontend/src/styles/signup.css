@@ -7,7 +7,7 @@
   color: #876DC6;
 } */
 
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -19,22 +19,22 @@
 .form > * {
   padding: 1rem;
   color: rgb(243, 236, 223);
-}
+} */
 
-.form label {
+/* .form label {
   text-align: left;
 }
 
 .controlling-form, .form__form-control {
   display: grid;
   grid-template-columns: 40% 60%;
-}
+} */
 
-.controlling-form input,
+/* .controlling-form input,
 .form__form-control input {
   height: 2rem;
   border-radius: 0.5rem;
-}
+} */
 
 /* a {
   text-decoration: none;
