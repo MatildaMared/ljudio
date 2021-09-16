@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { MusicContext } from '../context/MusicContext';
 import { FaPlay } from 'react-icons/fa';
 import { AiFillDatabase } from 'react-icons/ai';
+import AddToPlayQueue from '../components/AddToPlayQueue';
 
 function SongsResults() {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -38,6 +39,7 @@ function SongsResults() {
               onClick={() => playSong(item)}
               style={{ marginRight: '.3rem' }}
             >
+              <AddToPlayQueue />
               <FaPlay />
             </button>
             <button onClick={() => addToQueue(item)}>
