@@ -149,15 +149,22 @@
     margin-bottom: 10px;
     background-color: rgba(255, 255, 255, .1);
     border-radius: .5rem;
-    overflow: hidden;
+    // overflow: hidden;
     position: relative;
     width: 400px;
     margin-top: 10px;
+
+    &:hover {
+      #seek-slider span::after {
+        background-color: #696969;
+      }
+    }
 }
 
 #seek-slider span
 {
     background-color: var.$color-primary;
+    border-radius: .5rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -173,8 +180,7 @@
     z-index: 100;
     display: block;
     position: absolute;
-    background-color: hotpink;
-    color: darkviolet;
-    top: 0;
-    right: 0;
+    background-color: #5b5b5b;
+    top: -2.75px;
+    right: -2px;
 }
