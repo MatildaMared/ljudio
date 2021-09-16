@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { MusicContext } from '../context/MusicContext';
 import { MdPlaylistAdd } from 'react-icons/md';
 
@@ -10,8 +10,6 @@ function AddToPlayQueue({ item }) {
       queue: [...musicContext.queue, song],
     });
   };
-
-  useEffect(() => {}, []);
 
   return (
     <div>

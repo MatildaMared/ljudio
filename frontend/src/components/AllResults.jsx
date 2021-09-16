@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { MusicContext } from './../context/MusicContext';
 import { useHistory } from 'react-router-dom';
-import { FaPlay } from 'react-icons/fa';
-import { MdPlayCircleFilled, MdPlaylistAdd } from 'react-icons/md';
+import { MdPlayCircleFilled } from 'react-icons/md';
+import PlaySongBtn from './PlaySongBtn';
 import AddToPlayQueue from './AddToPlayQueue';
 
 function AllResults() {
@@ -28,28 +28,6 @@ function AllResults() {
   }
 
   sortResults(musicContext.fetchResult.content);
-
-  function playSong(item) {
-    if (musicContext.queue.length === 0) {
-      updateMusicContext({
-        queue: [...musicContext.queue, item],
-        nowPlayingIndex: 0,
-      });
-    } else {
-      const newPlayQueue = [...musicContext.queue];
-      newPlayQueue.splice(musicContext.nowPlayingIndex + 1, 0, item);
-      updateMusicContext({
-        queue: newPlayQueue,
-        nowPlayingIndex: musicContext.nowPlayingIndex + 1,
-      });
-    }
-  }
-
-  function addToQueue(item) {
-    updateMusicContext({
-      queue: [...musicContext.queue, item],
-    });
-  }
 
   return (
     <div className="all-results">
@@ -93,10 +71,7 @@ function AllResults() {
                   {item.name} by {item.artist.name}
                 </p>
                 <div className="results__icon-wrapper">
-                  <MdPlayCircleFilled
-                    className="results__list__icon"
-                    onClick={() => playSong(item)}
-                  />
+                  <PlaySongBtn item={item} />
                   <AddToPlayQueue item={item} />
                 </div>
               </li>
