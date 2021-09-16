@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import ErrorModal from '../modal/ErrorModal';
 import { loginFetch } from '../services/authService';
-import '../../styles/signup.css';
+import '../styles/signup.css';
 
 function LoginPage() {
   const [email, setEmail] = useState('');

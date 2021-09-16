@@ -1,0 +1,31 @@
+#seek-slider
+{
+    cursor: pointer;
+    height: 10px;
+    margin-bottom: 10px;
+    outline: thin solid purple;
+    overflow: hidden;
+    position: relative;
+    width: 400px;
+    margin-top: 10px;
+}
+
+#seek-slider span
+{
+    background-color: purple;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10px;
+    width: 0px;
+}
+
+#seek-slider span.hover:after{
+    content: '⬤';
+    display: block;
+    position: absolute;
+    background-color: hotpink;
+    color: darkviolet;
+    top: 0;
+    right: 0;
+}
