@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { MusicContext } from '../context/MusicContext';
 import { MdPlaylistAdd } from 'react-icons/md';
 
-function AddToPlayQueue() {
+function AddToPlayQueue({ item }) {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
 
   const addToQueue = (song) => {
@@ -11,9 +11,11 @@ function AddToPlayQueue() {
     });
   };
 
+  useEffect(() => {}, []);
+
   return (
     <div>
-      <button className="queue__btn" onClick={addToQueue(item)}>
+      <button className="queue__btn" onClick={() => addToQueue(item)}>
         <MdPlaylistAdd />
       </button>
     </div>

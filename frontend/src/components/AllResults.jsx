@@ -3,6 +3,7 @@ import { MusicContext } from './../context/MusicContext';
 import { useHistory } from 'react-router-dom';
 import { FaPlay } from 'react-icons/fa';
 import { playSong } from './../utilities/musicUtils';
+import AddToPlayQueue from './AddToPlayQueue';
 
 function AllResults() {
   const history = useHistory();
@@ -99,13 +100,7 @@ function AllResults() {
               <button onClick={() => playSong(item)}>
                 <FaPlay />
               </button>
-              <button
-                onClick={() => {
-                  addToQueue(item);
-                }}
-              >
-                Add to queue
-              </button>
+              <AddToPlayQueue item={item} />
             </li>
           ))}
       </ul>
