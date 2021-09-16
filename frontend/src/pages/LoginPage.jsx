@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import ErrorModal from '../modal/ErrorModal';
+import ErrorModal from '../modals/ErrorModal';
 import { loginFetch } from '../services/authService';
 import '../styles/signup.css';
 
@@ -8,6 +8,7 @@ function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  	//Show or hide modal that displays an error message when user typed something wrong
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 

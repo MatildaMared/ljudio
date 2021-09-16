@@ -18,10 +18,10 @@ function HomePage() {
 	}
 
 	return (
-		<div className="home-page" style={{ padding: "2rem 0rem" }}>
+		<div className="home-page">
 			{userContext.user?.firstName && (
 				<div>
-					<h1 style={{ marginBottom: "1rem" }}>
+					<h1 className="home-page__heading">
 						Welcome back, {userContext.user?.firstName}! 👋
 					</h1>
 					<p>What music are you in the mood for today? 🥳</p>
