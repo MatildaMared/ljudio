@@ -17,7 +17,7 @@ import QueuePage from "./pages/QueuePage";
 
 function App() {
 	return (
-		<>
+		<div className="app">
 			<Router>
 				<UserProvider>
 					<MusicProvider>
@@ -50,7 +50,7 @@ function App() {
 					</MusicProvider>
 				</UserProvider>
 			</Router>
-		</>
+		</div>
 	);
 }
 

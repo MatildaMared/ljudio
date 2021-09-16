@@ -2,7 +2,13 @@ import React, { useContext, useState } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
 import "./../../styles/SeekSlider.css";
-import { FaPlay, FaPause, FaVolumeDown, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import {
+	FaPlay,
+	FaPause,
+	FaVolumeDown,
+	FaVolumeUp,
+	FaVolumeMute,
+} from "react-icons/fa";
 import { MdSkipPrevious, MdSkipNext } from "react-icons/md";
 
 const Player = () => {
@@ -55,27 +61,25 @@ const Player = () => {
 	function volumeDown() {
 		const currentVolume = player.getVolume();
 		player.setVolume(currentVolume - 10);
-		if(currentVolume <= 0){
+		if (currentVolume <= 0) {
 			setIsMuted(true);
-		}
-		else{
+		} else {
 			setPreviousVolume(player.getVolume());
 		}
 	}
 
 	// Mute/Unmute function
 	function volumeMute() {
-		if(isMuted){
+		if (isMuted) {
 			player.setVolume(previousVolume);
 			setIsMuted(false);
-		}
-		else{
+		} else {
 			setPreviousVolume(player.getVolume());
 			player.setVolume(0);
 			setIsMuted(true);
 		}
 	}
-	
+
 	function nextSong() {
 		updateMusicContext({
 			nowPlayingIndex:
@@ -93,12 +97,12 @@ const Player = () => {
 	}
 
 	function sliderUpdate(event) {
-		if(player.getPlayerState() === 2){
+		if (player.getPlayerState() === 2) {
 			clearInterval(videoTimer);
-		}
-		else if(player.getPlayerState() === 1){
-			let percentage = ( player.getCurrentTime() / player.getDuration() ) * 100;
-		    document.querySelector('#seek-slider span').style.width = percentage+"%";
+		} else if (player.getPlayerState() === 1) {
+			let percentage = (player.getCurrentTime() / player.getDuration()) * 100;
+			document.querySelector("#seek-slider span").style.width =
+				percentage + "%";
 		}
 	}
 
@@ -108,30 +112,29 @@ const Player = () => {
 	}
 
 	// Called when dragging the video progressbar to change the current time
-	function sliderMove(event) {
-		
-	}
+	function sliderMove(event) {}
 
 	// Called when the cursor hovers over the video progressbar
 	function sliderHover(event) {
-		document.querySelector('#seek-slider span').classList.add("hover");
+		document.querySelector("#seek-slider span").classList.add("hover");
 	}
 
 	// Called when the cursor unhovers the video progressbar
 	function sliderUnhover(event) {
-		document.querySelector('#seek-slider span').classList.remove("hover");
+		document.querySelector("#seek-slider span").classList.remove("hover");
 	}
 
 	return (
 		<section className="player">
-			{musicContext.nowPlaying && (
-				<div className="player__header">
-					<h2>{musicContext.nowPlaying?.artist.name}</h2>
-					<h3>{musicContext.nowPlaying?.name}</h3>
-				</div>
-			)}
+				<header className="player__header">
+					<span className="player__label">Now playing</span>
+					<div className="player__artist-info">
+						<h2 className="player__artist-name">{musicContext.nowPlaying?.artist.name}</h2>
+						<h3 className="player__song-name">– {musicContext.nowPlaying?.name}</h3>
+					</div>
+				</header>
 			<YouTube
-				className="youtube-player"
+				className="player__player"
 				videoId={musicContext.queue[musicContext.nowPlayingIndex]?.videoId}
 				opts={opts}
 				onReady={videoOnReady}
@@ -142,7 +145,12 @@ const Player = () => {
 				<button onClick={volumeUp}>Volume Up</button>
 				<button onClick={volumeDown}>Volume Down</button>
 				<br></br>
-				<div id="seek-slider" onClick={sliderClick} onMouseMove={sliderMove} onMouseOver={sliderHover} onMouseOut={sliderUnhover}>
+				<div
+					id="seek-slider"
+					onClick={sliderClick}
+					onMouseMove={sliderMove}
+					onMouseOver={sliderHover}
+					onMouseOut={sliderUnhover}>
 					<span></span>
 				</div>
 			</div>
