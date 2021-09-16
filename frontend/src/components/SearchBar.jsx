@@ -6,7 +6,6 @@ import {
 	getArtistsByString,
 	getSongsByString,
 } from "../services/musicService";
-import "./../styles/SearchBar.scss";
 
 function SearchBar() {
 	const [searchInput, setSearchInput] = useState("");
@@ -65,7 +64,7 @@ function SearchBar() {
 				<input
 					type="text"
 					ref={inputRef}
-					placeholder="Search..."
+					placeholder="Enter text here..."
 					value={searchInput}
 					onChange={(e) => setSearchInput(e.target.value)}
 				/>

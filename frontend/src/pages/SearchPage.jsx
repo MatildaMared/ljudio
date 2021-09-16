@@ -4,7 +4,7 @@ import Result from "../components/Result";
 
 function SearchPage() {
 	return (
-		<div className="search-content">
+		<div className="search-content main-wrapper">
 			<SearchBar />
 			<Result />
 		</div>

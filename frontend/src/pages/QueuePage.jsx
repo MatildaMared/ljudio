@@ -1,38 +1,40 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from "react";
 import { MusicContext } from "./../context/MusicContext";
+import { MdDeleteForever } from "react-icons/md";
 
 function QueuePage() {
-    const [musicContext, updateMusicContext] = useContext(MusicContext);
-    const musicQueue = musicContext.queue;
-    const nowPlayingIndex = musicContext.nowPlayingIndex;
-    const [list, setList] = useState(musicQueue);
+  const [musicContext, updateMusicContext] = useContext(MusicContext);
+  const musicQueue = musicContext.queue;
+  const nowPlayingIndex = musicContext.nowPlayingIndex;
+  const [list, setList] = useState(musicQueue);
 
-    const handleDelete = (itemId) => {
-        const newList = list.filter((item) => item.videoId !== itemId);
+  const handleDelete = (itemId) => {
+    const newList = list.filter((item) => item.videoId !== itemId);
 
-        setList(newList);
-        updateMusicContext({queue: newList});
-    }
- 
-    return (
-        <section className="result">
-			<h1>Queue</h1>
-			<ul>    
-                {
-                    list.map((item, index) => {
-                        if (index >= nowPlayingIndex) {
-                            return (
-                                <li key={`${item.videoId}`}>
-                                {`${item.name} by ${item.artist.name}`}
-                                <button className="buttons" onClick={() => handleDelete(item.videoId)}>Delete</button>
-                                </li>
-                            )
-                        }
-                    })
-                }
-			</ul>
-		</section>
-    )
+    setList(newList);
+    updateMusicContext({ queue: newList });
+  };
+
+  return (
+    <section className="queue-page">
+      <h1 className="queue-page__header">Queue</h1>
+      <ul className="queue-page__list">
+        {list.map((item, index) => {
+          if (index >= nowPlayingIndex) {
+            return (
+              <li key={`${item.videoId}`} className="queue-page__list__item">
+                {`${item.name} by ${item.artist.name}`}
+                <MdDeleteForever
+                  className="queue-page__list__btn"
+                  onClick={() => handleDelete(item.videoId)}
+                />
+              </li>
+            );
+          }
+        })}
+      </ul>
+    </section>
+  );
 }
 
 export default QueuePage;

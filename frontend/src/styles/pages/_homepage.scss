@@ -1,1 +1,9 @@
 @use "../abstracts/variables" as var;
+.home-page {
+    margin: 1rem;
+    width: 100%;
+
+    &__heading {
+        margin-bottom: 1rem;
+    }
+}

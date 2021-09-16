@@ -1,2 +1,47 @@
 @use "../abstracts/variables" as var;
 
+.main-wrapper {
+    margin: 1rem;
+    width: 80%;
+}
+
+.add-playlist {
+    margin: 1rem 0;
+
+    &__input {
+    min-width: 30rem;
+    padding: 1rem 2rem;
+    font: inherit;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var.$color-light-gray;
+    outline: none;
+    color: var.$color-light;
+    }
+
+    &__btn {
+        padding: 1rem 2rem;
+		cursor: pointer;
+        border-radius: 0.5rem;
+        background-color: var.$color-primary;
+    }
+}
+
+.results-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var.$color-light-gray;
+    border-bottom: 1px solid var.$color-light;
+
+    &__name {
+        margin-bottom: 0;
+    }
+
+    &__btn {
+        color: var.$color-primary;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
