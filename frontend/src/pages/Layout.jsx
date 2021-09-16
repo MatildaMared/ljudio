@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
@@ -6,17 +6,17 @@ import Player from "../components/Player";
 
 function Layout({ component: Component }) {
 	return (
-		<div className="App">
+		<>
 			<Header />
-			<div className="content-wrapper">
+			<div className="layout">
 				<Navigation />
-				<main className="main">
+				<>
 					<Component />
 					<Player />
-				</main>
+				</>
 			</div>
 			<Footer />
-		</div>
+		</>
 	);
 }
 
