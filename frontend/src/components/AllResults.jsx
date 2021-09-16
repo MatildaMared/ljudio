@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import { useHistory } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
+import NotifyModal from "../modals/NotifyModal";
 import { playSong } from "./../utilities/musicUtils";
 
 function AllResults() {
 	const history = useHistory();
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
+	//Show or hide modal that displays a warning when user deletes a playlist
+	const [show, setShow] = useState(false);
 	let songsArray = [];
 	let artistsArray = [];
 	let albumsArray = [];
@@ -49,6 +52,8 @@ function AllResults() {
 			queue: [...musicContext.queue, item],
 		});
 	}
+
+	//const showModal = setTimeout(function(){ setShow(true); }, 3000);
 
 	return (
 		<div className="all-results">
@@ -104,6 +109,7 @@ function AllResults() {
 						</li>
 					))}
 			</ul>
+			<NotifyModal title="Song added to queue" show={show}></NotifyModal>
 		</div>
 	);
 }
