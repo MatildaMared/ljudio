@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-import '../../styles/signup.css';
+import '../styles/signup.css';
 import { createAccountFetch } from '../services/authService';
 import ErrorModal from '../modals/ErrorModal';
 

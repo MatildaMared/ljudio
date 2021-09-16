@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./routing/PrivateRoute";
 import { UserProvider } from "./context/UserContext";
 import { MusicProvider } from "./context/MusicContext";
+import "./styles/style.scss";
 
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";

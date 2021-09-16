@@ -6,7 +6,7 @@ import {
 	getArtistsByString,
 	getSongsByString,
 } from "../services/musicService";
-import "./../../styles/SearchBar.scss";
+import "./../styles/SearchBar.scss";
 
 function SearchBar() {
 	const [searchInput, setSearchInput] = useState("");

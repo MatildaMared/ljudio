@@ -1,0 +1,56 @@
+// ### VARIABLES ###
+
+// Import this file in every single file that needs our variables
+// and write var.$variable-name to access a variable.
+// Example: background-color: var.$background-color
+@use "./abstracts/variables" as var;
+
+// ### BASE STYLES ###
+
+// A simple CSS reset
+@use "./base/reset";
+// Specific styles concerning typographt
+@use "./base/typography";
+
+// ### PAGES STYLES ###
+
+// Styles for HomePage
+@use "./pages/homepage";
+// Styles for ArtistPage
+@use "./pages/artistpage";
+// Styles for LoginPage
+@use "./pages/loginpage";
+// Styles for PlaylistPage
+@use "./pages/playlistpage";
+// Styles for PlaylistsPage
+@use "./pages/playlistspage";
+// Styles for QueuePage
+@use "./pages/queuepage";
+// Styles for SearchPage
+@use "./pages/searchpage";
+// Styles for SignupPage
+@use "./pages/signuppage";
+
+
+// ### LAYOUT COMPONENTS STYLES ###
+
+// Styles for Layout component goes here and
+// grid styling for the main section of the page
+// probably goes here!!
+@use "./layout/layout";
+// Styles for Header component
+@use "./layout/header";
+// Styles for Navigation component
+@use "./layout/navigation";
+// Styles for Footer component
+@use "./layout/footer";
+
+
+// ### COMPONENT STYLES ###
+
+// Styles for AllResults component
+@use "./components/allresults";
+// Styles for ArtistsResults component
+@use "./components/artistsresults";
+// Styles for Player component
+@use "./components/player";
