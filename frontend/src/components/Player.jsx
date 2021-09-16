@@ -11,7 +11,7 @@ const Player = () => {
 	const [isPlaying, setIsPlaying] = useState(true);
 	const [isMuted, setIsMuted] = useState(false);
 	const [previousVolume, setPreviousVolume] = useState(100);
-	const [videoTimer, setTimer] = useState(null);
+	const [videoTimer, setTimer] = useState(0);
 
 	const opts = {
 		height: "390",
@@ -93,19 +93,18 @@ const Player = () => {
 	}
 
 	function sliderUpdate(event) {
-		if(!isPlaying){
+		if(player.getPlayerState() === 2){
 			clearInterval(videoTimer);
 		}
-		else{
+		else if(player.getPlayerState() === 1){
 			let percentage = ( player.getCurrentTime() / player.getDuration() ) * 100;
 		    document.querySelector('#seek-slider span').style.width = percentage+"%";
 		}
-		console.log(isPlaying);
 	}
 
 	// Called when clicking on the video progressbar to change the current time
 	function sliderClick(event) {
-		player.seekTo(10);
+		player.seekTo(player.getDuration() * 0.95);
 	}
 
 	// Called when dragging the video progressbar to change the current time
