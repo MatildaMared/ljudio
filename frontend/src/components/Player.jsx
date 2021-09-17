@@ -2,7 +2,16 @@ import React, { useContext, useState, useEffect } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
-import { MdSkipPrevious, MdSkipNext, MdPlayArrow, MdPause, MdVolumeUp, MdVolumeDown, MdVolumeMute, MdVolumeOff } from "react-icons/md";
+import {
+	MdSkipPrevious,
+	MdSkipNext,
+	MdPlayArrow,
+	MdPause,
+	MdVolumeUp,
+	MdVolumeDown,
+	MdVolumeMute,
+	MdVolumeOff,
+} from "react-icons/md";
 
 const Player = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -16,9 +25,11 @@ const Player = () => {
 	const [songName, setSongName] = useState(null);
 
 	useEffect(() => {
-		setArtistName(musicContext.queue[musicContext.nowPlayingIndex]?.artist.name);
+		setArtistName(
+			musicContext.queue[musicContext.nowPlayingIndex]?.artist.name
+		);
 		setSongName(musicContext.queue[musicContext.nowPlayingIndex]?.name);
-	}, [musicContext.nowPlayingIndex])
+	}, [musicContext.nowPlayingIndex]);
 
 	const opts = {
 		height: "390",
@@ -133,6 +144,12 @@ const Player = () => {
 		document.querySelector("#seek-slider span").classList.remove("hover");
 	}
 
+	function onSongEnd(event) {
+		updateMusicContext({
+			nowPlayingIndex: musicContext.nowPlayingIndex + 1,
+		});
+	}
+
 	return (
 		<section className="player">
 			{/* Player Header - Where the artist and song name is displayed! */}
@@ -145,12 +162,15 @@ const Player = () => {
 			</header>
 			{/* Player - Where the YouTube iframe is rendered */}
 			<YouTube
-				className={videoOn ? "player__player" : "player__player player__player--hide"}
+				className={
+					videoOn ? "player__player" : "player__player player__player--hide"
+				}
 				videoId={musicContext.queue[musicContext.nowPlayingIndex]?.videoId}
 				opts={opts}
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}
 				onPlay={onVideoPlay}
+				onEnd={onSongEnd}
 			/>
 			<div className="player__btns">
 				{/* Volume Buttons */}
