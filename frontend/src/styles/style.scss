@@ -31,7 +31,6 @@
 // Styles for SignupPage
 @use "./pages/signuppage";
 
-
 // ### LAYOUT COMPONENTS STYLES ###
 
 // Styles for Layout component goes here and
@@ -45,7 +44,6 @@
 // Styles for Footer component
 @use "./layout/footer";
 
-
 // ### COMPONENT STYLES ###
 
 // Styles for AllResults component
@@ -57,4 +55,7 @@
 // Styles for LogoutBtn component
 @use "./components/logoutbtn";
 // Styles for SearchBar
-@use "./components/searchbar"
+@use "./components/searchbar";
+// Styles for PlayBtn & AddToPlayQueueBtn
+@use './components/playsongbtn';
+@use './components/addtoplayqueue';
