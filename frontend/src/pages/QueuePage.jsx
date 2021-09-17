@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
-import { MusicContext } from "./../context/MusicContext";
-import { MdDeleteForever } from "react-icons/md";
+import React, { useContext, useState } from 'react';
+import { MusicContext } from './../context/MusicContext';
+import { MdDeleteForever } from 'react-icons/md';
 
 function QueuePage() {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
