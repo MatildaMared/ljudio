@@ -60,7 +60,7 @@ function SignupPage() {
 	}
 
 	return (
-		<div className="signup">
+		<section className="signup">
 			<h1 className="signup__logo">Ljudio</h1>
 			<h2 className="signup__heading">Sign up</h2>
 			<form onSubmit={handleSubmit} className="signup__form">
@@ -132,7 +132,7 @@ function SignupPage() {
 			<ErrorModal title="Error" onClose={() => setShow(false)} show={show}>
 				<p>{errorMessage}</p>
 			</ErrorModal>
-		</div>
+		</section>
 	);
 }
 
