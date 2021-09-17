@@ -29,8 +29,6 @@
                 border-top: 1px solid var.$color-light;
             }
     
-            cursor: pointer;
-    
             &:hover {
                 background-color: var.$color-dark-gray;
             }
@@ -40,8 +38,11 @@
             color: var.$color-primary;
             margin: 0.5rem;
             font-size: 2rem;
+            cursor: pointer;
         }
     }
 }
 
-
+.cursor {
+    cursor: pointer;
+}

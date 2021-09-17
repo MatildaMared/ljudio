@@ -58,7 +58,7 @@ function AllResults() {
           {artistsArray &&
             artistsArray.map((item) => (
               <li
-                className="results__list__item"
+                className="results__list__item cursor"
                 key={item.browseId}
                 onClick={() => history.push(`/artist/${item.browseId}`)}
               >
