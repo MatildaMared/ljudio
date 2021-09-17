@@ -1,42 +1,45 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 export const MusicContext = createContext();
 
 export const MusicProvider = ({ children }) => {
-	const [context, setContext] = useState({
-		nowPlayingIndex: null,
-		queue: [],
-		fetchResult: null,
-		resultType: null,
-		isLoading: false,
-		searchString: "",
-	});
+  const [context, setContext] = useState({
+    nowPlayingIndex: null,
+    queue: [],
+    fetchResult: null,
+    resultType: null,
+    isLoading: false,
+    searchString: '',
+  });
 
-	const [userContext] = useContext(UserContext);
-	const history = useHistory();
+  const [userContext] = useContext(UserContext);
+  const history = useHistory();
 
-	// Makes sure, with every update to the state,
-	// that the user is still logged in
-	useEffect(() => {
-		if (userContext.isAuthenticated === false || !localStorage.getItem("token")) {
-			history.push("/login");
-		}
-	}, [context]);
+  // Makes sure, with every update to the state,
+  // that the user is still logged in
+  useEffect(() => {
+    if (
+      userContext.isAuthenticated === false ||
+      !localStorage.getItem('token')
+    ) {
+      history.push('/login');
+    }
+  }, [context]);
 
-	function updateContext(updates) {
-		setContext((prevState) => {
-			return {
-				...prevState,
-				...updates,
-			};
-		});
-	}
+  function updateContext(updates) {
+    setContext((prevState) => {
+      return {
+        ...prevState,
+        ...updates,
+      };
+    });
+  }
 
-	const value = [context, updateContext];
+  const value = [context, updateContext];
 
-	return (
-		<MusicContext.Provider value={value}>{children}</MusicContext.Provider>
-	);
+  return (
+    <MusicContext.Provider value={value}>{children}</MusicContext.Provider>
+  );
 };

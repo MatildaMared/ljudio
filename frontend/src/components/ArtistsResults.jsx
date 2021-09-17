@@ -17,11 +17,11 @@ function ArtistsResults() {
 					<li onClick={() => clickHandler(item.browseId)} key={item.browseId} style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <p>{`${item.name}`}</p>
             <img src={item.thumbnails[0].url} alt={item.name}></img>
-					</li>
-				))}
-			</ul>
-		</section>
-	);
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }
 
 export default ArtistsResults;

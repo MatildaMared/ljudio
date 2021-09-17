@@ -45,9 +45,10 @@ function SearchBar() {
 			data = await getSongsByString(musicContext.searchString);
 		} else if (activeType === "artists") {
 			data = await getArtistsByString(musicContext.searchString);
-		} else if (activeType === "albums") {
-			data = await getAlbumsByString(musicContext.searchString);
 		}
+		//  else if (activeType === "albums") {
+		// 	data = await getAlbumsByString(musicContext.searchString);
+		// }
 
 		updateMusicContext({
 			resultType: activeType,
@@ -98,7 +99,7 @@ function SearchBar() {
 					}>
 					<p>Artists</p>
 				</div>
-				<div
+				{/* <div
 					onClick={() => setActiveType("albums")}
 					className={
 						activeType === "albums"
@@ -106,7 +107,7 @@ function SearchBar() {
 							: "search__type"
 					}>
 					<p>Albums</p>
-				</div>
+				</div> */}
 			</div>
 		</section>
 	);

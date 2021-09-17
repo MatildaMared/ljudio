@@ -1,1 +1,40 @@
 @use "../abstracts/variables" as var;
+
+.result {
+    padding: 1rem;
+    width: 80%;
+    background-color: var.$color-dark-gray;
+
+    &__heading {
+        margin: 1rem 0;
+    }
+
+    &__list {
+        max-width: 80%;
+        margin-bottom: 1rem;
+        
+        &__item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: var.$color-light-gray;
+            border-bottom: 1px solid var.$color-light;
+    
+            &:first-of-type {
+                border-top: 1px solid var.$color-light;
+            }
+    
+            &:hover {
+                background-color: var.$color-dark-gray;
+            }
+        }
+
+        &__icon {
+            color: var.$color-primary;
+            margin: 0.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,2 +1,125 @@
 @use "../abstracts/variables" as var;
 
+.signup {
+	margin: 0 auto;
+	margin-top: 6rem;
+	background-color: rgba(255, 255, 255, 0.03);
+	border-radius: 0.5rem;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 30rem;
+
+	&__logo {
+		font-size: 4rem;
+		font-weight: 900;
+		letter-spacing: 1px;
+		margin-bottom: 0.5rem;
+	}
+
+	&__heading {
+		font-size: 1.4rem;
+		font-weight: 700;
+		letter-spacing: 1px;
+		color: var.$color-primary-light;
+		margin-bottom: 2rem;
+	}
+
+	&__form {
+		width: 100%;
+	}
+
+	&__form-control {
+		position: relative;
+		margin-bottom: 1.5rem;
+	}
+
+	&__input {
+		position: relative;
+		width: 100%;
+		outline: none;
+		border: none;
+		padding: 1rem 1rem;
+		font: inherit;
+		color: rgba(255, 255, 255, 0.8);
+		background: transparent;
+		border-radius: 0.5rem;
+		border: 2.5px solid rgba(255, 255, 255, 0.1);
+		transition: all 0.3s;
+
+		&:focus {
+			border: 2.5px solid var.$color-primary;
+
+			& ~ label {
+				color: var.$color-primary;
+			}
+		}
+	}
+
+	&__label {
+		color: rgba(255, 255, 255, 0.6);
+		font-size: 0.8rem;
+		background-color: #191919;
+		position: absolute;
+		font-weight: 400;
+		top: -8px;
+		left: 10px;
+		padding: 0.25rem;
+		transition: all 0.3s;
+	}
+
+	&__text {
+		text-align: center;
+	}
+
+	&__btn {
+		margin: 0 auto;
+		display: block;
+		outline: none;
+		border: none;
+		padding: 1rem 2rem;
+		margin-bottom: 1.5rem;
+		border-radius: 0.5rem;
+		background-color: var.$color-primary;
+		color: rgba(0, 0, 0, 0.8);
+		font: inherit;
+		cursor: pointer;
+		transition: all 0.5s;
+		border: 2px solid transparent;
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.05);
+			color: var.$color-primary;
+      border: 2px solid var.$color-primary;
+
+			&:focus {
+				border: 2px solid var.$color-primary;
+			}
+		}
+
+		&:focus {
+      background-color: rgba(255, 255, 255, 0.05);
+			color: var.$color-primary;
+      border: 2px solid var.$color-primary;
+		}
+	}
+
+	&__link {
+		color: var.$color-primary;
+		font-weight: 700;
+		transition: all 0.3s;
+    outline: none;
+    padding: .25rem;
+    border-radius: .5rem;
+    border: 2px solid transparent;
+
+		&:hover {
+			color: rgba(255, 255, 255, 0.4);
+		}
+
+    &:focus {
+      border: 2px solid var.$color-primary;
+    }
+	}
+}

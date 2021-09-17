@@ -20,9 +20,9 @@ function Result() {
 			{!musicContext.isLoading && musicContext.resultType === "artists" && (
 				<ArtistsResults />
 			)}
-			{!musicContext.isLoading && musicContext.resultType === "albums" && (
+			{/* {!musicContext.isLoading && musicContext.resultType === "albums" && (
 				<AlbumsResults />
-			)}
+			)} */}
 		</div>
 	);
 }
