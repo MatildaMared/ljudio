@@ -10,10 +10,10 @@ function PrivateRoute({ component: Component, layout: Layout, ...rest }) {
 			{...rest}
 			render={(props) => {
 				return localStorage.getItem("token") &&
-					userContext.isAuthenticated === true ? (
+					userContext.isAuthenticated === true && userContext.isLoading === false ? (
 					<Layout component={Component} />
 				) : (
-					<div className="loginpage__wrapper">
+					userContext.isLoading === false && <div className="loginpage__wrapper">
 						<h1 className="loginpage__alert">You need to be logged in to access this page</h1>
 						<LoginPage />
 					</div>

@@ -1,3 +1,4 @@
+import { set } from "mongoose";
 import React, { createContext, useState, useEffect } from "react";
 import { getUser } from "../services/userService";
 
@@ -5,6 +6,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 	const [context, setContext] = useState({
+		isLoading: true,
 		isAuthenticated: null,
 		user: {},
 	});
@@ -14,6 +16,10 @@ export const UserProvider = ({ children }) => {
 	useEffect(() => {
 		if (localStorage.getItem("token") && context.isAuthenticated !== true) {
 			setUserData();
+		} else {
+			updateContext({
+				isLoading: false,
+			});
 		}
 	}, []);
 
@@ -34,6 +40,7 @@ export const UserProvider = ({ children }) => {
 				if (user) {
 					updateContext({
 						isAuthenticated: true,
+						isLoading: false,
 						user,
 					});
 
