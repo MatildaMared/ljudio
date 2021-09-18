@@ -22,30 +22,14 @@ function App() {
 				<UserProvider>
 					<MusicProvider>
 						<Switch>
-							<PrivateRoute path="/" exact>
-								<Layout component={HomePage} />
-							</PrivateRoute>
-							<PrivateRoute path="/search" exact>
-								<Layout component={SearchPage} />
-							</PrivateRoute>
-							<PrivateRoute path="/playlists" exact>
-								<Layout component={PlaylistsPage} />
-							</PrivateRoute>
-							<PrivateRoute path="/queue" exact>
-								<Layout component={QueuePage} />
-							</PrivateRoute>
-							<Route path="/login">
-								<LoginPage />
-							</Route>
-							<Route path="/signup">
-								<SignupPage />
-							</Route>
-							<PrivateRoute path="/artist/:browseId">
-								<Layout component={ArtistPage} />
-							</PrivateRoute>
-							<PrivateRoute path="/playlist/:playlistId">
-								<Layout component={PlaylistPage} />
-							</PrivateRoute>
+							<PrivateRoute path="/" exact component={HomePage} layout={Layout} />
+							<PrivateRoute path="/search" exact component={SearchPage} layout={Layout} />
+							<PrivateRoute path="/playlists" exact component={PlaylistsPage} layout={Layout} />
+							<PrivateRoute path="/queue" exact component={QueuePage} layout={Layout} />
+							<Route path="/login" component={LoginPage} />
+							<Route path="/signup" component={SignupPage} />
+							<PrivateRoute path="/artist/:browseId" component={ArtistPage} layout={Layout} />
+							<PrivateRoute path="/playlist/:playlistId" component={PlaylistPage} layout={Layout} />
 						</Switch>
 					</MusicProvider>
 				</UserProvider>
