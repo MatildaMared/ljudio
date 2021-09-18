@@ -17,12 +17,15 @@ const Player = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [player, setPlayer] = useState(null);
 	const [isPlaying, setIsPlaying] = useState(false);
+	const [videoLength, setVideoLength] = useState(0);
+	const [currentTime, setCurrentTime] = useState(0);
 	const [isMuted, setIsMuted] = useState(false);
 	const [videoOn, setVideoOn] = useState(true);
 	const [previousVolume, setPreviousVolume] = useState(100);
 	const [videoTimer, setTimer] = useState(0);
 	const [artistName, setArtistName] = useState(null);
 	const [songName, setSongName] = useState(null);
+	let clearTimer;
 
 	useEffect(() => {
 		setArtistName(
@@ -44,6 +47,13 @@ const Player = () => {
 		},
 	};
 
+	function getTimeInMinutes(time) {
+		const minutes = Math.floor(time / 60);
+		const seconds = Math.round(time - minutes * 60);
+
+		return `${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}`;
+	}
+
 	function videoOnReady(event) {
 		setPlayer(event.target);
 	}
@@ -53,11 +63,19 @@ const Player = () => {
 	}
 
 	function videoStateChange(event) {
-		console.log(player);
+		console.log("Video state change", player);
 	}
 
 	function onVideoPlay() {
 		setIsPlaying(true);
+		setVideoLength(player.getDuration());
+		clearTimer = setInterval(() => {
+			setCurrentTime(player.getCurrentTime());
+		}, 1000);
+	}
+
+	function onVideoPause() {
+		clearTimer && clearTimer();
 	}
 
 	function play() {
@@ -144,10 +162,11 @@ const Player = () => {
 		document.querySelector("#seek-slider span").classList.remove("hover");
 	}
 
-	function onSongEnd(event) {
+	function onVideoEnd(event) {
 		updateMusicContext({
 			nowPlayingIndex: musicContext.nowPlayingIndex + 1,
 		});
+		clearTimer && clearTimer();
 	}
 
 	return (
@@ -170,7 +189,8 @@ const Player = () => {
 				onReady={videoOnReady}
 				onStateChange={videoStateChange}
 				onPlay={onVideoPlay}
-				onEnd={onSongEnd}
+				onEnd={onVideoEnd}
+				onPause={onVideoPause}
 			/>
 			<div className="player__btns">
 				{/* Volume Buttons */}
@@ -226,6 +246,22 @@ const Player = () => {
 				</button>
 			</div>
 			{/* Song Progress Bar */}
+			<div className="player__progress">
+				<span className="player__current-time">{getTimeInMinutes(currentTime)}</span>
+				<input
+					type="range"
+					min="0"
+					max={videoLength}
+					value={currentTime}
+					className="player__slider"
+					id="myRange"
+					onChange={(e) => {
+						setCurrentTime(e.target.value);
+						player.seekTo(e.target.value);
+					}}
+				/>
+				<span className="player__remaining-time">{getTimeInMinutes(videoLength - currentTime)}</span>
+			</div>
 			<div
 				id="seek-slider"
 				onClick={sliderClick}
