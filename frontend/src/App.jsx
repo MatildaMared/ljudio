@@ -7,7 +7,6 @@ import "./styles/style.scss";
 
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
 import SearchPage from "./pages/SearchPage";
 import ArtistPage from "./pages/ArtistPage";
 import Layout from "./pages/Layout";
@@ -27,7 +26,6 @@ function App() {
 							<PrivateRoute path="/playlists" exact component={PlaylistsPage} layout={Layout} />
 							<PrivateRoute path="/queue" exact component={QueuePage} layout={Layout} />
 							<Route path="/login" component={LoginPage} />
-							<Route path="/signup" component={SignupPage} />
 							<PrivateRoute path="/artist/:browseId" component={ArtistPage} layout={Layout} />
 							<PrivateRoute path="/playlist/:playlistId" component={PlaylistPage} layout={Layout} />
 						</Switch>

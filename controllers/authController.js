@@ -16,11 +16,10 @@ async function signup(req, res, next) {
 		res.status(200).json({
 			success: true,
 			user: {
-				_id: user._id,
-				token: user.getToken(),
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email,
+				playlists: user.playlists,
 			},
 		});
 	} catch (err) {
@@ -44,14 +43,16 @@ async function login(req, res, next) {
 			return next(new ErrorResponse("Incorrect credentials...", 400));
 		}
 
+		await user.populate("playlists");
+
 		res.status(200).json({
 			success: true,
 			token: user.getToken(),
 			user: {
-				_id: user._id,
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email,
+				playlists: user.playlists,
 			},
 		});
 	} catch (err) {

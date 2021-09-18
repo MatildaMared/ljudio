@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { getUser } from "../services/userService";
 
 export const UserContext = createContext();
@@ -10,24 +9,13 @@ export const UserProvider = ({ children }) => {
 		user: {},
 	});
 
-	const history = useHistory();
-
 	// Tries to set user data on initial page load
+	// if there is already a token in localstorage
 	useEffect(() => {
-		setUserData();
-	}, []);
-
-	useEffect(() => {
-		console.log("New User Context is: ", context);
-	}, [context]);
-
-	// If the user is not authenticated,
-	// redirect to Login page
-	useEffect(() => {
-		if (context.isAuthenticated === false || !localStorage.getItem("token")) {
-			history.push("/login");
+		if (localStorage.getItem("token") && context.isAuthenticated !== true) {
+			setUserData();
 		}
-	}, [context]);
+	}, []);
 
 	async function setUserData() {
 		try {

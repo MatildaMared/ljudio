@@ -19,14 +19,14 @@ export const MusicProvider = ({ children }) => {
 
   // Makes sure, with every update to the state,
   // that the user is still logged in
-  useEffect(() => {
-    if (
-      userContext.isAuthenticated === false ||
-      !localStorage.getItem('token')
-    ) {
-      history.push('/login');
-    }
-  }, [context]);
+  // useEffect(() => {
+  //   if (
+  //     userContext.isAuthenticated === false ||
+  //     !localStorage.getItem('token')
+  //   ) {
+  //     history.push('/login');
+  //   }
+  // }, [context]);
 
   function updateContext(updates) {
     setContext((prevState) => {
