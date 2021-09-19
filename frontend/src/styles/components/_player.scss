@@ -2,6 +2,7 @@
 
 .player {
 	margin-top: 3rem;
+	margin-bottom: 3rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -196,43 +197,43 @@
 	}
 }
 
-#seek-slider {
-	cursor: pointer;
-	height: 10px;
-	margin-bottom: 10px;
-	background-color: rgba(255, 255, 255, 0.1);
-	border-radius: 0.5rem;
-	// overflow: hidden;
-	position: relative;
-	width: 400px;
-	margin-top: 10px;
+// #seek-slider {
+// 	cursor: pointer;
+// 	height: 10px;
+// 	margin-bottom: 10px;
+// 	background-color: rgba(255, 255, 255, 0.1);
+// 	border-radius: 0.5rem;
+// 	// overflow: hidden;
+// 	position: relative;
+// 	width: 400px;
+// 	margin-top: 10px;
 
-	&:hover {
-		#seek-slider span::after {
-			background-color: #696969;
-		}
-	}
-}
+// 	&:hover {
+// 		#seek-slider span::after {
+// 			background-color: #696969;
+// 		}
+// 	}
+// }
 
-#seek-slider span {
-	background-color: var.$color-primary;
-	border-radius: 0.5rem;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 10px;
-	width: 0px;
-}
+// #seek-slider span {
+// 	background-color: var.$color-primary;
+// 	border-radius: 0.5rem;
+// 	position: absolute;
+// 	top: 0;
+// 	left: 0;
+// 	height: 10px;
+// 	width: 0px;
+// }
 
-#seek-slider span::after {
-	content: "";
-	width: 15px;
-	height: 15px;
-	border-radius: 100rem;
-	z-index: 100;
-	display: block;
-	position: absolute;
-	background-color: #5b5b5b;
-	top: -2.75px;
-	right: -2px;
-}
+// #seek-slider span::after {
+// 	content: "";
+// 	width: 15px;
+// 	height: 15px;
+// 	border-radius: 100rem;
+// 	z-index: 100;
+// 	display: block;
+// 	position: absolute;
+// 	background-color: #5b5b5b;
+// 	top: -2.75px;
+// 	right: -2px;
+// }
