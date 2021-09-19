@@ -1,0 +1,62 @@
+@use "../abstracts/variables" as var;
+
+.yt-playlists {
+  background-color: rgba(255, 255, 255, .03);
+  max-width: 100%;
+  padding: 2rem 0;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+
+  &__header {
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+  }
+
+  &__list {
+
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    padding: 1rem 2rem;
+    background-color: rgba(255, 255, 255, .03);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, .06);
+    }
+
+    &:first-of-type {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  &__title {
+    color: var.$color-primary;
+    font-weight: 600;
+    font-size: 1.1rem;
+    opacity: .8;
+  }
+
+  &__author {
+    margin-left: .25rem;
+    color: rgba(255, 255, 255, .6);
+  }
+
+  &__icon {
+    font-size: 2rem;
+    color: var.$color-primary;
+    cursor: pointer;
+
+    &:hover {
+      color: rgba(255, 255, 255, .2);
+    }
+  }
+}

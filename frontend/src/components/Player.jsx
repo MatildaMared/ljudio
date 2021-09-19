@@ -26,15 +26,50 @@ const Player = () => {
 	const [previousVolume, setPreviousVolume] = useState(100);
 	// const [videoTimer, setTimer] = useState(0);
 	const [artistName, setArtistName] = useState(null);
+	const [nextArtistName, setNextArtistName] = useState(null);
 	const [songName, setSongName] = useState(null);
+	const [nextSongName, setNextSongName] = useState(null);
 	let clearTimer;
 	let volumeMessageTimeout;
 
 	useEffect(() => {
-		setArtistName(
-			musicContext.queue[musicContext.nowPlayingIndex]?.artist.name
-		);
+		if (musicContext.queue[musicContext.nowPlayingIndex]?.artist?.name) {
+			setArtistName(
+				musicContext.queue[musicContext.nowPlayingIndex]?.artist?.name
+			);
+		} else if (musicContext.queue[musicContext.nowPlayingIndex]?.author?.name) {
+			setArtistName(
+				musicContext.queue[musicContext.nowPlayingIndex]?.author?.name
+			);
+		} else if (
+			musicContext.queue[musicContext.nowPlayingIndex]?.author[0]?.name
+		) {
+			setArtistName(
+				musicContext.queue[musicContext.nowPlayingIndex]?.author[0]?.name
+			);
+		}
 		setSongName(musicContext.queue[musicContext.nowPlayingIndex]?.name);
+
+		if (musicContext.queue[musicContext.nowPlayingIndex + 1]) {
+					if (musicContext.queue[musicContext.nowPlayingIndex + 1]?.artist?.name) {
+						setNextArtistName(
+							musicContext.queue[musicContext.nowPlayingIndex + 1]?.artist?.name
+						);
+					} else if (
+						musicContext.queue[musicContext.nowPlayingIndex + 1]?.author?.name
+					) {
+						setNextArtistName(
+							musicContext.queue[musicContext.nowPlayingIndex + 1]?.author?.name
+						);
+					} else if (
+						musicContext.queue[musicContext.nowPlayingIndex + 1]?.author[0]?.name
+					) {
+						setNextArtistName(
+							musicContext.queue[musicContext.nowPlayingIndex + 1]?.author[0]?.name
+						);
+					}
+					setNextSongName(musicContext.queue[musicContext.nowPlayingIndex + 1]?.name);
+		}
 	}, [musicContext.nowPlayingIndex]);
 
 	useEffect(() => {
@@ -302,10 +337,10 @@ const Player = () => {
 				<span className="player__label player__label--next">Next in queue</span>
 				<div className="player__artist-info player__artist-info--next">
 					<p className="player__artist-name player__artist-name--next">
-						{musicContext.queue[musicContext.nowPlayingIndex + 1]?.artist.name}
+						{nextArtistName}
 					</p>
 					<p className="player__song-name player__song-name--next">
-						{musicContext.queue[musicContext.nowPlayingIndex + 1]?.name}
+						{nextSongName}
 					</p>
 				</div>
 			</section>

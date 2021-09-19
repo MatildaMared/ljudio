@@ -50,6 +50,7 @@ export const UserProvider = ({ children }) => {
 					updateContext({
 						isAuthenticated: false,
 					});
+					localStorage.removeItem("token");
 				}
 			}
 		} catch (err) {

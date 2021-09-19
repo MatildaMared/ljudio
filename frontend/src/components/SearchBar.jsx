@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import {
-	getAlbumsByString,
+	getPlaylistsByString,
 	getAllMusicByString,
 	getArtistsByString,
 	getSongsByString,
@@ -46,9 +46,9 @@ function SearchBar() {
 		} else if (activeType === "artists") {
 			data = await getArtistsByString(musicContext.searchString);
 		}
-		//  else if (activeType === "albums") {
-		// 	data = await getAlbumsByString(musicContext.searchString);
-		// }
+		 else if (activeType === "playlists") {
+			data = await getPlaylistsByString(musicContext.searchString);
+		}
 
 		updateMusicContext({
 			resultType: activeType,
@@ -99,15 +99,15 @@ function SearchBar() {
 					}>
 					<p>Artists</p>
 				</div>
-				{/* <div
-					onClick={() => setActiveType("albums")}
+				<div
+					onClick={() => setActiveType("playlists")}
 					className={
-						activeType === "albums"
+						activeType === "playlists"
 							? "search__type search__type--active"
 							: "search__type"
 					}>
-					<p>Albums</p>
-				</div> */}
+					<p>YouTube Playlists</p>
+				</div>
 			</div>
 		</section>
 	);

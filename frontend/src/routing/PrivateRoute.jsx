@@ -13,7 +13,7 @@ function PrivateRoute({ component: Component, layout: Layout, ...rest }) {
 					userContext.isAuthenticated === true && userContext.isLoading === false ? (
 					<Layout component={Component} />
 				) : (
-					userContext.isLoading === false && <div className="loginpage__wrapper">
+					userContext.isLoading !== true && <div className="loginpage__wrapper">
 						<h1 className="loginpage__alert">You need to be logged in to access this page</h1>
 						<LoginPage />
 					</div>

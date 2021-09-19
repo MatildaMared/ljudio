@@ -15,6 +15,16 @@ function QueuePage() {
     updateMusicContext({ queue: newList });
   };
 
+  function getArtistName(item) {
+    if (item.artist?.name) {
+      return item.artist?.name;
+    } else if (item.author[0]) {
+      return item.author[0]?.name
+    } else if (item.author) {
+      return item.author.name
+    }
+  }
+
   return (
     <section className="queue-page">
       <h1 className="queue-page__header">Queue</h1>
@@ -23,7 +33,7 @@ function QueuePage() {
           if (index >= nowPlayingIndex) {
             return (
               <li key={`${item.videoId}`} className="queue-page__list__item">
-                {`${item.name} by ${item.artist.name}`}
+                {`${item.name} by ${getArtistName(item)}`}
                 <MdDeleteForever
                   className="queue-page__list__btn"
                   onClick={() => handleDelete(item.videoId)}

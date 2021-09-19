@@ -34,13 +34,13 @@ export async function getArtistsByString(string) {
 }
 
 // Get a single album by ID
-export async function getAlbumById(id) {
-	const fetchUrl = `https://yt-music-api.herokuapp.com/api/yt/album/${id}`;
+export async function getPlaylistById(id) {
+	const fetchUrl = `https://yt-music-api.herokuapp.com/api/yt/playlist/${id}`;
 	return fetchDataByUrl(fetchUrl);
 }
 
 // Get result with multiple albums based on a search string
-export async function getAlbumsByString(string) {
-	const fetchUrl = `https://yt-music-api.herokuapp.com/api/yt/albums/${string}`;
+export async function getPlaylistsByString(string) {
+	const fetchUrl = `https://yt-music-api.herokuapp.com/api/yt/playlists/${string}`;
 	return fetchDataByUrl(fetchUrl);
 }
