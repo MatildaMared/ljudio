@@ -36,17 +36,26 @@
 		font-weight: 700;
 		letter-spacing: 1px;
 		color: rgba(255, 255, 255, 0.4);
+
+		&--next {
+			flex: 1;
+		}
 	}
 
 	&__artist-info {
 		margin-top: 0.25rem;
 		display: flex;
 		font-size: 1.1rem;
+
 	}
 
 	&__artist-name {
 		color: var.$color-primary;
 		font-weight: 700;
+
+		&--next {
+			font-size: .9rem;
+		}
 	}
 
 	&__player {
@@ -59,6 +68,10 @@
 			content: "–";
 			margin-left: 0.25rem;
 			margin-right: 0.25rem;
+		}
+
+		&--next {
+			font-size: .9rem;
 		}
 	}
 
@@ -194,6 +207,17 @@
 
 	&__remaining-time {
 		margin-left: .5rem;
+	}
+
+	&__next {
+		margin-top: 1rem;
+		opacity: .8;
+		width: 100%;
+		padding: .5rem;
+		border-radius: .5rem;
+		display: flex;
+		align-items: center;
+		background-color: rgba(255, 255, 255, .05);
 	}
 }
 

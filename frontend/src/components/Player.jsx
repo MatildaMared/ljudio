@@ -22,7 +22,7 @@ const Player = () => {
 	const [isMuted, setIsMuted] = useState(false);
 	const [videoOn, setVideoOn] = useState(true);
 	const [previousVolume, setPreviousVolume] = useState(100);
-	const [videoTimer, setTimer] = useState(0);
+	// const [videoTimer, setTimer] = useState(0);
 	const [artistName, setArtistName] = useState(null);
 	const [songName, setSongName] = useState(null);
 	let clearTimer;
@@ -246,8 +246,10 @@ const Player = () => {
 				</button>
 			</div>
 			{/* Song Progress Bar */}
-			<div className="player__progress">
-				<span className="player__current-time">{getTimeInMinutes(currentTime)}</span>
+			<section className="player__progress">
+				<span className="player__current-time">
+					{getTimeInMinutes(currentTime)}
+				</span>
 				<input
 					type="range"
 					min="0"
@@ -260,8 +262,21 @@ const Player = () => {
 						player.seekTo(e.target.value);
 					}}
 				/>
-				<span className="player__remaining-time">{getTimeInMinutes(videoLength - currentTime)}</span>
-			</div>
+				<span className="player__remaining-time">
+					{getTimeInMinutes(videoLength - currentTime)}
+				</span>
+			</section>
+			<section className="player__next">
+				<span className="player__label player__label--next">Next in queue</span>
+				<div className="player__artist-info player__artist-info--next">
+					<p className="player__artist-name player__artist-name--next">
+						{musicContext.queue[musicContext.nowPlayingIndex + 1]?.artist.name}
+					</p>
+					<p className="player__song-name player__song-name--next">
+						{musicContext.queue[musicContext.nowPlayingIndex + 1]?.name}
+					</p>
+				</div>
+			</section>
 			{/* <div
 				id="seek-slider"
 				onClick={sliderClick}
