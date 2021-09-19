@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
@@ -19,6 +19,8 @@ const Player = () => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [videoLength, setVideoLength] = useState(0);
 	const [currentTime, setCurrentTime] = useState(0);
+	const [volumeMessage, setVolumeMessage] = useState("");
+	const volumeMessageRef = useRef();
 	const [isMuted, setIsMuted] = useState(false);
 	const [videoOn, setVideoOn] = useState(true);
 	const [previousVolume, setPreviousVolume] = useState(100);
@@ -26,6 +28,7 @@ const Player = () => {
 	const [artistName, setArtistName] = useState(null);
 	const [songName, setSongName] = useState(null);
 	let clearTimer;
+	let volumeMessageTimeout;
 
 	useEffect(() => {
 		setArtistName(
@@ -33,6 +36,18 @@ const Player = () => {
 		);
 		setSongName(musicContext.queue[musicContext.nowPlayingIndex]?.name);
 	}, [musicContext.nowPlayingIndex]);
+
+	useEffect(() => {
+		displayVolumeMessage();
+	}, [volumeMessage]);
+
+	function displayVolumeMessage() {
+		volumeMessageRef.current.className = "player__volume-message";
+		volumeMessageTimeout = setTimeout(() => {
+			volumeMessageRef.current.className =
+				"player__volume-message player__volume-message--hide";
+		}, 1500);
+	}
 
 	const opts = {
 		height: "390",
@@ -51,7 +66,9 @@ const Player = () => {
 		const minutes = Math.floor(time / 60);
 		const seconds = Math.round(time - minutes * 60);
 
-		return `${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}`;
+		return `${minutes.toString().padStart(2, 0)}:${seconds
+			.toString()
+			.padStart(2, 0)}`;
 	}
 
 	function videoOnReady(event) {
@@ -90,31 +107,43 @@ const Player = () => {
 	}
 
 	function volumeUp() {
+		clearTimeout(volumeMessageTimeout);
 		const currentVolume = player.getVolume();
 		player.setVolume(currentVolume + 10);
 		setPreviousVolume(player.getVolume());
 		setIsMuted(false);
+		if (currentVolume === 100 || currentVolume + 10 === 100) {
+			setVolumeMessage(`Volume max`);
+		} else {
+			setVolumeMessage(`Volume: ${currentVolume + 10}`);
+		}
 	}
 
 	function volumeDown() {
+		clearTimeout(volumeMessageTimeout);
 		const currentVolume = player.getVolume();
 		player.setVolume(currentVolume - 10);
-		if (currentVolume <= 0) {
+		if (currentVolume <= 0 || currentVolume - 10 <= 0) {
 			setIsMuted(true);
+			setVolumeMessage("Muted");
 		} else {
 			setPreviousVolume(player.getVolume());
+			setVolumeMessage(`Volume: ${currentVolume - 10}`);
 		}
 	}
 
 	// Mute/Unmute function
 	function volumeMute() {
+		clearTimeout(volumeMessageTimeout);
 		if (isMuted) {
 			player.setVolume(previousVolume);
 			setIsMuted(false);
+			setVolumeMessage("Unmuted");
 		} else {
 			setPreviousVolume(player.getVolume());
 			player.setVolume(0);
 			setIsMuted(true);
+			setVolumeMessage("Muted");
 		}
 	}
 
@@ -202,15 +231,18 @@ const Player = () => {
 					{/* Volume Mute Toggler */}
 					<button onClick={volumeMute} className="player__btn">
 						{isMuted === true ? (
-							<MdVolumeMute className="player__icon" />
-						) : (
 							<MdVolumeOff className="player__icon" />
+						) : (
+							<MdVolumeMute className="player__icon" />
 						)}
 					</button>
 					{/* Volume Up */}
 					<button onClick={volumeUp} className="player__btn">
 						<MdVolumeUp className="player__icon" />
 					</button>
+					<span className="player__volume-message" ref={volumeMessageRef}>
+						{volumeMessage}
+					</span>
 				</section>
 				{/* Player Buttons */}
 				<section className="player__player-btns">
