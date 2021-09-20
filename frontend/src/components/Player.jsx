@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import YouTube from "react-youtube";
+import { getArtistNameFromSongObj } from "./../utilities/musicUtils";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
 import {
 	MdSkipPrevious,
@@ -31,49 +32,41 @@ const Player = () => {
 	const [nextSongName, setNextSongName] = useState(null);
 	let clearTimer;
 	let volumeMessageTimeout;
+	const queue = musicContext.queue;
+	const nowPlayingIndex = musicContext.nowPlayingIndex;
 
+	// Will play song from beginning if 
+	// replacing an old queue with a new one
+	// to make sure that the video begins playing
+	// at 00:00 even if it's the same video that was
+	// playing when user replaced the old queue
 	useEffect(() => {
-		if (musicContext.queue[musicContext.nowPlayingIndex]?.artist?.name) {
-			setArtistName(
-				musicContext.queue[musicContext.nowPlayingIndex]?.artist?.name
-			);
-		} else if (musicContext.queue[musicContext.nowPlayingIndex]?.author?.name) {
-			setArtistName(
-				musicContext.queue[musicContext.nowPlayingIndex]?.author?.name
-			);
-		} else if (
-			musicContext.queue[musicContext.nowPlayingIndex]?.author[0]?.name
-		) {
-			setArtistName(
-				musicContext.queue[musicContext.nowPlayingIndex]?.author[0]?.name
-			);
+		if (musicContext.resetPlayer === true) {
+			player.seekTo(0);
 		}
-		setSongName(musicContext.queue[musicContext.nowPlayingIndex]?.name);
+		updateMusicContext({
+			resetPlayer: false,
+		});
+	}, [musicContext.queue]);
 
-		if (musicContext.queue[musicContext.nowPlayingIndex + 1]) {
-					if (musicContext.queue[musicContext.nowPlayingIndex + 1]?.artist?.name) {
-						setNextArtistName(
-							musicContext.queue[musicContext.nowPlayingIndex + 1]?.artist?.name
-						);
-					} else if (
-						musicContext.queue[musicContext.nowPlayingIndex + 1]?.author?.name
-					) {
-						setNextArtistName(
-							musicContext.queue[musicContext.nowPlayingIndex + 1]?.author?.name
-						);
-					} else if (
-						musicContext.queue[musicContext.nowPlayingIndex + 1]?.author[0]?.name
-					) {
-						setNextArtistName(
-							musicContext.queue[musicContext.nowPlayingIndex + 1]?.author[0]?.name
-						);
-					}
-					setNextSongName(musicContext.queue[musicContext.nowPlayingIndex + 1]?.name);
+	// Updates variables about current and next song & artist,
+	// every time the nowPlayingIndex changes
+	useEffect(() => {
+		if (nowPlayingIndex !== null) {
+			setArtistName(getArtistNameFromSongObj(queue[nowPlayingIndex]));
+			setSongName(queue[nowPlayingIndex]?.name);
+
+			if (queue[nowPlayingIndex + 1]) {
+				setNextArtistName(getArtistNameFromSongObj(queue[nowPlayingIndex + 1]));
+				setNextSongName(queue[nowPlayingIndex + 1]?.name);
+			}
 		}
 	}, [musicContext.nowPlayingIndex]);
 
 	useEffect(() => {
-		displayVolumeMessage();
+		if (volumeMessage.length > 0) {
+			displayVolumeMessage();
+		}
 	}, [volumeMessage]);
 
 	function displayVolumeMessage() {

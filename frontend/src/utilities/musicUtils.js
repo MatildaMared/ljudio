@@ -1,17 +1,10 @@
-export function playSong(item) {
-	console.log(item);
-	if (musicContext.queue.length === 0) {
-		console.log("musicContext queue is empty!");
-		updateMusicContext({
-			queue: [...musicContext.queue, item],
-			nowPlayingIndex: 0,
-		});
-	} else {
-		const newPlayQueue = [...musicContext.queue];
-		newPlayQueue.splice(musicContext.nowPlayingIndex + 1, 0, item);
-		updateMusicContext({
-			queue: newPlayQueue,
-			nowPlayingIndex: musicContext.nowPlayingIndex + 1,
-		});
+export function getArtistNameFromSongObj(item) {
+	if (item.artist?.name) {
+		return item.artist?.name;
+	} else if (item.author[0]) {
+		return item.author[0]?.name;
+	} else if (item.author) {
+		return item.author.name;
 	}
+	return undefined;
 }

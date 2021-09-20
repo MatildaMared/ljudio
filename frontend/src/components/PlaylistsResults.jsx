@@ -1,22 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { MusicContext } from "../context/MusicContext";
-import { MdPlayCircleFilled } from "react-icons/md";
+import { MdPlayCircleFilled, MdMoreHoriz } from "react-icons/md";
 import { getPlaylistById } from "./../services/musicService";
 
 function PlaylistsResults() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [playlistData, setPlaylistData] = useState(null);
-	console.log(musicContext.fetchResult);
 	const playlists = musicContext.fetchResult.content;
 
 	async function onPlayHandler(browseId) {
-		console.log(browseId);
 		const data = await getPlaylistById(browseId);
-		console.log(data);
 		setPlaylistData(data.content);
 		updateMusicContext({
 			queue: data.content,
 			nowPlayingIndex: 0,
+			resetPlayer: true,
 		});
 	}
 
@@ -27,7 +26,11 @@ function PlaylistsResults() {
 				{playlists.map((playlist) => (
 					<li className="yt-playlists__item" key={playlist.browseId}>
 						<div className="yt-playlists__info">
-							<p className="yt-playlists__title">{playlist.title}</p>
+							<Link
+								to={`/yt-playlist/${playlist.browseId}`}
+								className="yt-playlists__link">
+								<p className="yt-playlists__title">{playlist.title}</p>
+							</Link>
 							<p className="yt-playlists__author">by {playlist.author}</p>
 						</div>
 						<div className="yt-playlists__btns">
@@ -37,6 +40,13 @@ function PlaylistsResults() {
 									onPlayHandler(playlist.browseId);
 								}}
 							/>
+							<Link
+								to={`/yt-playlist/${playlist.browseId}`}
+								className="yt-playlists__link">
+								<div className="yt-playlists__more">
+									<MdMoreHoriz className="yt-playlists__more-icon" />
+								</div>
+							</Link>
 						</div>
 					</li>
 				))}
