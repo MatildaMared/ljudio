@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import { MdDeleteForever } from "react-icons/md";
 import { getArtistNameFromSongObj } from "./../utilities/musicUtils";
@@ -7,20 +7,16 @@ function QueuePage() {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
   const musicQueue = musicContext.queue;
   const nowPlayingIndex = musicContext.nowPlayingIndex;
-  const [list, setList] = useState(musicQueue);
 
   async function handleDelete (itemId) { 
     const newPlayQueue = [...musicQueue];
     
     newPlayQueue.splice(itemId, 1);
-    console.log('New Play Queue: ', newPlayQueue);
 
     await updateMusicContext({
         queue: newPlayQueue,
       });
   };
-
-  console.log(musicQueue);
 
   return (
     <section className="queue-page">
