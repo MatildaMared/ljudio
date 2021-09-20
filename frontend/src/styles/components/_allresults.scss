@@ -49,3 +49,18 @@
 .cursor {
   cursor: pointer;
 }
+
+.item__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0.5rem;
+
+  &:hover {
+    background: var.$color-light-gray;
+  }
+
+  &--btn {
+    display: flex;
+  }
+}
