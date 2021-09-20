@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { MusicContext } from './../context/MusicContext';
-import { MdDeleteForever } from 'react-icons/md';
+import React, { useContext, useState } from "react";
+import { MusicContext } from "./../context/MusicContext";
+import { MdDeleteForever } from "react-icons/md";
 import { getArtistNameFromSongObj } from "./../utilities/musicUtils";
 
 function QueuePage() {
@@ -9,25 +9,31 @@ function QueuePage() {
   const nowPlayingIndex = musicContext.nowPlayingIndex;
   const [list, setList] = useState(musicQueue);
 
-  const handleDelete = (itemId) => {
-    const newList = list.filter((item) => item.videoId !== itemId);
+  async function handleDelete (itemId) { 
+    const newPlayQueue = [...musicQueue];
+    
+    newPlayQueue.splice(itemId, 1);
+    console.log('New Play Queue: ', newPlayQueue);
 
-    setList(newList);
-    updateMusicContext({ queue: newList });
+    await updateMusicContext({
+        queue: newPlayQueue,
+      });
   };
+
+  console.log(musicQueue);
 
   return (
     <section className="queue-page">
       <h1 className="queue-page__header">Queue</h1>
       <ul className="queue-page__list">
-        {list.map((item, index) => {
+        {musicQueue && musicQueue.map((item, index) => {
           if (index >= nowPlayingIndex) {
             return (
-              <li key={`${item.videoId}`} className="queue-page__list__item">
+              <li key={index} className="queue-page__list__item">
                 {`${item.name} by ${getArtistNameFromSongObj(item)}`}
                 <MdDeleteForever
                   className="queue-page__list__btn"
-                  onClick={() => handleDelete(item.videoId)}
+                  onClick={() => handleDelete(index)}
                 />
               </li>
             );
