@@ -6,6 +6,10 @@
   border-radius: 1rem;
   overflow: hidden;
 
+  &__loading {
+    padding: 2rem;
+  }
+
   &__header {
     display: flex;
     align-items: center;
@@ -35,6 +39,8 @@
   }
 
   &__item {
+    display: flex;
+    align-items: center;
     padding: 1rem;
     background-color: rgba(255, 255, 255, .03);
     border-bottom: 1px solid rgba(255, 255, 255, .1);
@@ -50,6 +56,10 @@
     &:hover {
       background-color: rgba(255, 255, 255, .06);
     }
+  }
+
+  &__song-info {
+    flex: 1;
   }
 
   &__btn {
@@ -74,5 +84,10 @@
     & span {
       transform: translateY(2px);
     }
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
   }
 }

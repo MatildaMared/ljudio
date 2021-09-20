@@ -43,6 +43,7 @@ const Player = () => {
 	useEffect(() => {
 		if (musicContext.resetPlayer === true) {
 			player.seekTo(0);
+			play();
 		}
 		updateMusicContext({
 			resetPlayer: false,
