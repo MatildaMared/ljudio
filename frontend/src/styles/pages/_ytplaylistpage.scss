@@ -1,0 +1,78 @@
+@use "./../abstracts/variables" as var;
+
+.yt-playlist {
+  background-color: rgba(255, 255, 255, .03);
+  margin: 1rem 0;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__thumbnail {
+    max-width: 100px;
+    height: auto;
+    border-radius: .5rem;
+    overflow: hidden;
+    margin-right: 1rem;
+  }
+
+  &__song {
+    font-size: 1.1rem;
+    color: var.$color-primary;
+    font-weight: 500;
+  }
+
+  &__artist {
+    color: rgba(255, 255, 255, .6);
+  }
+
+  &__item {
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, .03);
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+
+    &:first-of-type {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, .06);
+    }
+  }
+
+  &__btn {
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+
+    .yt-playlist__icon {
+      margin-left: .5rem;
+      color: rgba(0, 0, 0, .6);
+      font-size: 1.6rem;
+      vertical-align: middle;
+      transition: all .3s;
+    }
+
+    &:hover {
+      .yt-playlist__icon {
+        color: var.$color-primary;
+      }
+    }
+
+    & span {
+      transform: translateY(2px);
+    }
+  }
+}

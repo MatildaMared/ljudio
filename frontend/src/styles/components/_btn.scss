@@ -1,0 +1,31 @@
+@use "./../abstracts/variables" as var;
+
+.btn {
+	outline: none;
+	border: none;
+	padding: 1rem 2rem;
+	margin-bottom: 1.5rem;
+	border-radius: 0.5rem;
+	background-color: var.$color-primary;
+	color: rgba(0, 0, 0, 0.8);
+	font: inherit;
+	cursor: pointer;
+	transition: all 0.5s;
+	border: 2px solid transparent;
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.05);
+		color: var.$color-primary;
+		border: 2px solid var.$color-primary;
+
+		&:focus {
+			border: 2px solid var.$color-primary;
+		}
+	}
+
+	&:focus {
+		background-color: rgba(255, 255, 255, 0.05);
+		color: var.$color-primary;
+		border: 2px solid var.$color-primary;
+	}
+}

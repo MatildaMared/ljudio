@@ -24,6 +24,8 @@
 @use "./pages/playlistpage";
 // Styles for PlaylistsPage
 @use "./pages/playlistspage";
+// Styles for YtPlaylistPage
+@use "./pages/ytplaylistpage";
 // Styles for QueuePage
 @use "./pages/queuepage";
 // Styles for SearchPage
@@ -49,7 +51,7 @@
 // Styles for ArtistsResults component
 @use "./components/artistsresults";
 // Styles for PlaylistsResults component
-@use "./components//playlistsresults";
+@use "./components/playlistsresults";
 // Styles for Player component
 @use "./components/player";
 // Styles for LogoutBtn component
@@ -59,3 +61,5 @@
 // Styles for PlayBtn & AddToPlayQueueBtn
 @use './components/playsongbtn';
 @use './components/addtoplayqueue';
+// Styles for button
+@use "./components/btn";

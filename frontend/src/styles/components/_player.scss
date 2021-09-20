@@ -1,6 +1,8 @@
 @use "../abstracts/variables" as var;
 
 .player {
+	width: 100%;
+	margin: 0 auto;
 	margin-top: 3rem;
 	margin-bottom: 3rem;
 	display: flex;
