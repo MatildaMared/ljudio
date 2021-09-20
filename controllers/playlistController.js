@@ -73,17 +73,22 @@ async function createPlaylist(req, res, next) {
 		user.playlists.unshift(playlist._id);
 
 		// Save changes in user to database
-		await user.save();
+		const updatedUser = await user.save();
 
 		// Populate the playlists array before sending data back to user
-		await user.populate("playlists");
+		await updatedUser.populate("playlists");
 
 		// Send back the created playlist
 		// and user in the response
 		res.status(200).json({
 			success: true,
 			playlist,
-			user,
+			user: {
+				firstName: updatedUser.firstName,
+				lastName: updatedUser.lastName,
+				email: updatedUser.email,
+				playlists: updatedUser.playlists
+			},
 		});
 	} catch (err) {
 		next(err);
@@ -144,7 +149,12 @@ async function addSongToPlaylist(req, res, next) {
 		res.status(200).json({
 			success: true,
 			playlist,
-			updatedUser: user,
+			user: {
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email,
+				playlists: user.playlists
+			},
 		});
 	} catch (err) {
 		next(err);
@@ -201,7 +211,12 @@ async function removePlaylist(req, res, next) {
 		// Send response back to user
 		res.status(200).json({
 			success: true,
-			user: updatedUser,
+			user: {
+				firstName: updatedUser.firstName,
+				lastName: updatedUser.lastName,
+				email: updatedUser.email,
+				playlists: updatedUser.playlists
+			}
 		});
 	} catch (err) {
 		next(err);
@@ -272,7 +287,12 @@ async function removeSongFromPlaylist(req, res, next) {
 		res.status(200).json({
 			success: true,
 			updatedPlaylist,
-			user,
+			user: {
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email,
+				playlists: user.playlists
+			}
 		});
 	} catch (err) {
 		next(err);

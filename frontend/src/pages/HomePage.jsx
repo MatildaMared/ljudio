@@ -5,17 +5,17 @@ import { getUser } from "./../services/userService";
 function HomePage() {
 	const [userContext, updateUserContext] = useContext(UserContext);
 
-	useEffect(async () => {
-		setUserData();
-	}, []);
+	// useEffect(async () => {
+	// 	setUserData();
+	// }, []);
 
-	async function setUserData() {
-		const data = await getUser(localStorage.getItem("token"));
-		console.log("Data from useeffect is: ", data);
-		updateUserContext({
-			user: data,
-		});
-	}
+	// async function setUserData() {
+	// 	const data = await getUser(localStorage.getItem("token"));
+	// 	console.log("Data from useeffect is: ", data);
+	// 	updateUserContext({
+	// 		user: data,
+	// 	});
+	// }
 
 	return (
 		<div className="home-page">

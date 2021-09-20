@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { createAccountFetch } from "../services/authService";
 import ErrorModal from "../modals/ErrorModal";
 
-function SignupPage() {
+function SignupForm() {
 	const [context, updateContext] = useContext(UserContext);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -15,6 +15,7 @@ function SignupPage() {
 	const [show, setShow] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const history = useHistory();
+	const location = useLocation();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -44,11 +45,13 @@ function SignupPage() {
 
 			if (data.success) {
 				localStorage.setItem("token", data.user.token);
-				history.push("/");
 				updateContext({
 					isAuthenticated: true,
 					user: data.user,
 				});
+				if (location.pathname === "/login") {
+					history.push("/");
+				}
 			} else {
 				setShow(true);
 				setErrorMessage(data.error);
@@ -59,74 +62,71 @@ function SignupPage() {
 	}
 
 	return (
-		<section className="signup">
-			<h1 className="signup__logo">Ljudio</h1>
-			<h2 className="signup__heading">Sign up</h2>
-			<form onSubmit={handleSubmit} className="signup__form">
-				<div className="signup__form-control">
+		<section className="loginpage">
+			<h1 className="loginpage__logo">Ljudio</h1>
+			<h2 className="loginpage__heading">Sign up</h2>
+			<form onSubmit={handleSubmit} className="loginpage__form">
+				<div className="loginpage__form-control">
 					<input
 						type="text"
-						className="signup__input"
+						className="loginpage__input"
 						name="firstName"
 						onChange={(e) => setFirstName(e.target.value)}
 					/>
-					<label htmlFor="text" className="signup__label">
+					<label htmlFor="text" className="loginpage__label">
 						First name
 					</label>
 				</div>
-				<div className="signup__form-control">
+				<div className="loginpage__form-control">
 					<input
 						type="text"
-						className="signup__input"
+						className="loginpage__input"
 						name="lastName"
 						onChange={(e) => setLastName(e.target.value)}
 					/>
-					<label htmlFor="text" className="signup__label">
+					<label htmlFor="text" className="loginpage__label">
 						Last name
 					</label>
 				</div>
-				<div className="signup__form-control">
+				<div className="loginpage__form-control">
 					<input
 						type="email"
-						className="signup__input"
+						className="loginpage__input"
 						type="email"
 						name="email"
 						onChange={(e) => setEmail(e.target.value)}
 					/>
-					<label htmlFor="email" className="signup__label">
+					<label htmlFor="email" className="loginpage__label">
 						Email
 					</label>
 				</div>
-				<div className="signup__form-control">
+				<div className="loginpage__form-control">
 					<input
 						type="password"
 						name="password"
-						className="signup__input"
+						className="loginpage__input"
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<label htmlFor="password" className="signup__label">
+					<label htmlFor="password" className="loginpage__label">
 						Password
 					</label>
 				</div>
-				<div className="signup__form-control">
+				<div className="loginpage__form-control">
 					<input
 						type="password"
 						name="password"
-						className="signup__input"
+						className="loginpage__input"
 						onChange={(e) => setConfirmPassword(e.target.value)}
 					/>
-					<label htmlFor="password" className="signup__label">
+					<label htmlFor="password" className="loginpage__label">
 						Confirm password
 					</label>
 				</div>
-				<input type="submit" className="signup__btn" value="Create account" />
-
-				<p className="signup__text">
-					Already have an account?{" "}
-					<Link to="/login" className="signup__link">
-						Log in
-					</Link>
-				</p>
+				<input
+					type="submit"
+					className="loginpage__btn"
+					value="Create account"
+				/>
 			</form>
 			<ErrorModal title="Error" onClose={() => setShow(false)} show={show}>
 				<p>{errorMessage}</p>
@@ -135,4 +135,4 @@ function SignupPage() {
 	);
 }
 
-export default SignupPage;
+export default SignupForm;
