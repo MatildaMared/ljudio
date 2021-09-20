@@ -39,7 +39,7 @@ const Player = () => {
 	// replacing an old queue with a new one
 	// to make sure that the video begins playing
 	// at 00:00 even if it's the same video that was
-	// playing when user replaced the old queue
+	// playing when user replaced the old queue 
 	useEffect(() => {
 		if (musicContext.resetPlayer === true) {
 			player.seekTo(0);
