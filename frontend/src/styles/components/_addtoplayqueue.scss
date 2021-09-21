@@ -12,3 +12,17 @@
   border: none;
   outline: none;
 }
+
+.queue-message {
+  font-size: .9rem;
+  padding: 0.25rem;
+  position: absolute;
+  background-color: rgba(39, 39, 39);
+  color: rgba(255, 255, 255, .6);
+  border-radius: 0.5rem;
+  transition: opacity 0.3s;
+
+  &--hide {
+    z-index: -1000;
+  }
+}
