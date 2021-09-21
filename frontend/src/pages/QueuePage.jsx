@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { MusicContext } from "./../context/MusicContext";
 import { MdDeleteForever, MdPlayCircleFilled } from "react-icons/md";
 import { getArtistNameFromSongObj } from "./../utilities/musicUtils";
@@ -8,6 +8,7 @@ function QueuePage() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const musicQueue = musicContext.queue;
 	const nowPlayingIndex = musicContext.nowPlayingIndex;
+	const playAllBtnRef = useRef();
 
 	async function handleDelete(itemId) {
 		const newPlayQueue = [...musicQueue];
@@ -31,24 +32,32 @@ function QueuePage() {
 		});
 	}
 
-  function onPlayAllHandler() {
+	function onPlayAllHandler() {
+		if (musicQueue.length === 0) {
+			playAllBtnRef.current.blur();
+			return;
+		}
 		if (nowPlayingIndex === null) {
 			console.log("nowPlaying is not");
 			updateMusicContext({
 				nowPlayingIndex: 0,
 			});
-    } else {
-      updateMusicContext({
-        resetPlayer: true
-      })
-    }
+		} else {
+			updateMusicContext({
+				resetPlayer: true,
+			});
+		}
+		playAllBtnRef.current.blur();
 	}
 
 	return (
 		<section className="queue-page">
 			<header className="queue-page__header">
 				<h1 className="queue-page__heading">Queue</h1>
-				<button className="queue-page__play-all-btn" onClick={onPlayAllHandler}>
+				<button
+					className="queue-page__play-all-btn"
+					onClick={onPlayAllHandler}
+					ref={playAllBtnRef}>
 					Play from beginning
 					<MdPlayCircleFilled className="queue-page__play-all-icon" />
 				</button>
@@ -92,7 +101,7 @@ function QueuePage() {
 														</div>
 														<button
 															className="queue-page__delete-btn"
-                              onClick={() => handleDelete(index)}>
+															onClick={() => handleDelete(index)}>
 															<MdDeleteForever className="queue-page__delete-icon" />
 														</button>
 													</li>
