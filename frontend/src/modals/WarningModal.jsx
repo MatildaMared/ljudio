@@ -8,17 +8,17 @@ const WarningModal = props => {
     }
 
     return (
-        <div className="modal">
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <div className="modal-header">
-                <h4 className="modal-title">{props.title}</h4>
+        <div className="warning-modal">
+            <div className="warning-modal__content" onClick={e => e.stopPropagation()}>
+                <div className="warning-modal__header">
+                <h4 className="warning-modal__title">{props.title}</h4>
                 </div>
-                <div className="modal-body">
+                <div className="warning-modal__body">
                     {props.children}
                 </div>
-                <div className="modal-footer">
-                <button onClick={props.onClose} className="buttons button">No</button>
-                <button onClick={props.onDelete} className="buttons button">Yes</button>
+                <div className="warning-modal__footer">
+                <button onClick={props.onClose} className="warning-modal__btn">No</button>
+                <button onClick={props.onDelete} className="warning-modal__btn">Yes</button>
                 </div>
             </div>
             </div>

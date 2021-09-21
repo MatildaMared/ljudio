@@ -65,3 +65,9 @@
 @use "./components/btn";
 // Styles for ShareLinkBtn
 @use "./components/share-btn";
+
+// ### MODAL STYLES ###
+// Styles for warning-modal
+@use "./modals/warningmodal";
+// Styles for errormadal
+@use "./modals/errormodal";
