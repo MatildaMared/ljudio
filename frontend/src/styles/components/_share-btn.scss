@@ -1,0 +1,81 @@
+@use "./../abstracts/variables" as var;
+
+.share-btn {
+	position: relative;
+
+	&__btn {
+		outline: none;
+		padding: 0.75rem 1rem;
+		border-radius: 0.5rem;
+		border: 2px solid transparent;
+		background-color: rgba(255, 255, 255, 0.1);
+		font: inherit;
+		color: rgba(255, 255, 255, 0.8);
+		display: flex;
+		align-items: center;
+		position: relative;
+    transition: all .3s;
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.05);
+			border: 2px solid var.$color-primary;
+			color: var.$color-primary;
+		}
+	}
+
+	&__icon {
+		margin-left: 0.5rem;
+	}
+
+	&__dropdown {
+		padding: 1rem;
+		position: absolute;
+		top: 100%;
+		left: 0;
+    margin-top: .5rem;
+    border-radius: .5rem;
+    background-color: #272727;
+	}
+
+  &__input {
+    width: 25rem;
+    background-color: rgba(255, 255, 255, .1);
+    padding: .5rem;
+    border: none;
+    outline: none;
+    font: inherit;
+    border-radius: .5rem;
+    color: rgba(255, 255, 255, .8);
+    border: 2px solid transparent;
+  }
+
+  &__copy-btn {
+    margin-left: .5rem;
+    font: inherit;
+    outline: none;
+    border: none;
+    padding: .5rem;
+    font-size: .9rem;
+    border: 2px solid transparent;
+    background-color: var.$color-primary;
+    border-radius: .5rem;
+    transition: all .3s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, .05);
+      border: 2px solid var.$color-primary;
+      color: var.$color-primary;
+    }
+  }
+
+  &__copy-alert {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: .5rem;
+    background-color: #303030;
+    border-radius: .5rem;
+    padding: .5rem;
+    border: 2px solid var.$color-primary;
+  }
+}
