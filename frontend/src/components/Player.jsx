@@ -35,11 +35,11 @@ const Player = () => {
 	const queue = musicContext.queue;
 	const nowPlayingIndex = musicContext.nowPlayingIndex;
 
-	// Will play song from beginning if 
+	// Will play song from beginning if
 	// replacing an old queue with a new one
 	// to make sure that the video begins playing
 	// at 00:00 even if it's the same video that was
-	// playing when user replaced the old queue 
+	// playing when user replaced the old queue
 	useEffect(() => {
 		if (musicContext.resetPlayer === true) {
 			player.seekTo(0);
@@ -48,7 +48,7 @@ const Player = () => {
 		updateMusicContext({
 			resetPlayer: false,
 		});
-	}, [musicContext.queue]);
+	}, [musicContext.queue, musicContext.resetPlayer]);
 
 	// Updates variables about current and next song & artist,
 	// every time the nowPlayingIndex changes
@@ -62,7 +62,7 @@ const Player = () => {
 				setNextSongName(queue[nowPlayingIndex + 1]?.name);
 			}
 		}
-	}, [musicContext.nowPlayingIndex]);
+	}, [musicContext.nowPlayingIndex, musicContext.queue]);
 
 	useEffect(() => {
 		if (volumeMessage.length > 0) {
