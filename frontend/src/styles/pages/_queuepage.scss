@@ -7,8 +7,14 @@
 	border-radius: 1rem;
 
 	&__header {
-		font-size: 2em;
+		display: flex;
+		align-items: center;
 		margin: 2rem;
+	}
+
+	&__heading {
+		flex: 1;
+		font-size: 2rem;
 	}
 
 	&__item {
@@ -18,7 +24,7 @@
 		padding: 1.5rem 2rem;
 		background-color: rgba(255, 255, 255, 0.05);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        position: relative;
+		position: relative;
 
 		&--now-playing {
 			border: 2px solid var.$color-primary;
@@ -31,27 +37,77 @@
 		cursor: pointer;
 	}
 
-    &__now-playing {
-        background-color: var.$color-primary;
-        color: rgba(0, 0, 0, .8);
-        padding: .25rem;
-        border-radius: .5rem;
-        opacity: .8;
-        transform: translateX(-1rem);
-    }
+	&__now-playing {
+		background-color: rgba(255, 255, 255, 0.1);
+		color: var.$color-primary;
+		padding: 0.25rem;
+		border-radius: 0.5rem;
+		transform: translateX(-1rem);
+	}
 
-    &__song-info {
-        flex: 1;
-    }
+	&__song-info {
+		flex: 1;
+	}
 
-    &__artist {
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: var.$color-primary;
-        margin-bottom: .25rem;
-    }
+	&__artist {
+		font-size: 1.2rem;
+		font-weight: 500;
+		color: var.$color-primary;
+		margin-bottom: 0.25rem;
+	}
 
-    &__song {
+	&__play-all-icon {
+		font-size: 1.5rem;
+		margin-left: 0.5rem;
+		transition: all 0.2s;
+		color: rgba(0, 0, 0, 0.8);
+	}
 
-    }
+	&__play-all-btn {
+		outline: none;
+		background-color: var.$color-primary;
+		padding: 0.75rem;
+		border: 2px solid transparent;
+		font: inherit;
+		display: flex;
+		align-items: center;
+		border-radius: 0.5rem;
+		transition: all 0.3s;
+		color: rgba(0, 0, 0, 0.8);
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.03);
+			border: 2px solid var.$color-primary;
+			color: var.$color-primary;
+
+			& .queue-page__play-all-icon {
+				color: var.$color-primary;
+			}
+		}
+	}
+
+	&__delete-icon {
+		font-size: 1.5rem;
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	&__delete-btn {
+		border: none;
+		outline: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 0.5rem;
+		width: 2rem;
+		height: 2rem;
+		background-color: rgb(148, 69, 86);
+
+		&:hover {
+			background-color: rgb(185, 82, 105);
+
+            & queue-page__delete-icon {
+                color: #FFF;
+            }
+		}
+	}
 }
