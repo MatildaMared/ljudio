@@ -3,6 +3,7 @@
 .queue-page {
 	margin: 1rem 0;
 	width: 100%;
+    max-width: 65rem;
 	background-color: rgba(255, 255, 255, 0.03);
 	border-radius: 1rem;
 
@@ -98,7 +99,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: 0.5rem;
+		border-radius: 100rem;
 		width: 2rem;
 		height: 2rem;
 		background-color: rgb(148, 69, 86);
