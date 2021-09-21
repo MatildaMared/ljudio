@@ -299,10 +299,55 @@ async function removeSongFromPlaylist(req, res, next) {
 	}
 }
 
+async function changeTitle(req, res, next) {
+	try {
+		const { title } = req.body;
+		const playlistId = req.params.id;
+
+		const token = req.headers.authorization.split(" ")[1];
+		const userId = await getUserIdFromToken(token);
+
+		if (userId === null) {
+			return next(new ErrorResponse("Unauthorized", 400));
+		}
+
+		const user = await User.findById(userId);
+
+		//Update the name of the playlist 
+		const filter = { _id: playlistId }
+		const update = { title: title }
+
+		// `doc` is the document _before_ `update` was applied
+		let doc = await Playlist.findOneAndUpdate(filter, update, {
+			returnOriginal: false
+		});
+
+		// Save changes in user to database
+		const updatedUser = await user.save();
+
+		// Populate the playlists array before sending data back to user
+		await updatedUser.populate("playlists");
+
+		// Send back the created playlist
+		// and user in the response
+		res.status(200).json({
+			success: true,
+			doc,
+			user: {
+				playlists: updatedUser.playlists
+			},
+		});
+	} catch (err) {
+		next(err);
+	}
+}
+
+
 module.exports = {
 	createPlaylist,
 	getPlaylist,
 	addSongToPlaylist,
 	removePlaylist,
 	removeSongFromPlaylist,
+	changeTitle
 };

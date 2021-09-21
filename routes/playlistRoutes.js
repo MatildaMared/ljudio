@@ -17,4 +17,7 @@ router.delete("/:id", playlistController.removePlaylist);
 // Remove song from playlist
 router.delete("/:playlistId/:videoId", playlistController.removeSongFromPlaylist);
 
+//Change the title of a playlist
+router.post("/:playlistId/changetitle", playlistController.changeTitle);
+
 module.exports = router;
