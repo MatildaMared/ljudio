@@ -4,17 +4,18 @@
 	margin-top: 1rem;
 	margin-bottom: 2rem;
 
-  &__form {
-    margin-bottom: .5rem;
-  }
+	&__form {
+		margin-bottom: 0.5rem;
+	}
 
 	&__types {
 		display: flex;
 	}
 
 	&__type {
+		color: rgba(255, 255, 255, 0.8);
 		padding: 0.5rem 1rem;
-		background-color: var.$color-light-gray;
+		background-color: rgba(255, 255, 255, 0.05);
 		margin-right: 0.5rem;
 		border-radius: 0.5rem;
 		cursor: pointer;
@@ -23,8 +24,7 @@
 		align-items: center;
 
 		&--active {
-			background-color: var.$color-dark-gray;
-            
+			background-color: rgba(255, 255, 255, 0.15);
 		}
 
 		&:hover {
@@ -36,25 +36,39 @@
 		}
 	}
 
-	input[type="text"] {
+	&__input {
 		min-width: 30rem;
 		padding: 1rem 2rem;
 		font: inherit;
 		border: none;
 		border-radius: 0.5rem;
-		background-color: var.$color-light-gray;
+		background-color: rgba(255, 255, 255, 0.05);
 		outline: none;
-        color: var.$color-light;
+		color: rgba(255, 255, 255, 0.8);
+		transition: all 0.3s;
 
 		&:focus {
-			background-color: var.$color-dark-gray;
+			background-color: rgba(255, 255, 255, 0.1);
 		}
 	}
 
-	input[type="submit"] {
-		padding: 1rem 2rem;
+	&__btn {
+		margin-left: .5rem;
+		padding: 0.75rem 1.5rem;
+		outline: none;
+		border: 2px solid transparent;
 		cursor: pointer;
-        border-radius: 0.5rem;
-        background-color: var.$color-primary;
+		border-radius: 0.5rem;
+		font: inherit;
+		font-size: 0.9rem;
+		background-color: var.$color-primary;
+		transition: all .3s;
+
+		&:focus,
+		&:hover {
+			background-color: rgba(255, 255, 255, .03);
+			border: 2px solid var.$color-primary;
+			color: var.$color-primary;
+		}
 	}
 }
