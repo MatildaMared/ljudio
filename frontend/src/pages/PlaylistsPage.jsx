@@ -45,14 +45,15 @@ function PlaylistsPage() {
 		});
 	}
 
-	async function changeTitleHandler (playlistId, playlistTitle, e) {
-		e.preventDefault();
-		console.log(playlistId, playlistTitle);
+	async function changeTitleHandler (playlistId) {
+		console.log('in handler ', playlistId, titleChange);
+		// e.preventDefault();
 
-		const data = await changePlayListTitle(playlistId, playlistTitle)
+		const data = await changePlayListTitle(titleChange.trim(), playlistId);
 		updateUserContext({
 			user: data.user,
 		});
+		setTitleChange("");
 	}
 
 	return (
@@ -90,12 +91,20 @@ function PlaylistsPage() {
 							className="results-items__btn"
 							onClick={() => removePlaylistHandler(playlist._id)}
 						/>
-						<form onSubmit={() => changeTitleHandler(playlist._id, playlist.title)}>
+						{/* <form 
+							onSubmit={() => changeTitleHandler(playlist._id)}
+							className="results-items__change">
 							<input 
+								className="results-item__input"
 								type="text"
-								placeholder="Change playlist name"/>
+								placeholder="Change playlist name"
+								onChange={(e) => setTitleChange(e.target.value)}/>
 							<input type="submit" />
-						</form>
+						</form> */}
+						<input type="text" onChange={(e) => setTitleChange(e.target.value)}/>
+						
+						
+						<button type="submit" onClick={() => changeTitleHandler(playlist._id)}>Change name</button>
 
 					</div>
 				))}
