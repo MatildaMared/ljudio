@@ -74,7 +74,7 @@ function SignupForm() {
 						onChange={(e) => setFirstName(e.target.value)}
 					/>
 					<label htmlFor="text" className="loginpage__label">
-						First name
+						First name*
 					</label>
 				</div>
 				<div className="loginpage__form-control">
@@ -85,7 +85,7 @@ function SignupForm() {
 						onChange={(e) => setLastName(e.target.value)}
 					/>
 					<label htmlFor="text" className="loginpage__label">
-						Last name
+						Last name*
 					</label>
 				</div>
 				<div className="loginpage__form-control">
@@ -97,7 +97,7 @@ function SignupForm() {
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<label htmlFor="email" className="loginpage__label">
-						Email
+						Email*
 					</label>
 				</div>
 				<div className="loginpage__form-control">
@@ -108,7 +108,7 @@ function SignupForm() {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<label htmlFor="password" className="loginpage__label">
-						Password
+						Password*
 					</label>
 				</div>
 				<div className="loginpage__form-control">
@@ -119,15 +119,17 @@ function SignupForm() {
 						onChange={(e) => setConfirmPassword(e.target.value)}
 					/>
 					<label htmlFor="password" className="loginpage__label">
-						Confirm password
+						Confirm password*
 					</label>
 				</div>
+				<div class='loginpage__fine-print'>* Required field</div>
 				<input
 					type="submit"
 					className="loginpage__btn"
 					value="Create account"
 				/>
 			</form>
+			
 			<ErrorModal title="Error" onClose={() => setShow(false)} show={show}>
 				<p>{errorMessage}</p>
 			</ErrorModal>
