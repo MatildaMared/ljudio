@@ -163,7 +163,7 @@ async function addSongToPlaylist(req, res, next) {
 
 async function removePlaylist(req, res, next) {
 	try {
-		playlistId = req.params.id;
+		const playlistId = req.params.id;
 
 		// grabs the JWT token from the http request headers
 		const token = req.headers.authorization.split(" ")[1];
@@ -225,7 +225,7 @@ async function removePlaylist(req, res, next) {
 
 async function removeSongFromPlaylist(req, res, next) {
 	try {
-		playlistId = req.params.playlistId;
+		const playlistId = req.params.playlistId;
 		const videoId = req.params.videoId;
 		console.log("Playlist id is: ", playlistId);
 		console.log("Video id is: ", videoId);
@@ -302,7 +302,7 @@ async function removeSongFromPlaylist(req, res, next) {
 async function changeTitle(req, res, next) {
 	try {
 		const { title } = req.body;
-		const playlistId = req.params.id;
+		const playlistId = req.params.playlistId;
 
 		const token = req.headers.authorization.split(" ")[1];
 		const userId = await getUserIdFromToken(token);
@@ -323,18 +323,20 @@ async function changeTitle(req, res, next) {
 		});
 
 		// Save changes in user to database
-		const updatedUser = await user.save();
+		//const updatedUser = await user.save();
 
 		// Populate the playlists array before sending data back to user
-		await updatedUser.populate("playlists");
+		await user.populate("playlists");
 
 		// Send back the created playlist
 		// and user in the response
 		res.status(200).json({
 			success: true,
-			doc,
 			user: {
-				playlists: updatedUser.playlists
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email,
+				playlists: user.playlists
 			},
 		});
 	} catch (err) {
