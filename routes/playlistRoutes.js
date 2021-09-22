@@ -1,20 +1,23 @@
-const { Router } = require("express");
-const playlistController = require("../controllers/playlistController");
+const { Router } = require('express');
+const playlistController = require('../controllers/playlistController');
 const router = new Router();
 
 // Create new playlist
-router.post("/", playlistController.createPlaylist);
+router.post('/', playlistController.createPlaylist);
 
 // Get playlist by ID
-router.get("/:id", playlistController.getPlaylist);
+router.get('/:id', playlistController.getPlaylist);
 
 // Add song to playlist
-router.post("/:id", playlistController.addSongToPlaylist);
+router.post('/:playlistId', playlistController.addSongToPlaylist);
 
 // Remove playlist
-router.delete("/:id", playlistController.removePlaylist);
+router.delete('/:id', playlistController.removePlaylist);
 
 // Remove song from playlist
-router.delete("/:playlistId/:videoId", playlistController.removeSongFromPlaylist);
+router.delete(
+  '/:playlistId/:videoId',
+  playlistController.removeSongFromPlaylist
+);
 
 module.exports = router;

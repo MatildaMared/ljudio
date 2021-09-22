@@ -14,5 +14,20 @@ content-type: application/json
 
 {
   "email": "gunnar@bertilsson.se",
-  "password": "1234"
+  "password": "test1234"
+}
+
+### 
+POST http://localhost:8000/api/playlist/6141ebe63239244c6adbbeab/kaOOfci2YC8
+content-type: application/json
+
+{
+  "type": "song",
+  "videoId": "kaOOfci2YC8",
+  "playlistId": "RDAMVMkaOOfci2YC8",
+  "name": "Nothing Else Matters",
+  "artist": {
+    "name": "Metallica",
+    "browseId": "UCGexNm_Kw4rdQjLxmpb2EKw"
+    }
 }

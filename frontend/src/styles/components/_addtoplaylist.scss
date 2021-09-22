@@ -1,0 +1,31 @@
+@use "../abstracts/variables" as var;
+
+.add-to-playlist__modal {
+  position: relative;
+
+  &--ul {
+    position: absolute;
+    left: 32px;
+    background-color: var.$color-light-gray;
+    border: 1px solid var.$color-dark-gray;
+    border-radius: 0 0.2rem 0.2rem 0.2rem;
+  }
+}
+
+.show-playlist {
+  display: block;
+  width: 12rem;
+  z-index: 100;
+  padding: 1rem 1.3rem;
+  font-size: 1rem;
+  color: var.$color-primary;
+
+  &--hide {
+    display: none;
+  }
+
+  &:hover {
+    background-color: var.$color-dark-gray;
+    border: 1px solid var.$color-light-gray;
+  }
+}

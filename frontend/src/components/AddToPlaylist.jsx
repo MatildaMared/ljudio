@@ -1,28 +1,39 @@
 import React, { useState, useContext } from 'react';
-import { MdList } from 'react-icons/md';
+import { MdMoreVert } from 'react-icons/md';
 import { UserContext } from '../context/UserContext';
-import ChoosePlaylist from './ChoosePlaylist';
+import { addSongToPlaylist } from '../services/playlistService';
 
-// import { addSongToPlaylist } from '../services/playlistService/addSongToPlaylist';
-
-function AddToPlaylist(song) {
+function AddToPlaylist({ item }) {
   const [userContext, updateUserContext] = useContext(UserContext);
+  const [isActive, setIsActive] = useState(false);
 
-  const addSongToPlaylist = () => {};
-
-  const choosePlaylistToAddSong = () => {
-    userContext.user.playlists.map((playlist) => {
-      console.log(playlist.title);
-      console.log(playlist._id);
-    });
+  const addSongToThisPlaylist = async (playlist, song) => {
+    console.log(`Playlist with the id: ${playlist} and song: ${song.name}`);
+    const res = await addSongToPlaylist(playlist, song);
   };
 
   return (
     <div>
-      <button onClick={(e) => choosePlaylistToAddSong(e.target.value)}>
-        <MdList />
+      <div
+        className="add-to-playlist__modal"
+        onClick={() => setIsActive(false)}
+      >
+        <ul className="add-to-playlist__modal--ul">
+          {isActive &&
+            userContext.user.playlists.map((playlist) => (
+              <li
+                key={playlist._id}
+                onClick={() => addSongToThisPlaylist(playlist._id, item)}
+                className={isActive ? 'show-playlist' : 'show-playlist--hide'}
+              >
+                {playlist.title}
+              </li>
+            ))}
+        </ul>
+      </div>
+      <button onClick={() => setIsActive(true)}>
+        <MdMoreVert />
       </button>
-      {/* <ChoosePlaylist playlist={playlist.title} /> */}
     </div>
   );
 }

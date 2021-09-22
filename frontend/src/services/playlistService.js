@@ -14,16 +14,21 @@ export async function addPlaylist(title) {
   return data;
 }
 
-export async function addSongToPlaylist(playlistId, videoId) {
+export async function addSongToPlaylist(playlistId, song) {
   const token = localStorage.getItem('token');
 
-  const response = await fetch(`/api/playlist/${playlistId}/${videoId}`, {
+  console.log(song.name, song.videoId);
+  console.log(playlistId);
+
+  const response = await fetch(`/api/playlist/${playlistId}`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(),
+    body: JSON.stringify({
+      song: song,
+    }),
   });
 
   const data = await response.json();
