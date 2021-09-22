@@ -46,9 +46,6 @@ function PlaylistsPage() {
 	}
 
 	async function changeTitleHandler (playlistId) {
-		console.log('in handler ', playlistId, titleChange);
-		// e.preventDefault();
-
 		const data = await changePlayListTitle(titleChange.trim(), playlistId);
 		updateUserContext({
 			user: data.user,

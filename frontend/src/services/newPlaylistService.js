@@ -1,8 +1,7 @@
 
 export async function changePlayListTitle(title, playlistId) {
 	const token = localStorage.getItem("token");
-
-	console.log('In service', title, playlistId);
+	
 	const response = await fetch(`/api/playlist/${playlistId}/changetitle`, {
 		method: "POST",
 		headers: {
