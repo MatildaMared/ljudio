@@ -42,7 +42,7 @@ const Player = () => {
 	// playing when user replaced the old queue
 	useEffect(() => {
 		if (musicContext.resetPlayer === true) {
-			player.seekTo(0);
+			player && player.seekTo(0);
 			play();
 		}
 		updateMusicContext({
@@ -314,8 +314,8 @@ const Player = () => {
 				<input
 					type="range"
 					min="0"
-					max={videoLength}
-					value={currentTime}
+					max={videoLength || 0}
+					value={currentTime || 0}
 					className="player__slider"
 					id="myRange"
 					onChange={(e) => {

@@ -12,6 +12,7 @@ function SearchBar() {
 	const [activeType, setActiveType] = useState("all");
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const inputRef = useRef();
+	const searchBtnRef = useRef();
 
 	useEffect(() => {
 		if (musicContext.searchString.length > 0) {
@@ -24,6 +25,7 @@ function SearchBar() {
 		updateMusicContext({
 			searchString: searchInput.trim().toLowerCase(),
 		});
+		searchBtnRef.current.blur();
 	}
 
 	useEffect(() => {
@@ -45,8 +47,7 @@ function SearchBar() {
 			data = await getSongsByString(musicContext.searchString);
 		} else if (activeType === "artists") {
 			data = await getArtistsByString(musicContext.searchString);
-		}
-		 else if (activeType === "playlists") {
+		} else if (activeType === "playlists") {
 			data = await getPlaylistsByString(musicContext.searchString);
 		}
 
@@ -63,13 +64,19 @@ function SearchBar() {
 		<section className="search">
 			<form onSubmit={onSubmitHandler} className="search__form">
 				<input
+					className="search__input"
 					type="text"
 					ref={inputRef}
 					placeholder="Enter text here..."
 					value={searchInput}
 					onChange={(e) => setSearchInput(e.target.value)}
 				/>
-				<input type="submit" value="Search" />
+				<input
+					type="submit"
+					value="Search"
+					className="search__btn"
+					ref={searchBtnRef}
+				/>
 			</form>
 			<div className="search__types">
 				<div
