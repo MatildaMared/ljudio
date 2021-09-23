@@ -12,6 +12,12 @@ function AddToPlaylist({ item }) {
     const res = await addSongToPlaylist(playlist, song);
   };
 
+  // window.onclick = function () {
+  //   if (isActive === true) {
+  //     setIsActive(false);
+  //   }
+  // };
+
   return (
     <div>
       <div
