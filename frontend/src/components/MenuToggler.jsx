@@ -40,7 +40,7 @@ function MenuToggler() {
 			showSmallDeviceMenu: false,
 		});
 		document.removeEventListener("mouseup", clickHandler);
-		if (e.target === menuRef.current) {
+		if (e.target === menuRef.current || e.target.parentElement === menuRef.current) {
 			return;
 		}
 		setShowMenu(false);
