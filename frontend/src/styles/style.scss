@@ -59,9 +59,11 @@
 // Styles for SearchBar
 @use "./components/searchbar";
 // Styles for PlayBtn & AddToPlayQueueBtn
-@use './components/playsongbtn';
-@use './components/addtoplayqueue';
+@use "./components/playsongbtn";
+@use "./components/addtoplayqueue";
 // Styles for button
 @use "./components/btn";
 // Styles for ShareLinkBtn
 @use "./components/share-btn";
+// Styles for MenuToggler
+@use "./components/menu-toggler";

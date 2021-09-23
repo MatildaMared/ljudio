@@ -1,12 +1,24 @@
 @use "../abstracts/variables" as var;
 
 .navigation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	min-width: 14rem;
-	background-color: rgba(255, 255, 255, 0.03);
+	background-color: #191919;
 	border-right: 1px solid rgba(255, 255, 255, 0.1);
+	transition: all 0.3s;
+
+	@media (max-width: 1600px) {
+		position: absolute;
+		top: 149px;
+		right: -20rem;
+		border: 1px solid #353535;
+
+		&--show {
+			right: 0;
+		}
+	}
 
 	&__list {
 		width: 100%;
@@ -29,7 +41,7 @@
 	}
 
 	&__item {
-		background-color: rgba(255, 255, 255, 0.03);
+		background-color: #202020;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 		padding: 1rem 1rem;
 		color: var.$color-light;
@@ -41,7 +53,7 @@
 
 		&--active,
 		&:hover {
-			background-color: rgba(255, 255, 255, 0.1);
+			background-color: #303030;
 
 			.navigation__text {
 				color: var.$color-primary-light;
