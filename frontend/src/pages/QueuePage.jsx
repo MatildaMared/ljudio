@@ -10,12 +10,27 @@ function QueuePage() {
 	const nowPlayingIndex = musicContext.nowPlayingIndex;
 	const playAllBtnRef = useRef();
 
-	async function handleDelete(itemId) {
+	function handleDelete(itemId) {
+		if (musicQueue.length === 1) {
+			updateMusicContext({
+				queue: [],
+				nowPlayingIndex: null,
+			});
+		}
+
 		const newPlayQueue = [...musicQueue];
 
 		newPlayQueue.splice(itemId, 1);
 
-		await updateMusicContext({
+		if (newPlayQueue.length === nowPlayingIndex) {
+			updateMusicContext({
+				queue: [],
+				nowPlayingIndex: null,
+			});
+			return;
+		}
+
+		updateMusicContext({
 			queue: newPlayQueue,
 		});
 	}

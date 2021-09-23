@@ -53,7 +53,15 @@ const Player = () => {
 	// Updates variables about current and next song & artist,
 	// every time the nowPlayingIndex changes
 	useEffect(() => {
-		if (nowPlayingIndex !== null) {
+		if (queue.length === 0) {
+			setArtistName(null);
+			setSongName(null);
+			setNextArtistName(null);
+			setNextSongName(null);
+		} else if (!queue[nowPlayingIndex + 1]) {
+			setNextArtistName(null);
+			setNextSongName(null);
+		} else if (nowPlayingIndex !== null && queue.length > 0) {
 			setArtistName(getArtistNameFromSongObj(queue[nowPlayingIndex]));
 			setSongName(queue[nowPlayingIndex]?.name);
 
