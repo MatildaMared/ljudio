@@ -1,13 +1,20 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdHome, MdSearch, MdQueueMusic, MdList } from "react-icons/md";
-import LogoutBtn from './LogoutBtn';
+import LogoutBtn from "./LogoutBtn";
+import { UserContext } from "../context/UserContext";
 
 function Navigation() {
+	const [userContext, setUserContext] = useContext(UserContext);
 	const location = useLocation();
 
 	return (
-		<nav className="navigation">
+		<nav
+			className={
+				!userContext.showSmallDeviceMenu
+					? "navigation"
+					: "navigation navigation--show"
+			}>
 			<ul className="navigation__list">
 				<Link to="/" className="navigation__link">
 					<li

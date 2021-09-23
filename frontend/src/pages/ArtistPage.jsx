@@ -23,9 +23,9 @@ const ArtistPage = () => {
 		timeout = setTimeout(() => {
 			setShowAlert(false);
 			setAlertMsg("");
-    }, 2000);
-    
-    return(() => clearTimeout(timeout))
+		}, 2000);
+
+		return () => clearTimeout(timeout);
 	}, [showAlert]);
 
 	async function getArtistData(browseId) {
@@ -57,7 +57,7 @@ const ArtistPage = () => {
 					return;
 				}
 				if (musicContext.queue.length === 0) {
-					setAlertMsg("Playing song");
+					setAlertMsg("Playing");
 					setShowAlert(true);
 					updateMusicContext({
 						queue: [...musicContext.queue, song],
@@ -65,12 +65,12 @@ const ArtistPage = () => {
 					});
 				} else {
 					const newPlayQueue = [...musicContext.queue];
-					newPlayQueue.splice(musicContext.nowPlayingIndex + 1, 0, song);
-					setAlertMsg("Playing song");
+					newPlayQueue.splice(musicContext.nowPlayingIndex, 0, song);
+					setAlertMsg("Playing");
 					setShowAlert(true);
 					updateMusicContext({
 						queue: newPlayQueue,
-						nowPlayingIndex: musicContext.nowPlayingIndex + 1,
+						nowPlayingIndex: musicContext.nowPlayingIndex || 0,
 					});
 				}
 				break;
@@ -90,7 +90,7 @@ const ArtistPage = () => {
 			// as the current artist, update the context
 			// and break out of the loop
 			if (song.artist.name.toLowerCase() === artist.toLowerCase()) {
-				setAlertMsg("Song added to queue");
+				setAlertMsg("Added to queue");
 				setShowAlert(true);
 				updateMusicContext({
 					queue: [...musicContext.queue, song],
