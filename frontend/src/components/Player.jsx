@@ -25,7 +25,6 @@ const Player = () => {
 	const [isMuted, setIsMuted] = useState(false);
 	const [videoOn, setVideoOn] = useState(true);
 	const [previousVolume, setPreviousVolume] = useState(100);
-	// const [videoTimer, setTimer] = useState(0);
 	const [artistName, setArtistName] = useState(null);
 	const [nextArtistName, setNextArtistName] = useState(null);
 	const [songName, setSongName] = useState(null);
@@ -135,7 +134,6 @@ const Player = () => {
 	function play() {
 		player.playVideo();
 		setIsPlaying(true);
-		// setTimer(setInterval(sliderUpdate, 1000));
 	}
 
 	function pause() {
@@ -199,34 +197,6 @@ const Player = () => {
 				musicContext.nowPlayingIndex > 0 ? musicContext.nowPlayingIndex - 1 : 0,
 		});
 	}
-
-	// function sliderUpdate(event) {
-	// 	if (player.getPlayerState() === 2) {
-	// 		clearInterval(videoTimer);
-	// 	} else if (player.getPlayerState() === 1) {
-	// 		let percentage = (player.getCurrentTime() / player.getDuration()) * 100;
-	// 		document.querySelector("#seek-slider span").style.width =
-	// 			percentage + "%";
-	// 	}
-	// }
-
-	// Called when clicking on the video progressbar to change the current time
-	// function sliderClick(event) {
-	// 	player.seekTo(player.getDuration() * 0.95);
-	// }
-
-	// Called when dragging the video progressbar to change the current time
-	// function sliderMove(event) {}
-
-	// Called when the cursor hovers over the video progressbar
-	// function sliderHover(event) {
-	// 	document.querySelector("#seek-slider span").classList.add("hover");
-	// }
-
-	// Called when the cursor unhovers the video progressbar
-	// function sliderUnhover(event) {
-	// 	document.querySelector("#seek-slider span").classList.remove("hover");
-	// }
 
 	function onVideoEnd(event) {
 		updateMusicContext({
@@ -346,14 +316,6 @@ const Player = () => {
 					</p>
 				</div>
 			</section>
-			{/* <div
-				id="seek-slider"
-				onClick={sliderClick}
-				onMouseMove={sliderMove}
-				onMouseOver={sliderHover}
-				onMouseOut={sliderUnhover}>
-				<span></span>
-			</div> */}
 		</section>
 	);
 };
