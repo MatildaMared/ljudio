@@ -3,12 +3,14 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "./../context/UserContext";
 import { MusicContext } from "./../context/MusicContext";
 import { addPlaylist, removePlaylist } from "./../services/playlistService";
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever, MdTrackChanges } from "react-icons/md";
+import { changePlayListTitle } from "../services/newPlaylistService";
 
 function PlaylistsPage() {
 	const [userContext, updateUserContext] = useContext(UserContext);
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [titleInput, setTitleInput] = useState("");
+	const [titleChange, setTitleChange] = useState("");
 	const history = useHistory();
 	const inputRef = useRef();
 
@@ -41,6 +43,14 @@ function PlaylistsPage() {
 		updateUserContext({
 			user: data.user,
 		});
+	}
+
+	async function changeTitleHandler (playlistId) {
+		const data = await changePlayListTitle(titleChange.trim(), playlistId);
+		updateUserContext({
+			user: data.user,
+		});
+		setTitleChange("");
 	}
 
 	return (
@@ -78,6 +88,21 @@ function PlaylistsPage() {
 							className="results-items__btn"
 							onClick={() => removePlaylistHandler(playlist._id)}
 						/>
+						{/* <form 
+							onSubmit={() => changeTitleHandler(playlist._id)}
+							className="results-items__change">
+							<input 
+								className="results-item__input"
+								type="text"
+								placeholder="Change playlist name"
+								onChange={(e) => setTitleChange(e.target.value)}/>
+							<input type="submit" />
+						</form> */}
+						<input type="text" onChange={(e) => setTitleChange(e.target.value)}/>
+						
+						
+						<button type="submit" onClick={() => changeTitleHandler(playlist._id)}>Change name</button>
+
 					</div>
 				))}
 		</div>

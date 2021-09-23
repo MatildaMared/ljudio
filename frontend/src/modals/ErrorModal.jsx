@@ -1,5 +1,4 @@
 import React from "react";
-import '../styles/modal.css';
 
 const ErrorModal = props => {
  
@@ -9,16 +8,16 @@ const ErrorModal = props => {
     }
 
   return (
-    <div className="modal" onClick={props.onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <h4 className="modal-title">{props.title}</h4>
+    <div className="error-modal" onClick={props.onClose}>
+      <div className="error-modal__content" onClick={e => e.stopPropagation()}>
+        <div className="error-modal__header">
+          <h4 className="error-modal__title">{props.title}</h4>
         </div>
-        <div className="modal-body">
+        <div className="error-modal__body">
             {props.children}
         </div>
-        <div className="modal-footer">
-          <button onClick={props.onClose} className="buttons button">Close</button>
+        <div className="error-modal__footer">
+          <button onClick={props.onClose} className="error-modal__btn">Close</button>
         </div>
       </div>
     </div>

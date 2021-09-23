@@ -67,3 +67,9 @@
 @use "./components/share-btn";
 // Styles for MenuToggler
 @use "./components/menu-toggler";
+
+// ### MODAL STYLES ###
+// Styles for warning-modal
+@use "./modals/warningmodal";
+// Styles for errormadal
+@use "./modals/errormodal";
