@@ -164,7 +164,7 @@ async function addSongToPlaylist(req, res, next) {
 
 async function removePlaylist(req, res, next) {
   try {
-    playlistId = req.params.id;
+    const playlistId = req.params.id;
 
     // grabs the JWT token from the http request headers
     const token = req.headers.authorization.split(' ')[1];
@@ -226,7 +226,7 @@ async function removePlaylist(req, res, next) {
 
 async function removeSongFromPlaylist(req, res, next) {
   try {
-    playlistId = req.params.playlistId;
+    const playlistId = req.params.playlistId;
     const videoId = req.params.videoId;
     console.log('Playlist id is: ', playlistId);
     console.log('Video id is: ', videoId);
@@ -300,10 +300,56 @@ async function removeSongFromPlaylist(req, res, next) {
   }
 }
 
+async function changeTitle(req, res, next) {
+  try {
+    const { title } = req.body;
+    const playlistId = req.params.playlistId;
+
+    const token = req.headers.authorization.split(' ')[1];
+    const userId = await getUserIdFromToken(token);
+
+    if (userId === null) {
+      return next(new ErrorResponse('Unauthorized', 400));
+    }
+
+    const user = await User.findById(userId);
+
+    //Update the name of the playlist
+    const filter = { _id: playlistId };
+    const update = { title: title };
+
+    // `doc` is the document _before_ `update` was applied
+    let doc = await Playlist.findOneAndUpdate(filter, update, {
+      returnOriginal: false,
+    });
+
+    // Save changes in user to database
+    //const updatedUser = await user.save();
+
+    // Populate the playlists array before sending data back to user
+    await user.populate('playlists');
+
+    // Send back the created playlist
+    // and user in the response
+    res.status(200).json({
+      success: true,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        playlists: user.playlists,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   createPlaylist,
   getPlaylist,
   addSongToPlaylist,
   removePlaylist,
   removeSongFromPlaylist,
+  changeTitle,
 };

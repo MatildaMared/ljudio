@@ -20,4 +20,7 @@ router.delete(
   playlistController.removeSongFromPlaylist
 );
 
+//Change the title of a playlist
+router.post("/:playlistId/changetitle", playlistController.changeTitle);
+
 module.exports = router;
