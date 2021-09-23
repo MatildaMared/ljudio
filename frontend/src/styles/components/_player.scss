@@ -89,16 +89,6 @@
 		outline: none;
 		border: none;
 		cursor: pointer;
-
-		&--gray {
-			background-color: rgba(255, 255, 255, 0.07);
-			border-radius: 2000rem;
-			width: 4rem;
-			height: 4rem;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
 	}
 
 	&__volume-btns {
@@ -126,11 +116,6 @@
 		.player__icon {
 			color: var.$color-primary;
 			font-size: 1.6rem;
-
-			&--play,
-			&--pause {
-				font-size: 3.5rem;
-			}
 		}
 	}
 

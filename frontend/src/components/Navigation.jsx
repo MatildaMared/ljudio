@@ -2,16 +2,16 @@ import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdHome, MdSearch, MdQueueMusic, MdList } from "react-icons/md";
 import LogoutBtn from "./LogoutBtn";
-import { UserContext } from "../context/UserContext";
+import { LayoutContext } from "../context/LayoutContext";
 
 function Navigation() {
-	const [userContext, setUserContext] = useContext(UserContext);
+	const [layoutContext, updateLayoutContext] = useContext(LayoutContext);
 	const location = useLocation();
 
 	return (
 		<nav
 			className={
-				!userContext.showSmallDeviceMenu
+				!layoutContext.showSmallDeviceMenu
 					? "navigation"
 					: "navigation navigation--show"
 			}>
