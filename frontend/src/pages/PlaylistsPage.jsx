@@ -85,7 +85,7 @@ function PlaylistsPage() {
               >
                 {playlist.title}
               </p>
-              <div>
+              <div className="results-items__btn-wrapper">
                 <MdDeleteForever
                   className="results-items__btn"
                   onClick={() => removePlaylistHandler(playlist._id)}
@@ -109,7 +109,7 @@ function PlaylistsPage() {
                 type="submit"
                 onClick={() => changeTitleHandler(playlist._id)}
               >
-                Sumbit
+                Submit
               </button>
             </div>
           )} 
