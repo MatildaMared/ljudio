@@ -9,7 +9,6 @@ export const UserProvider = ({ children }) => {
 		isLoading: true,
 		isAuthenticated: null,
 		user: {},
-		showSmallDeviceMenu: false,
 	});
 
 	// Tries to set user data on initial page load

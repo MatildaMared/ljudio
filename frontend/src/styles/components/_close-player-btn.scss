@@ -1,0 +1,33 @@
+@use "./../abstracts/variables" as var;
+
+.close-player-btn {
+	outline: none;
+	background-color: var.$color-primary;
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	border: none;
+	border-radius: 100rem;
+	height: 3rem;
+	width: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s;
+	opacity: .8;
+
+	&__icon {
+		font-size: 2.7rem;
+		color: #252525;
+		transition: all 0.3s;
+	}
+
+	&:hover {
+		background-color: #353535;
+
+		.close-player-btn__icon {
+			color: var.$color-primary;
+			transform: scale(1.2);
+		}
+	}
+}

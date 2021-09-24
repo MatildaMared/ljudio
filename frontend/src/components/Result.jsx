@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 import { MusicContext } from "../context/MusicContext";
 import AllResults from "./AllResults";
 import SongsResults from "./SongsResults";
-import ArtistsResults from './ArtistsResults';
-import PlaylistsResults from './PlaylistsResults';
+import ArtistsResults from "./ArtistsResults";
+import PlaylistsResults from "./PlaylistsResults";
 
 function Result() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 
 	return (
-		<div>
+		<div className="result">
 			{musicContext.isLoading && <h3>Loading...</h3>}
 			{!musicContext.isLoading && musicContext.resultType === "all" && (
 				<AllResults />

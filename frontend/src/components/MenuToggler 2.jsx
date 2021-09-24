@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { LayoutContext } from "../context/LayoutContext";
+import { UserContext } from "../context/UserContext";
 
 function MenuToggler() {
 	const [showMenu, setShowMenu] = useState(false);
-	const [layoutContext, updateLayoutContext] = useContext(LayoutContext);
+	const [userContext, updateUserContext] = useContext(UserContext);
 	const menuRef = useRef();
 
 	useEffect(() => {
 		if (showMenu) {
-			updateLayoutContext({
+			updateUserContext({
 				showSmallDeviceMenu: true,
 			});
 		} else {
-			updateLayoutContext({
+			updateUserContext({
 				showSmallDeviceMenu: false,
 			});
 		}
@@ -36,11 +36,11 @@ function MenuToggler() {
 
 	function clickHandler(e) {
 		e.stopPropagation();
-		updateLayoutContext({
+		updateUserContext({
 			showSmallDeviceMenu: false,
 		});
 		document.removeEventListener("mouseup", clickHandler);
-		if (e.target === menuRef.current || e.target.parentElement === menuRef.current) {
+		if (e.target === menuRef.current) {
 			return;
 		}
 		setShowMenu(false);

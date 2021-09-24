@@ -46,6 +46,8 @@
 
 // ### COMPONENT STYLES ###
 
+// Styles for Result component
+@use './components/result';
 // Styles for AllResults component
 @use './components/allresults';
 // Styles for ArtistsResults component
@@ -67,7 +69,15 @@
 @use './components/share-btn';
 // Styles for MenuToggler
 @use './components/menu-toggler';
+//Styles for addToPlaylist
 @use './components/addtoplaylist';
+
+// Styles for SmallPlayer
+@use './components/small-player';
+// Styles for PlayPauseBtn
+@use './components/play-pause-btn';
+// Styles for ClosePlayerBtn
+@use './components/close-player-btn';
 
 // ### MODAL STYLES ###
 // Styles for warning-modal
