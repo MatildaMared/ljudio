@@ -74,9 +74,10 @@ function PlaylistsPage() {
           className="add-playlist__btn"
         />
       </form>
-      {userContext.user?.playlists?.length > 0 &&
-        userContext.user.playlists.map((playlist) => (
-          <div className="results-items__wrapper">
+
+      {userContext.user?.playlists?.length > 0 && (
+        <article className="results-items__wrapper">
+          {userContext.user.playlists.map((playlist) => (
             <div className="results-items" key={playlist._id}>
               <p
                 className="results-items__name"
@@ -94,28 +95,32 @@ function PlaylistsPage() {
                   onClick={() => setToggle(!toggle)}
                 />
               </div>
+
+              {toggle && (
+            <div className="change-playlist-name">
+              <input
+                className="change-playlist-name__input"
+                type="text"
+                placeholder="Change playlist name"
+                onChange={(e) => setTitleChange(e.target.value)}
+              />
+              <button
+                className="change-playlist-name__btn"
+                type="submit"
+                onClick={() => changeTitleHandler(playlist._id)}
+              >
+                Sumbit
+              </button>
             </div>
-            {toggle && (
-              <div className="change-playlist-name">
-                <input
-                  className="change-playlist-name__input"
-                  type="text"
-                  placeholder="Change playlist name"
-                  onChange={(e) => setTitleChange(e.target.value)}
-                />
-                <button
-                  className="change-playlist-name__btn"
-                  type="submit"
-                  onClick={() => changeTitleHandler(playlist._id)}
-                >
-                  Sumbit
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
+          )} 
+            </div>
+            
+          ))}
+        </article>
+      )}
     </div>
   );
 }
 
 export default PlaylistsPage;
+
