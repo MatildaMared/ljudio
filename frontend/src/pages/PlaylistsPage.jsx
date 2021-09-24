@@ -84,24 +84,23 @@ function PlaylistsPage() {
               >
                 {playlist.title}
               </p>
-            
-            <div>
-              <MdDeleteForever
-                className="results-items__btn"
-                onClick={() => removePlaylistHandler(playlist._id)}
-              />
-              <MdMoreVert
-                className="results-items__btn"
-                onClick={() => setToggle(!toggle)}
-              />
+              <div>
+                <MdDeleteForever
+                  className="results-items__btn"
+                  onClick={() => removePlaylistHandler(playlist._id)}
+                />
+                <MdMoreVert
+                  className="results-items__btn"
+                  onClick={() => setToggle(!toggle)}
+                />
+              </div>
             </div>
-			</div>
             {toggle && (
               <div className="change-playlist-name">
                 <input
                   className="change-playlist-name__input"
                   type="text"
-				          placeholder="Change playlist name"
+                  placeholder="Change playlist name"
                   onChange={(e) => setTitleChange(e.target.value)}
                 />
                 <button
@@ -112,7 +111,7 @@ function PlaylistsPage() {
                   Sumbit
                 </button>
               </div>
-          )}
+            )}
           </div>
         ))}
     </div>
