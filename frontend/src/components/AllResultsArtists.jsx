@@ -9,10 +9,10 @@ function AllResultsArtists({ artists }) {
       <h2 className="all-results__heading">Artists</h2>
       <ul className="results__list">
         {artists &&
-          artists.map((item) => (
+          artists.map((item, index) => (
             <li
               className="results__list__item cursor"
-              key={item.browseId}
+              key={`${item.browseId}${index}`}
               onClick={() => history.push(`/artist/${item.browseId}`)}
             >
               <p>{`${item.name}`}</p>

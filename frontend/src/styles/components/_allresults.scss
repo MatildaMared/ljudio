@@ -1,20 +1,9 @@
 @use "../abstracts/variables" as var;
 
-.all-results {
-  padding: 1rem;
-  width: 80%;
-  background-color: var.$color-dark-gray;
-
-  &__heading {
-    margin: 1rem 0;
-  }
-}
-
 .results {
   // width: 50vw;
 
   &__list {
-    max-width: 80%;
     margin-bottom: 1rem;
 
     &__item {
