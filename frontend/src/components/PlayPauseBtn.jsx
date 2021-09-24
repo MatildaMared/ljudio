@@ -1,7 +1,7 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { MdPlayArrow, MdPause } from "react-icons/md";
 
-const PlayPauseBtn = React.forwardRef(({ isPlaying, pause, play }, ref) => {
+const PlayPauseBtn = forwardRef(({ isPlaying, pause, play }, ref) => {
 	return (
 		<button
 			ref={ref}
