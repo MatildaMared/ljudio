@@ -1,0 +1,54 @@
+@use "./../abstracts/variables" as var;
+
+.small-player {
+	position: fixed;
+	z-index: 1000;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	background-color: #181818;
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	padding: 1rem 2rem;
+	display: none;
+	transition: 0.4s;
+
+	@media (max-width: 1600px) {
+		display: block;
+	}
+
+	&--hide {
+		left: -100%;
+	}
+
+	&:hover {
+		background-color: #252525;
+	}
+
+	&__wrapper {
+		width: 100%;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		cursor: pointer;
+	}
+
+	&__thumbnail {
+		max-height: 3.5rem;
+		height: auto;
+		overflow: hidden;
+		border-radius: 0.5rem;
+	}
+
+	&__info {
+		margin-left: 1rem;
+		flex: 1;
+	}
+
+	&__artist {
+		font-size: 1.1rem;
+		color: var.$color-primary;
+		font-weight: 600;
+		margin-bottom: 0.25rem;
+	}
+}

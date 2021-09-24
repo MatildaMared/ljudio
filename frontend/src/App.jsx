@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./routing/PrivateRoute";
 import { UserProvider } from "./context/UserContext";
 import { MusicProvider } from "./context/MusicContext";
+import { LayoutProvider } from "./context/LayoutContext";
 import "./styles/style.scss";
 
 import HomePage from "./pages/HomePage";
@@ -21,48 +22,50 @@ function App() {
 			<Router>
 				<UserProvider>
 					<MusicProvider>
-						<Switch>
-							<PrivateRoute
-								path="/"
-								exact
-								component={HomePage}
-								layout={Layout}
-							/>
-							<PrivateRoute
-								path="/search"
-								exact
-								component={SearchPage}
-								layout={Layout}
-							/>
-							<PrivateRoute
-								path="/playlists"
-								exact
-								component={PlaylistsPage}
-								layout={Layout}
-							/>
-							<PrivateRoute
-								path="/queue"
-								exact
-								component={QueuePage}
-								layout={Layout}
-							/>
-							<Route path="/login" component={LoginPage} />
-							<PrivateRoute
-								path="/artist/:browseId"
-								component={ArtistPage}
-								layout={Layout}
-							/>
-							<PrivateRoute
-								path="/playlist/:playlistId"
-								component={PlaylistPage}
-								layout={Layout}
-							/>
-							<PrivateRoute
-								path="/yt-playlist/:browseId"
-								component={YtPlaylistPage}
-								layout={Layout}
-							/>
-						</Switch>
+						<LayoutProvider>
+							<Switch>
+								<PrivateRoute
+									path="/"
+									exact
+									component={HomePage}
+									layout={Layout}
+								/>
+								<PrivateRoute
+									path="/search"
+									exact
+									component={SearchPage}
+									layout={Layout}
+								/>
+								<PrivateRoute
+									path="/playlists"
+									exact
+									component={PlaylistsPage}
+									layout={Layout}
+								/>
+								<PrivateRoute
+									path="/queue"
+									exact
+									component={QueuePage}
+									layout={Layout}
+								/>
+								<Route path="/login" component={LoginPage} />
+								<PrivateRoute
+									path="/artist/:browseId"
+									component={ArtistPage}
+									layout={Layout}
+								/>
+								<PrivateRoute
+									path="/playlist/:playlistId"
+									component={PlaylistPage}
+									layout={Layout}
+								/>
+								<PrivateRoute
+									path="/yt-playlist/:browseId"
+									component={YtPlaylistPage}
+									layout={Layout}
+								/>
+							</Switch>
+						</LayoutProvider>
 					</MusicProvider>
 				</UserProvider>
 			</Router>
