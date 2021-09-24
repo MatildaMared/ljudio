@@ -41,7 +41,7 @@ const ArtistPage = () => {
 		timeout && clearTimeout(timeout);
 		// Make a fetch request to return
 		// an array of songs by a search string
-		const data = await getSongsByString(songName);
+		const data = await getSongsByString(`${songName} ${artist}`);
 
 		// Iterate over the array
 		for (const song of data.content) {
