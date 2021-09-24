@@ -9,16 +9,15 @@ function AddToPlaylist({ item }) {
   const ref = useRef();
 
   useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      console.log('In checkClick');
+    const checkIfClickedOutsideOfModal = (e) => {
       if (isActive && ref.current && !ref.current.contains(e.target)) {
         setIsActive(false);
       }
     };
 
-    document.addEventListener('mousedown', checkIfClickedOutside);
+    document.addEventListener('mousedown', checkIfClickedOutsideOfModal);
     return () => {
-      document.removeEventListener('mousedown', checkIfClickedOutside);
+      document.removeEventListener('mousedown', checkIfClickedOutsideOfModal);
     };
   }, [isActive]);
 
@@ -27,6 +26,7 @@ function AddToPlaylist({ item }) {
       `In AddToPlaylist.jsx - Playlist with the id: ${playlist} and song: ${song.name}`
     );
     const res = await addSongToPlaylist(playlist, song);
+    setIsActive(false);
   };
 
   return (
@@ -42,9 +42,10 @@ function AddToPlaylist({ item }) {
           className="add-to-playlist-modal__content"
           onClick={(e) => e.stopPropagation()}
         >
-          <ul className="add-to-playlist-modal__ul">
-            {isActive &&
-              userContext.user.playlists.map((playlist) => (
+          {isActive && (
+            <ul className="add-to-playlist-modal__ul">
+              <h2>Add to playlist</h2>
+              {userContext.user.playlists.map((playlist) => (
                 <li
                   key={playlist._id}
                   onClick={() => addSongToThisPlaylist(playlist._id, item)}
@@ -53,7 +54,8 @@ function AddToPlaylist({ item }) {
                   {playlist.title}
                 </li>
               ))}
-          </ul>
+            </ul>
+          )}
         </div>
       </div>
     </div>
