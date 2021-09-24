@@ -5,6 +5,10 @@
 	padding: 3rem 0;
 	background-color: rgba(255, 255, 255, 0.03);
 
+	@media (max-width: 1600px) {
+		display: none;
+	}
+
 	&__heading {
 		text-align: center;
 		font-size: 1.4rem;

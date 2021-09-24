@@ -3,17 +3,18 @@
 .layout {
 	width: 100%;
 	display: grid;
-	grid-template-columns: auto 1fr 1fr;
+	grid-template-columns: auto 1fr auto;
 	grid-gap: 1rem;
 
 	@media (max-width: 1600px) {
-    padding: 0 1rem;
-    grid-template-columns: 1fr 1fr;
+		padding: 0 1rem;
+		grid-template-columns: 1fr;
+		max-width: 80rem;
+		margin: 0 auto;
+    padding-bottom: 7rem;
 	}
 
-  @media(max-width: 1300px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+	&--extra-padding {
+		padding-bottom: 35rem;
+	}
 }

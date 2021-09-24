@@ -92,6 +92,12 @@ const ArtistPage = () => {
 			if (song.artist.name.toLowerCase() === artist.toLowerCase()) {
 				setAlertMsg("Added to queue");
 				setShowAlert(true);
+				if (musicContext.queue.length === 0) {
+					updateMusicContext({
+						queue: [song],
+						nowPlayingIndex: 0,
+					});
+				}
 				updateMusicContext({
 					queue: [...musicContext.queue, song],
 				});

@@ -4,7 +4,8 @@ export const LayoutContext = createContext();
 
 export const LayoutProvider = ({ children }) => {
 	const [context, setContext] = useState({
-		showSmallDeviceMenu: false,
+    showSmallDeviceMenu: false,
+    showPlayerOnSmallDevice: false,
 	});
 
 	function updateContext(updates) {

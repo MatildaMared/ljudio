@@ -1,12 +1,10 @@
 import React from "react";
-import {
-	MdPlayArrow,
-	MdPause,
-} from "react-icons/md";
+import { MdPlayArrow, MdPause } from "react-icons/md";
 
-function PlayPauseBtn({ isPlaying, pause, play }) {
+const PlayPauseBtn = React.forwardRef(({ isPlaying, pause, play }, ref) => {
 	return (
 		<button
+			ref={ref}
 			onClick={isPlaying ? pause : play}
 			className="play-pause-btn">
 			{isPlaying ? (
@@ -16,6 +14,6 @@ function PlayPauseBtn({ isPlaying, pause, play }) {
 			)}
 		</button>
 	);
-}
+});
 
 export default PlayPauseBtn;

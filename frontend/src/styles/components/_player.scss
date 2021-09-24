@@ -1,22 +1,27 @@
 @use "../abstracts/variables" as var;
 
 .player {
+	padding: 1rem;
 	width: 100%;
-	margin: 0 auto;
-	margin-top: 3rem;
-	margin-bottom: 3rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	max-width: 640px;
+	transition: all 0.4s;
+	position: relative;
+	background-color: #171717;
+	border-left: 1px solid rgba(255, 255, 255, 0.13);
+	z-index: 1700;
 
-	&__player {
-		margin-top: 1rem;
-		margin-bottom: 0.5rem;
-		&--hide {
-			width: 0;
-			height: 0;
-			margin: 0;
+	@media (max-width: 1600px) {
+		position: fixed;
+		bottom: 0;
+		right: -100%;
+		margin: 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.13);
+		border-left: none;
+		background-color: #191919;
+		&--show {
+			right: 0;
 		}
 	}
 
@@ -60,8 +65,21 @@
 	}
 
 	&__player {
+		width: 640px;
+		height: 320px;
 		border-radius: 0.5rem;
 		overflow: hidden;
+		margin: 0.5rem;
+		transition: all 0.3s;
+
+		@media (max-width: 640px) {
+			width: 320px;
+			height: 195px;
+		}
+
+		&--hide {
+			height: 0;
+		}
 	}
 
 	&__song-name {
@@ -77,8 +95,9 @@
 	}
 
 	&__btns {
-		position: relative;
 		width: 100%;
+		max-width: 640px;
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -143,16 +162,18 @@
 	}
 
 	&__progress {
+		display: block;
 		margin-top: 1rem;
 		width: 100%;
+		max-width: 800px;
 		display: flex;
 		align-items: center;
 	}
 
 	&__slider {
-		-webkit-appearance: none;
+		width: 100%;
+		-webkit-appearance: no ne;
 		appearance: none;
-		width: 90%;
 		height: 10px;
 		background: rgba(255, 255, 255, 0.2);
 		border-radius: 0.5rem;
@@ -208,14 +229,14 @@
 	}
 
 	&__volume-message {
-		font-size: .9rem;
+		font-size: 0.9rem;
 		z-index: 1000;
 		padding: 0.25rem;
 		position: absolute;
 		top: -18px;
 		left: 0px;
 		background-color: rgba(39, 39, 39);
-		color: rgba(255, 255, 255, .6);
+		color: rgba(255, 255, 255, 0.6);
 		border-radius: 0.5rem;
 		transition: opacity 0.3s;
 
@@ -226,44 +247,3 @@
 		}
 	}
 }
-
-// #seek-slider {
-// 	cursor: pointer;
-// 	height: 10px;
-// 	margin-bottom: 10px;
-// 	background-color: rgba(255, 255, 255, 0.1);
-// 	border-radius: 0.5rem;
-// 	// overflow: hidden;
-// 	position: relative;
-// 	width: 400px;
-// 	margin-top: 10px;
-
-// 	&:hover {
-// 		#seek-slider span::after {
-// 			background-color: #696969;
-// 		}
-// 	}
-// }
-
-// #seek-slider span {
-// 	background-color: var.$color-primary;
-// 	border-radius: 0.5rem;
-// 	position: absolute;
-// 	top: 0;
-// 	left: 0;
-// 	height: 10px;
-// 	width: 0px;
-// }
-
-// #seek-slider span::after {
-// 	content: "";
-// 	width: 15px;
-// 	height: 15px;
-// 	border-radius: 100rem;
-// 	z-index: 100;
-// 	display: block;
-// 	position: absolute;
-// 	background-color: #5b5b5b;
-// 	top: -2.75px;
-// 	right: -2px;
-// }

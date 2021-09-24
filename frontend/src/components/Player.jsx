@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { MusicContext } from "./../context/MusicContext";
+import { LayoutContext } from "../context/LayoutContext";
 import YouTube from "react-youtube";
 import { getArtistNameFromSongObj } from "./../utilities/musicUtils";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
@@ -12,10 +13,12 @@ import {
 	MdVolumeOff,
 } from "react-icons/md";
 import SmallPlayer from "./SmallPlayer";
-import PlayPauseBtn from './PlayPauseBtn';
+import PlayPauseBtn from "./PlayPauseBtn";
+import ClosePlayerBtn from "./ClosePlayerBtn";
 
 const Player = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
+	const [layoutContext, updateLayoutContext] = useContext(LayoutContext);
 	const [player, setPlayer] = useState(null);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [videoLength, setVideoLength] = useState(0);
@@ -23,7 +26,7 @@ const Player = () => {
 	const [volumeMessage, setVolumeMessage] = useState("");
 	const volumeMessageRef = useRef();
 	const [isMuted, setIsMuted] = useState(false);
-	const [videoOn, setVideoOn] = useState(true);
+	const [videoOn, setVideoOn] = useState(false);
 	const [previousVolume, setPreviousVolume] = useState(100);
 	const [artistName, setArtistName] = useState(null);
 	const [nextArtistName, setNextArtistName] = useState(null);
@@ -93,8 +96,8 @@ const Player = () => {
 	}
 
 	const opts = {
-		height: "390",
-		width: "640",
+		height: "100%",
+		width: "100%",
 		playerVars: {
 			// https://developers.google.com/youtube/player_parameters
 			autoplay: 1,
@@ -206,15 +209,29 @@ const Player = () => {
 	}
 
 	function onVideoEnd(event) {
-		updateMusicContext({
-			nowPlayingIndex: musicContext.nowPlayingIndex + 1,
-		});
+		if (queue.length === 1) {
+			updateMusicContext({
+				nowPlayingIndex: null,
+				queue: [],
+			});
+		}
+		if (queue.length > 0) {
+			updateMusicContext({
+				nowPlayingIndex: nowPlayingIndex + 1,
+			});
+		}
 		clearTimer && clearTimer();
 	}
 
 	return (
 		<>
-			<section className="player">
+			<section
+				className={
+					layoutContext.showPlayerOnSmallDevice
+						? "player player--show"
+						: "player"
+				}>
+				{layoutContext.showPlayerOnSmallDevice && <ClosePlayerBtn />}
 				{/* Player Header - Where the artist and song name is displayed! */}
 				<header className="player__header">
 					<span className="player__label">Now playing</span>
@@ -319,14 +336,16 @@ const Player = () => {
 					</div>
 				</section>
 			</section>
-			<SmallPlayer
-				song={currentSongObj}
-				artist={artistName}
-				title={songName}
-				isPlaying={isPlaying}
-				play={play}
-				pause={pause}
-			/>
+			{queue.length > 0 && (
+				<SmallPlayer
+					song={currentSongObj}
+					artist={artistName}
+					title={songName}
+					isPlaying={isPlaying}
+					play={play}
+					pause={pause}
+				/>
+			)}
 		</>
 	);
 };
