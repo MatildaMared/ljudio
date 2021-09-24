@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getArtistById, getSongsByString } from "../services/musicService";
 import ShareLinkBtn from "../components/ShareLinkBtn";
 import { MdPlayCircleFilled, MdPlaylistAdd } from "react-icons/md";
+import { getArtistNameFromSongObj } from "../utilities/musicUtils";
 
 const ArtistPage = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -36,6 +37,7 @@ const ArtistPage = () => {
 	}
 
 	async function onplayHandler(songName) {
+		console.log("Will try to play");
 		timeout && clearTimeout(timeout);
 		// Make a fetch request to return
 		// an array of songs by a search string
@@ -46,8 +48,20 @@ const ArtistPage = () => {
 			// If the artist name of the song is the same
 			// as the current artist, update the context
 			// and break out of the loop
-			if (song.artist.name.toLowerCase() === artist.toLowerCase()) {
-				if (
+			console.log("Song is: ", song);
+			const artistName = getArtistNameFromSongObj(song);
+			console.log(artistName);
+			if (artistName.toLowerCase() === artist.toLowerCase()) {
+				console.log("Found song");
+				if (musicContext.queue.length === 0) {
+					console.log("Queue is empty, will play");
+					setAlertMsg("Playing");
+					setShowAlert(true);
+					updateMusicContext({
+						queue: [...musicContext.queue, song],
+						nowPlayingIndex: 0,
+					});
+				} else if (
 					musicContext.queue[musicContext.nowPlayingIndex]?.videoId ===
 					song?.videoId
 				) {
@@ -55,14 +69,6 @@ const ArtistPage = () => {
 						resetPlayer: true,
 					});
 					return;
-				}
-				if (musicContext.queue.length === 0) {
-					setAlertMsg("Playing");
-					setShowAlert(true);
-					updateMusicContext({
-						queue: [...musicContext.queue, song],
-						nowPlayingIndex: 0,
-					});
 				} else {
 					const newPlayQueue = [...musicContext.queue];
 					newPlayQueue.splice(musicContext.nowPlayingIndex, 0, song);

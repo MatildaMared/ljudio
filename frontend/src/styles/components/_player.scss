@@ -27,40 +27,45 @@
 
 	&__header {
 		width: 100%;
-		background-color: rgba(255, 255, 255, 0.05);
-		border-radius: 0.5rem;
 		padding: 0.5rem 1rem;
 		display: flex;
-		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		min-height: 51px;
 	}
 
 	&__label {
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		font-weight: 700;
-		letter-spacing: 1px;
-		color: rgba(255, 255, 255, 0.4);
+		font-size: 0.9rem;
+		padding: 0.25rem;
+		background-color: rgba(255, 255, 255, 0.1);
+		border-radius: 0.5rem;
+		color: var.$color-primary;
+		margin-right: 0.5rem;
+		transform: translateY(3px);
 
 		&--next {
-			flex: 1;
+			transform: translateY(3px);
 		}
 	}
 
 	&__artist-info {
-		margin-top: 0.25rem;
+		margin-top: 0.5rem;
 		display: flex;
-		font-size: 1.1rem;
+		position: relative;
+		font-size: 1.2rem;
+
+		@media (max-width: 500px) {
+			flex-direction: column;
+		}
 	}
 
 	&__artist-name {
 		color: var.$color-primary;
 		font-weight: 700;
+		text-align: center;
 
 		&--next {
 			font-size: 0.9rem;
+			text-align: left;
 		}
 	}
 
@@ -83,14 +88,21 @@
 	}
 
 	&__song-name {
+		text-align: center;
+
 		&::before {
 			content: "–";
 			margin-left: 0.25rem;
 			margin-right: 0.25rem;
+
+			@media (max-width: 500px) {
+				display: none;
+			}
 		}
 
 		&--next {
 			font-size: 0.9rem;
+			text-align: left;
 		}
 	}
 
@@ -222,10 +234,9 @@
 		opacity: 0.8;
 		width: 100%;
 		padding: 0.5rem;
-		border-radius: 0.5rem;
 		display: flex;
 		align-items: center;
-		background-color: rgba(255, 255, 255, 0.05);
+		justify-content: center;
 	}
 
 	&__volume-message {
@@ -241,8 +252,6 @@
 		transition: opacity 0.3s;
 
 		&--hide {
-			top: -118px;
-			z-index: -1000;
 			opacity: 0;
 		}
 	}

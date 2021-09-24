@@ -233,13 +233,14 @@ const Player = () => {
 				}>
 				{layoutContext.showPlayerOnSmallDevice && <ClosePlayerBtn />}
 				{/* Player Header - Where the artist and song name is displayed! */}
-				<header className="player__header">
-					<span className="player__label">Now playing</span>
-					<div className="player__artist-info">
-						<p className="player__artist-name">{artistName}</p>
-						<p className="player__song-name">{songName}</p>
-					</div>
-				</header>
+				{artistName && (
+					<header className="player__header">
+						<div className="player__artist-info">
+							<p className="player__artist-name">{artistName}</p>
+							<p className="player__song-name">{songName}</p>
+						</div>
+					</header>
+				)}
 				{/* Player - Where the YouTube iframe is rendered */}
 				<YouTube
 					className={
@@ -272,9 +273,11 @@ const Player = () => {
 						<button onClick={volumeUp} className="player__btn">
 							<MdVolumeUp className="player__icon" />
 						</button>
-						<span className="player__volume-message" ref={volumeMessageRef}>
-							{volumeMessage}
-						</span>
+						{volumeMessage && (
+							<span className="player__volume-message" ref={volumeMessageRef}>
+								{volumeMessage}
+							</span>
+						)}
 					</section>
 					{/* Player Buttons */}
 					<section className="player__player-btns">
@@ -322,19 +325,21 @@ const Player = () => {
 						{getTimeInMinutes(videoLength - currentTime)}
 					</span>
 				</section>
-				<section className="player__next">
-					<span className="player__label player__label--next">
-						Next in queue
-					</span>
-					<div className="player__artist-info player__artist-info--next">
-						<p className="player__artist-name player__artist-name--next">
-							{nextArtistName}
-						</p>
-						<p className="player__song-name player__song-name--next">
-							{nextSongName}
-						</p>
-					</div>
-				</section>
+				{nextArtistName && (
+					<section className="player__next">
+						<span className="player__label player__label--next">
+							Next in queue
+						</span>
+						<div className="player__artist-info player__artist-info--next">
+							<p className="player__artist-name player__artist-name--next">
+								{nextArtistName}
+							</p>
+							<p className="player__song-name player__song-name--next">
+								{nextSongName}
+							</p>
+						</div>
+					</section>
+				)}
 			</section>
 			{queue.length > 0 && (
 				<SmallPlayer
