@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { MusicContext } from '../context/MusicContext';
 import { UserContext } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
 import { getPlaylist } from './../services/playlistService';
-import { MdDeleteForever } from 'react-icons/md';
+import { MdDeleteForever, MdPlayCircleFilled } from 'react-icons/md';
 import { removeSongFromPlaylist } from './../services/playlistService';
+import PlaySongBtn from '../components/PlaySongBtn';
 
 const PlaylistPage = () => {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -13,6 +14,7 @@ const PlaylistPage = () => {
   const [playlistData, setPlaylistData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
+  const playAllBtnRef = useRef();
 
   // on page load, get the playlist data
   // from the database
@@ -52,6 +54,16 @@ const PlaylistPage = () => {
     });
   }
 
+  function playEntirePlaylist(songArr) {
+    console.log(songArr);
+    updateMusicContext({
+      queue: songArr,
+      nowPlayingIndex: 0,
+      resetPlayer: true,
+    });
+    playAllBtnRef.current.blur();
+  }
+
   return (
     <div className="playlist">
       {isLoading && <h3 className="playlist__loading">Loading...</h3>}
@@ -62,7 +74,21 @@ const PlaylistPage = () => {
       )}
       {playlistData && (
         <section className="playlist__wrapper">
-          <h1 className="playlist__wrapper__heading">{playlistData.title}</h1>
+          <h1 className="playlist__wrapper__heading">
+            <span>{playlistData.title}</span>
+            <button
+              className="playlist__wrapper__heading__btn"
+              ref={playAllBtnRef}
+              onClick={() => {
+                playEntirePlaylist(playlistData.songs);
+              }}
+            >
+              <span>Play entire list </span>
+
+              <MdPlayCircleFilled className="playlist__wrapper__heading__icon" />
+            </button>
+          </h1>
+
           <ul className="playlist__wrapper__description">
             {playlistData.songs &&
               playlistData.songs.map((song) => (
@@ -88,14 +114,16 @@ const PlaylistPage = () => {
                       </h4>
                     </div>
                   </div>
-                  {isOwner && (
-                    <button className="playlist__wrapper__description__btn">
-                      <MdDeleteForever
-                        style={{ fontSize: '1.5rem' }}
-                        onClick={() => removeSongHandler(song.videoId)}
-                      />
-                    </button>
-                  )}
+                  <div className="playlist__btn">
+                    <PlaySongBtn item={song} />
+                    {isOwner && (
+                      <button className="playlist__btn--delete">
+                        <MdDeleteForever
+                          onClick={() => removeSongHandler(song.videoId)}
+                        />
+                      </button>
+                    )}
+                  </div>
                 </li>
               ))}
           </ul>

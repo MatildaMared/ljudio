@@ -16,16 +16,45 @@
       background-color: rgba(255, 255, 255, 0.05);
       padding: 2rem;
       border-radius: 0.3rem 0.3rem 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__icon {
+        font-size: 1.5rem;
+        margin-left: 0.7rem;
+      }
+
+      &__btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.3rem;
+        background-color: var.$color-primary;
+        color: var.$color-dark-gray;
+        border-radius: 0.3rem;
+        border: 2px solid var.$color-primary;
+        font-family: inherit;
+        font-size: 1rem;
+
+        &:hover {
+          background-color: var.$color-dark-gray;
+          border: solid 2px var.$color-primary;
+          color: var.$color-primary;
+        }
+      }
     }
 
     &__description {
+      background-color: var.$color-light-gray;
+      border-radius: 0.3rem;
+
       &__li {
-        padding-left: 0.5rem;
+        padding-left: 0.6rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
-        border-top: 0.002rem solid var.$color-light-gray;
+        border-top: 0.002rem solid rgba(var.$color-light, 0.4);
 
         &__content {
           display: flex;
@@ -35,8 +64,12 @@
         }
 
         &:hover {
-          background-color: var.$color-light-gray;
+          background-color: rgba(var.$color-light, 0.1);
         }
+      }
+
+      &__img {
+        border-radius: 0.2rem;
       }
 
       &__title,
@@ -53,16 +86,23 @@
         font-weight: 300;
         font-size: 0.9rem;
       }
+    }
+  }
 
-      &__btn {
-        border: none;
-        background-color: transparent;
-        color: var.$color-dark-gray;
-        padding-right: 0.9rem;
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        &:hover {
-          color: red;
-        }
+    &--delete {
+      border: none;
+      background-color: transparent;
+      color: var.$color-primary;
+      padding-right: 0.9rem;
+      font-size: 1.6rem;
+
+      &:hover {
+        color: red;
       }
     }
   }
