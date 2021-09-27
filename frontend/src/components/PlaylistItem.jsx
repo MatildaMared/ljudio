@@ -1,14 +1,12 @@
 import React, { useState, useContext } from "react";
 import { MdDeleteForever, MdMoreVert } from "react-icons/md";
-import { MusicContext } from "../context/MusicContext";
 import { UserContext } from "../context/UserContext";
-import { addPlaylist, removePlaylist } from "./../services/playlistService";
+import { removePlaylist } from "./../services/playlistService";
 import { changePlayListTitle } from "../services/newPlaylistService";
 import { useHistory } from "react-router-dom";
 
 function PlaylistItem({ playlist }) {
 	const [userContext, updateUserContext] = useContext(UserContext);
-	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [showMore, setShowMore] = useState(false);
 	const [titleInput, setTitleInput] = useState("");
 	const history = useHistory();
@@ -29,9 +27,9 @@ function PlaylistItem({ playlist }) {
 		updateUserContext({
 			user: data.user,
 		});
-    setTitleInput("");
-    
-    setShowMore(false);
+		setTitleInput("");
+
+		setShowMore(false);
 	}
 
 	return (
@@ -58,8 +56,8 @@ function PlaylistItem({ playlist }) {
 				</div>
 			</div>
 			{showMore && (
-        <div className="playlist-item__change-title">
-          <h3 className="playlist-item__change-title-heading">Change title</h3>
+				<div className="playlist-item__change-title">
+					<h3 className="playlist-item__change-title-heading">Change title</h3>
 					<input
 						className="playlist-item__input"
 						type="text"

@@ -1,21 +1,13 @@
 import React, { useContext, useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
 import { UserContext } from "./../context/UserContext";
 import { MusicContext } from "./../context/MusicContext";
-import { addPlaylist, removePlaylist } from "./../services/playlistService";
-import { MdDeleteForever, MdMoreVert } from "react-icons/md";
-// import ChangePlaylistName from "../components/ChangePlaylistName";
-import { changePlayListTitle } from "../services/newPlaylistService";
+import { addPlaylist } from "./../services/playlistService";
 import PlaylistItem from "../components/PlaylistItem";
 
 function PlaylistsPage() {
 	const [userContext, updateUserContext] = useContext(UserContext);
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [titleInput, setTitleInput] = useState("");
-	const [titleChange, setTitleChange] = useState("");
-	const [showMoreData, setShowMoreData] = useState(false);
-	const [toggle, setToggle] = useState(false);
-	const history = useHistory();
 	const inputRef = useRef();
 
 	function playSong(song) {
