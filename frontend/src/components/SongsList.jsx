@@ -1,6 +1,7 @@
 import React from "react";
 import PlaySongBtn from "./PlaySongBtn";
 import AddToPlayQueue from "./AddToPlayQueue";
+import AddToPlaylist from './AddToPlaylist';
 
 function SongsList({ songs }) {
 	return (
@@ -18,6 +19,7 @@ function SongsList({ songs }) {
 								<div className="songslist__icons">
 									<PlaySongBtn item={item} />
 									<AddToPlayQueue item={item} />
+									<AddToPlaylist item={item} />
 								</div>
 							</li>
 						))}

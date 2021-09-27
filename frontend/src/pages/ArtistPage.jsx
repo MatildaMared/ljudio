@@ -5,6 +5,7 @@ import { getArtistById, getSongsByString } from "../services/musicService";
 import ShareLinkBtn from "../components/ShareLinkBtn";
 import { MdPlayCircleFilled, MdPlaylistAdd } from "react-icons/md";
 import { getArtistNameFromSongObj } from "../utilities/musicUtils";
+import AddToPlaylist from "../components/AddToPlaylist";
 
 const ArtistPage = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -37,6 +38,7 @@ const ArtistPage = () => {
 	}
 
 	async function onplayHandler(songName) {
+		console.log(await getSong(songName));
 		console.log("Will try to play");
 		timeout && clearTimeout(timeout);
 		// Make a fetch request to return
@@ -88,7 +90,7 @@ const ArtistPage = () => {
 		timeout && clearTimeout(timeout);
 		// Make a fetch request to return
 		// an array of songs by a search string
-		const data = await getSongsByString(songName);
+		const data = await getSongsByString(`${songName} ${artist}`);
 
 		// Iterate over the array
 		for (const song of data.content) {
@@ -108,6 +110,22 @@ const ArtistPage = () => {
 					queue: [...musicContext.queue, song],
 				});
 				break;
+			}
+		}
+	}
+
+	async function getSong(songName) {
+		// Make a fetch request to return
+		// an array of songs by a search string
+		const data = await getSongsByString(`${songName} ${artist}`);
+
+		// Iterate over the array
+		for (const song of data.content) {
+			// If the artist name of the song is the same
+			// as the current artist, update the context
+			// and break out of the loop
+			if (song.artist.name.toLowerCase() === artist.toLowerCase()) {
+				return song;
 			}
 		}
 	}
