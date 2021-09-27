@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-function AllResultsArtists({ artists }) {
+function ArtistsList({ artists }) {
   const history = useHistory();
 
   return (
@@ -24,4 +24,4 @@ function AllResultsArtists({ artists }) {
   );
 }
 
-export default AllResultsArtists;
+export default ArtistsList;

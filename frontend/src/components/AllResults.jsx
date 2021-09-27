@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { MusicContext } from './../context/MusicContext';
-import AllResultsArtists from './AllResultsArtists';
-import ResultsSongs from './ResultsSongs';
+import ArtistsList from './ArtistsList';
+import SongsList from './SongsList';
 
 function AllResults() {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
   let songsArray = [];
   let artistsArray = [];
-  let albumsArray = [];
+  let playlistsArray = [];
 
   // Takes in a single array of items and
   // sorts items into on of three arrays
@@ -18,8 +18,8 @@ function AllResults() {
         songsArray.push(item);
       } else if (item.type === 'artist') {
         artistsArray.push(item);
-      } else if (item.type === 'album') {
-        albumsArray.push(item);
+      } else if (item.type === 'playlist') {
+        playlistsArray.push(item);
       }
     });
   }
@@ -28,8 +28,8 @@ function AllResults() {
 
   return (
     <div className="all-results">
-      <AllResultsArtists artists={artistsArray} />
-      <ResultsSongs songs={songsArray} />
+      <ArtistsList artists={artistsArray} />
+      <SongsList songs={songsArray} />
     </div>
   );
 }

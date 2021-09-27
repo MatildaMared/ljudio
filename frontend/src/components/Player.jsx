@@ -254,6 +254,7 @@ const Player = () => {
 					onEnd={onVideoEnd}
 					onPause={onVideoPause}
 				/>
+				{queue.length > 0 && (
 				<div className="player__btns">
 					{/* Volume Buttons */}
 					<section className="player__volume-btns">
@@ -304,7 +305,9 @@ const Player = () => {
 						)}
 					</button>
 				</div>
+				)}
 				{/* Song Progress Bar */}
+				{queue.length > 0 && (
 				<section className="player__progress">
 					<span className="player__current-time">
 						{getTimeInMinutes(currentTime)}
@@ -325,6 +328,8 @@ const Player = () => {
 						{getTimeInMinutes(videoLength - currentTime)}
 					</span>
 				</section>
+				)}
+				{/* Information about next song */}
 				{nextArtistName && (
 					<section className="player__next">
 						<span className="player__label player__label--next">
@@ -341,6 +346,7 @@ const Player = () => {
 					</section>
 				)}
 			</section>
+			{/* Small player element */}
 			{queue.length > 0 && (
 				<SmallPlayer
 					song={currentSongObj}

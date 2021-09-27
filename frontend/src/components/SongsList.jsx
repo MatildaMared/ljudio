@@ -2,7 +2,7 @@ import React from 'react';
 import PlaySongBtn from './PlaySongBtn';
 import AddToPlayQueue from './AddToPlayQueue';
 
-function ResultsSongs({ songs }) {
+function SongsList({ songs }) {
   return (
     <div>
       <div className="results">
@@ -26,4 +26,4 @@ function ResultsSongs({ songs }) {
   );
 }
 
-export default ResultsSongs;
+export default SongsList;
