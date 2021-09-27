@@ -5,18 +5,18 @@ function ArtistsList({ artists }) {
   const history = useHistory();
 
   return (
-    <div className="results">
-      <h2 className="all-results__heading">Artists</h2>
-      <ul className="results__list">
+    <div className="artistslist">
+      <h2 className="artistslist__heading">Artists</h2>
+      <ul className="artistslist__list">
         {artists &&
           artists.map((item, index) => (
             <li
-              className="results__list__item cursor"
+              className="artistslist__item"
               key={`${item.browseId}${index}`}
               onClick={() => history.push(`/artist/${item.browseId}`)}
             >
-              <p>{`${item.name}`}</p>
-              <img src={item.thumbnails[0].url} alt={item.name}></img>
+              <p className="artistslist__artist-name">{`${item.name}`}</p>
+              <img className="artistslist__thumbnail" src={item.thumbnails[0].url} alt={item.name}></img>
             </li>
           ))}
       </ul>

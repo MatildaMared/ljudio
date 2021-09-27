@@ -3,84 +3,87 @@
 // Import this file in every single file that needs our variables
 // and write var.$variable-name to access a variable.
 // Example: background-color: var.$background-color
-@use './abstracts/variables' as var;
+@use "./abstracts/variables" as var;
 
 // ### BASE STYLES ###
 
 // A simple CSS reset
-@use './base/reset';
+@use "./base/reset";
 // Specific styles concerning typographt
-@use './base/typography';
+@use "./base/typography";
 
 // ### PAGES STYLES ###
 
 // Styles for HomePage
-@use './pages/homepage';
+@use "./pages/homepage";
 // Styles for ArtistPage
-@use './pages/artistpage';
+@use "./pages/artistpage";
 // Styles for LoginPage
-@use './pages/loginpage';
+@use "./pages/loginpage";
 // Styles for PlaylistPage
-@use './pages/playlistpage';
+@use "./pages/playlistpage";
 // Styles for PlaylistsPage
-@use './pages/playlistspage';
+@use "./pages/playlistspage";
 // Styles for YtPlaylistPage
-@use './pages/ytplaylistpage';
+@use "./pages/ytplaylistpage";
 // Styles for QueuePage
-@use './pages/queuepage';
+@use "./pages/queuepage";
 // Styles for SearchPage
-@use './pages/searchpage';
+@use "./pages/searchpage";
 
 // ### LAYOUT COMPONENTS STYLES ###
 
 // Styles for Layout component goes here and
 // grid styling for the main section of the page
 // probably goes here!!
-@use './layout/layout';
+@use "./layout/layout";
 // Styles for Header component
-@use './layout/header';
+@use "./layout/header";
 // Styles for Navigation component
-@use './layout/navigation';
+@use "./layout/navigation";
 // Styles for Footer component
-@use './layout/footer';
+@use "./layout/footer";
 
 // ### COMPONENT STYLES ###
 
 // Styles for Result component
-@use './components/result';
+@use "./components/result";
 // Styles for AllResults component
-@use './components/allresults';
+@use "./components/allresults";
 // Styles for ArtistsResults component
-@use './components/artistsresults';
+@use "./components/artistsresults";
 // Styles for PlaylistsResults component
-@use './components/playlistsresults';
+@use "./components/playlistsresults";
 // Styles for Player component
-@use './components/player';
+@use "./components/player";
 // Styles for LogoutBtn component
-@use './components/logoutbtn';
+@use "./components/logoutbtn";
 // Styles for SearchBar
-@use './components/searchbar';
+@use "./components/searchbar";
 // Styles for PlayBtn & AddToPlayQueueBtn
-@use './components/playsongbtn';
-@use './components/addtoplayqueue';
+@use "./components/playsongbtn";
+@use "./components/addtoplayqueue";
 // Styles for button
-@use './components/btn';
+@use "./components/btn";
 // Styles for ShareLinkBtn
-@use './components/share-btn';
+@use "./components/share-btn";
 // Styles for MenuToggler
-@use './components/menu-toggler';
+@use "./components/menu-toggler";
 //Styles for addToPlaylist
-@use './components/addtoplaylist';
-
+@use "./components/addtoplaylist";
 // Styles for SmallPlayer
-@use './components/small-player';
+@use "./components/small-player";
 // Styles for PlayPauseBtn
-@use './components/play-pause-btn';
+@use "./components/play-pause-btn";
 // Styles for ClosePlayerBtn
-@use './components/close-player-btn';
+@use "./components/close-player-btn";
+// Styles for SongsList
+@use "./components/songslist";
+// Styles for ArtistsList
+@use "./components/artistslist";
 
 // ### MODAL STYLES ###
 // Styles for warning-modal
-@use './modals/warningmodal';
+@use "./modals/warningmodal";
 // Styles for errormadal
-@use './modals/errormodal';
+@use "./modals/errormodal";

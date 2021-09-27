@@ -1,0 +1,63 @@
+@use "./../abstracts/variables" as var;
+
+.songslist {
+	background-color: rgba(255, 255, 255, 0.05);
+	border-radius: 0.5rem;
+	overflow: hidden;
+
+	&__heading {
+		font-size: 2.2rem;
+		padding: 2rem;
+	}
+
+	&__item {
+		padding: 1rem 2rem;
+		background-color: rgba(255, 255, 255, 0.03);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		transition: all 0.3s;
+
+		&:first-of-type {
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+		}
+
+		&:last-of-type {
+			border-bottom: none;
+		}
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.05);
+
+			.songslist__song-name {
+				color: var.$color-primary;
+			}
+		}
+	}
+
+	&__artist-name {
+		&::before {
+			content: "–";
+			margin-right: 0.25rem;
+			margin-left: 0.25rem;
+		}
+	}
+
+	&__song-name {
+		color: var.$color-primary-light;
+		font-weight: 600;
+		transition: all 0.3s;
+	}
+
+	&__info {
+		display: flex;
+		align-items: center;
+	}
+
+	&__icons {
+		display: flex;
+		align-items: center;
+	}
+}

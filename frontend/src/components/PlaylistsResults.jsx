@@ -19,19 +19,32 @@ function PlaylistsResults() {
 		});
 	}
 
+	function getPlaylistThumbnailUrl(playlist) {
+		if (playlist?.hasOwnProperty("thumbnails")) {
+			if (playlist.thumbnails.length > 0) {
+				return playlist.thumbnails[0].url;
+			} else {
+				return playlist.thumbnails.url;
+			}
+		}
+	}
+
+	console.log(playlists);
+
 	return (
 		<section className="yt-playlists">
 			<h1 className="yt-playlists__header">YouTube Playlists</h1>
 			<ul className="yt-playlists__list">
 				{playlists.map((playlist) => (
 					<li className="yt-playlists__item" key={playlist.browseId}>
+						<img src={getPlaylistThumbnailUrl(playlist)} alt={playlist.title} className="yt-playlists__thumbnail" />
 						<div className="yt-playlists__info">
 							<Link
 								to={`/yt-playlist/${playlist.browseId}`}
 								className="yt-playlists__link">
 								<p className="yt-playlists__title">{playlist.title}</p>
 							</Link>
-							<p className="yt-playlists__author">by {playlist.author}</p>
+							<p className="yt-playlists__author">{playlist.author}</p>
 						</div>
 						<div className="yt-playlists__btns">
 							<MdPlayCircleFilled
