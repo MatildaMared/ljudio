@@ -33,11 +33,15 @@ function PlaylistsResults() {
 
 	return (
 		<section className="yt-playlists">
-			<h1 className="yt-playlists__header">YouTube Playlists</h1>
 			<ul className="yt-playlists__list">
+				<h1 className="yt-playlists__header">YouTube Playlists</h1>
 				{playlists.map((playlist) => (
 					<li className="yt-playlists__item" key={playlist.browseId}>
-						<img src={getPlaylistThumbnailUrl(playlist)} alt={playlist.title} className="yt-playlists__thumbnail" />
+						<img
+							src={getPlaylistThumbnailUrl(playlist)}
+							alt={playlist.title}
+							className="yt-playlists__thumbnail"
+						/>
 						<div className="yt-playlists__info">
 							<Link
 								to={`/yt-playlist/${playlist.browseId}`}

@@ -61,7 +61,8 @@ const YtPlaylistPage = () => {
 						<MdPlayCircleFilled className="yt-playlist__icon" />
 					</button>
 					<ShareLinkBtn className="yt-playlist__share-btn" />
-					<ul className="yt-playlist__list">
+						<ul className="yt-playlist__list">
+							<h2 className="yt-playlist__heading--secondary">Songs</h2>
 						{playlistData.content.map((song, index) => (
 							<li key={index} className="yt-playlist__item">
 								<div className="yt-playlist__song-info">
