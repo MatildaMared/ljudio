@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getArtistById } from "../services/musicService";
 import ArtistPageAddToPlaylistBtn from "../components/ArtistPageAddToPlaylistBtn";
 import ArtistPageAddToQueueBtn from "../components/ArtistPageAddToQueueBtn";
 import ArtistPagePlaySongBtn from "../components/ArtistPagePlaySongBtn";
 import ShareLinkBtn from "./../components/ShareLinkBtn";
+import { getBtoaString } from "./../utilities/musicUtils.js";
 
 const ArtistPage = () => {
 	const [isError, setIsError] = useState(false);
-	const [showAlert, setShowAlert] = useState(false);
 	const [artist, setArtist] = useState(null);
 	const { browseId } = useParams();
 	const [artistData, setArtistData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
-	let timeout;
+	const history = useHistory();
 
 	useEffect(() => {
 		getArtistData(browseId);
@@ -27,6 +27,11 @@ const ArtistPage = () => {
 			setIsError(true);
 		}
 		setIsLoading(false);
+	}
+
+	function onClickHandler(songName, artistName) {
+		const searchString = getBtoaString(songName, artistName);
+		history.push(`/song/${searchString}`);
 	}
 
 	return (
@@ -64,7 +69,11 @@ const ArtistPage = () => {
 									className="artist__song-item"
 									key={song.name}
 									data-name={song.name}>
-									<p className="artist__song-title">{song.name}</p>
+									<p
+										className="artist__song-title"
+										onClick={() => onClickHandler(song.name, artist)}>
+										{song.name}
+									</p>
 									<div className="artist__song-btns">
 										<ArtistPagePlaySongBtn
 											songName={song.name}

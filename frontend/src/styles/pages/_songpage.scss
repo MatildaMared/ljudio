@@ -1,0 +1,61 @@
+@use "./../abstracts/variables" as var;
+
+.song {
+	margin: 1rem 0;
+	background-color: rgba(255, 255, 255, 0.03);
+	border-radius: 1rem;
+	padding: 2rem;
+
+	@media (max-width: 700px) {
+		padding: 1rem;
+	}
+
+	&__heading {
+		font-size: 2.2rem;
+		margin-bottom: 2rem;
+
+		@media (max-width: 700px) {
+			font-size: 1.8rem;
+		}
+	}
+
+	&__item {
+		margin-top: 2rem;
+		background-color: rgba(255, 255, 255, 0.03);
+		padding: 2rem;
+		border-radius: 0.5rem;
+		display: flex;
+		align-items: center;
+		transition: all 0.3s;
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.06);
+		}
+
+		@media (max-width: 700px) {
+			padding: 1rem;
+		}
+	}
+
+	&__info {
+		flex: 1;
+		margin-left: 1rem;
+	}
+
+	&__thumbnail {
+		max-width: 4rem;
+		height: auto;
+		border-radius: 0.5rem;
+	}
+
+	&__btns {
+		display: flex;
+		align-items: center;
+	}
+
+	&__artist {
+		font-size: 1.2rem;
+		font-weight: 600;
+		color: var.$color-primary-light;
+	}
+}

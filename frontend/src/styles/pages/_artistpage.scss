@@ -139,6 +139,12 @@
 		font-size: 1.1rem;
 		font-weight: 500;
 		color: var.$color-primary-light;
+		cursor: pointer;
+		transition: all 0.3s;
+
+		&:hover {
+			color: var.$color-primary;
+		}
 	}
 
 	&__song-btns {
