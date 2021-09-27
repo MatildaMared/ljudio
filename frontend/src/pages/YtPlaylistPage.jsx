@@ -7,6 +7,7 @@ import { MdPlayCircleFilled } from 'react-icons/md';
 import PlaySongBtn from '../components/PlaySongBtn';
 import AddToPlayQueue from '../components/AddToPlayQueue';
 import ShareLinkBtn from '../components/ShareLinkBtn';
+import AddToPlaylist from '../components/AddToPlaylist';
 
 const YtPlaylistPage = () => {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -84,6 +85,7 @@ const YtPlaylistPage = () => {
 								<div className="yt-playlist__btns">
 									<PlaySongBtn item={song} />
 									<AddToPlayQueue item={song} />
+									<AddToPlaylist item={song} />
 								</div>
 							</li>
 						))}
