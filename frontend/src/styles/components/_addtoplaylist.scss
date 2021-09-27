@@ -12,6 +12,7 @@
 		max-height: 15rem;
 		min-width: 15rem;
 		overflow-y: scroll;
+		z-index: 10000;
 
 		&::-webkit-scrollbar {
 			width: 12px;

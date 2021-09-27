@@ -6,9 +6,12 @@ import ShareLinkBtn from "../components/ShareLinkBtn";
 import { MdPlayCircleFilled, MdPlaylistAdd } from "react-icons/md";
 import { getArtistNameFromSongObj } from "../utilities/musicUtils";
 import AddToPlaylist from "../components/AddToPlaylist";
+import ArtistPageAddToPlaylistBtn from '../components/ArtistPageAddToPlaylistBtn';
+import ArtistPageAddToQueueBtn from '../components/ArtistPageAddToQueueBtn';
 
 const ArtistPage = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
+	const [isError, setIsError] = useState(false);
 	const [alertMsg, setAlertMsg] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 	const [artist, setArtist] = useState(null);
@@ -20,6 +23,10 @@ const ArtistPage = () => {
 	useEffect(() => {
 		getArtistData(browseId);
 	}, []);
+
+	useEffect(() => {
+		console.log("Error is now: ", isError);
+	}, [isError]);
 
 	useEffect(() => {
 		timeout = setTimeout(() => {
@@ -34,12 +41,14 @@ const ArtistPage = () => {
 		const data = await getArtistById(browseId);
 		setArtistData(data);
 		setArtist(data.name);
+		console.log("Artistdata is: ", data);
+		if (data.error) {
+			setIsError(true);
+		}
 		setIsLoading(false);
 	}
 
 	async function onplayHandler(songName) {
-		console.log(await getSong(songName));
-		console.log("Will try to play");
 		timeout && clearTimeout(timeout);
 		// Make a fetch request to return
 		// an array of songs by a search string
@@ -50,7 +59,6 @@ const ArtistPage = () => {
 			// If the artist name of the song is the same
 			// as the current artist, update the context
 			// and break out of the loop
-			console.log("Song is: ", song);
 			const artistName = getArtistNameFromSongObj(song);
 			console.log(artistName);
 			if (artistName.toLowerCase() === artist.toLowerCase()) {
@@ -86,55 +94,15 @@ const ArtistPage = () => {
 		}
 	}
 
-	async function onAddHandler(songName) {
-		timeout && clearTimeout(timeout);
-		// Make a fetch request to return
-		// an array of songs by a search string
-		const data = await getSongsByString(`${songName} ${artist}`);
-
-		// Iterate over the array
-		for (const song of data.content) {
-			// If the artist name of the song is the same
-			// as the current artist, update the context
-			// and break out of the loop
-			if (song.artist.name.toLowerCase() === artist.toLowerCase()) {
-				setAlertMsg("Added to queue");
-				setShowAlert(true);
-				if (musicContext.queue.length === 0) {
-					updateMusicContext({
-						queue: [song],
-						nowPlayingIndex: 0,
-					});
-				}
-				updateMusicContext({
-					queue: [...musicContext.queue, song],
-				});
-				break;
-			}
-		}
-	}
-
-	async function getSong(songName) {
-		// Make a fetch request to return
-		// an array of songs by a search string
-		const data = await getSongsByString(`${songName} ${artist}`);
-
-		// Iterate over the array
-		for (const song of data.content) {
-			// If the artist name of the song is the same
-			// as the current artist, update the context
-			// and break out of the loop
-			if (song.artist.name.toLowerCase() === artist.toLowerCase()) {
-				return song;
-			}
-		}
-	}
-
 	return (
 		<div className="artist">
-			{isLoading ? (
-				<h1 className="artist__loading">Loading...</h1>
-			) : (
+			{isError && (
+				<h1 className="artist__error">
+					Could not find artist, please go back and try again...
+				</h1>
+			)}
+			{isLoading && <h1 className="artist__loading">Loading...</h1>}
+			{!isLoading && !isError && (
 				<div>
 					<header className="artist__header">
 						<div className="artist__header-wrapper">
@@ -173,13 +141,8 @@ const ArtistPage = () => {
 											}}>
 											<MdPlayCircleFilled className="artist__play-icon" />
 										</button>
-										<button
-											className="artist__add-btn"
-											onClick={() => {
-												onAddHandler(song.name);
-											}}>
-											<MdPlaylistAdd className="artist__add-icon" />
-										</button>
+										<ArtistPageAddToQueueBtn songName={song.name} artistName={artist} />
+										<ArtistPageAddToPlaylistBtn songName={song.name} artistName={artist} />
 									</div>
 								</li>
 							))}
