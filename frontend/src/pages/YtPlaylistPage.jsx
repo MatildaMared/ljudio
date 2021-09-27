@@ -35,6 +35,16 @@ const YtPlaylistPage = () => {
 		playAllBtnRef.current.blur();
 	}
 
+	function getPlaylistThumbnailUrl(playlist) {
+		if (playlist?.hasOwnProperty("thumbnails")) {
+			if (playlist.thumbnails.length > 0) {
+				return playlist.thumbnails[0].url;
+			} else {
+				return playlist.thumbnails.url;
+			}
+		}
+	}
+
 	return (
 		<div className="yt-playlist">
 			{isLoading ? (
@@ -44,7 +54,7 @@ const YtPlaylistPage = () => {
 					<header className="yt-playlist__header">
 						<img
 							className="yt-playlist__thumbnail"
-							src={playlistData.thumbnails[0].url}
+							src={getPlaylistThumbnailUrl(playlistData)}
 						/>
 						<div className="yt-playlist__info">
 							<h1 className="yt-playlist__heading">{playlistData.title}</h1>
@@ -61,8 +71,8 @@ const YtPlaylistPage = () => {
 						<MdPlayCircleFilled className="yt-playlist__icon" />
 					</button>
 					<ShareLinkBtn className="yt-playlist__share-btn" />
-						<ul className="yt-playlist__list">
-							<h2 className="yt-playlist__heading--secondary">Songs</h2>
+					<ul className="yt-playlist__list">
+						<h2 className="yt-playlist__heading--secondary">Songs</h2>
 						{playlistData.content.map((song, index) => (
 							<li key={index} className="yt-playlist__item">
 								<div className="yt-playlist__song-info">
