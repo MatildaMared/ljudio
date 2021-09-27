@@ -1,17 +1,17 @@
-import React, { useContext, useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
-import { UserContext } from "./../context/UserContext";
-import { MusicContext } from "./../context/MusicContext";
-import { addPlaylist, removePlaylist } from "./../services/playlistService";
-import { MdDeleteForever, MdMoreVert } from "react-icons/md";
+import React, { useContext, useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { UserContext } from './../context/UserContext';
+import { MusicContext } from './../context/MusicContext';
+import { addPlaylist, removePlaylist } from './../services/playlistService';
+import { MdDeleteForever, MdMoreVert } from 'react-icons/md';
 // import ChangePlaylistName from "../components/ChangePlaylistName";
-import { changePlayListTitle } from "../services/newPlaylistService";
+import { changePlayListTitle } from '../services/newPlaylistService';
 
 function PlaylistsPage() {
   const [userContext, updateUserContext] = useContext(UserContext);
   const [musicContext, updateMusicContext] = useContext(MusicContext);
-  const [titleInput, setTitleInput] = useState("");
-  const [titleChange, setTitleChange] = useState("");
+  const [titleInput, setTitleInput] = useState('');
+  const [titleChange, setTitleChange] = useState('');
   const [toggle, setToggle] = useState(false);
   const history = useHistory();
   const inputRef = useRef();
@@ -32,7 +32,7 @@ function PlaylistsPage() {
     updateUserContext({
       user: data.user,
     });
-    setTitleInput("");
+    setTitleInput('');
     inputRef.current.blur();
   }
 
@@ -52,7 +52,7 @@ function PlaylistsPage() {
     updateUserContext({
       user: data.user,
     });
-    setTitleChange("");
+    setTitleChange('');
   }
   return (
     <div className="playlists-main-wrapper">
@@ -87,7 +87,7 @@ function PlaylistsPage() {
               </p>
               <div className="results-items__btn-wrapper">
                 <MdDeleteForever
-                  className="results-items__btn"
+                  className="results-items__btn--delete"
                   onClick={() => removePlaylistHandler(playlist._id)}
                 />
                 <MdMoreVert
@@ -97,24 +97,23 @@ function PlaylistsPage() {
               </div>
 
               {toggle && (
-            <div className="change-playlist-name">
-              <input
-                className="change-playlist-name__input"
-                type="text"
-                placeholder="Change playlist name"
-                onChange={(e) => setTitleChange(e.target.value)}
-              />
-              <button
-                className="change-playlist-name__btn"
-                type="submit"
-                onClick={() => changeTitleHandler(playlist._id)}
-              >
-                Submit
-              </button>
+                <div className="change-playlist-name">
+                  <input
+                    className="change-playlist-name__input"
+                    type="text"
+                    placeholder="Change playlist name"
+                    onChange={(e) => setTitleChange(e.target.value)}
+                  />
+                  <button
+                    className="change-playlist-name__btn"
+                    type="submit"
+                    onClick={() => changeTitleHandler(playlist._id)}
+                  >
+                    Submit
+                  </button>
+                </div>
+              )}
             </div>
-          )} 
-            </div>
-            
           ))}
         </article>
       )}
@@ -123,4 +122,3 @@ function PlaylistsPage() {
 }
 
 export default PlaylistsPage;
-

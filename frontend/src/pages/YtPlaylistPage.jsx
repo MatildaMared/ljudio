@@ -1,39 +1,39 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { MusicContext } from "../context/MusicContext";
-import { useParams } from "react-router-dom";
-import { getPlaylistById } from "../services/musicService";
-import { getArtistNameFromSongObj } from "../utilities/musicUtils";
-import { MdPlayCircleFilled } from "react-icons/md";
-import PlaySongBtn from "../components/PlaySongBtn";
-import AddToPlayQueue from "../components/AddToPlayQueue";
-import ShareLinkBtn from "../components/ShareLinkBtn";
+import React, { useEffect, useState, useContext, useRef } from 'react';
+import { MusicContext } from '../context/MusicContext';
+import { useParams } from 'react-router-dom';
+import { getPlaylistById } from '../services/musicService';
+import { getArtistNameFromSongObj } from '../utilities/musicUtils';
+import { MdPlayCircleFilled } from 'react-icons/md';
+import PlaySongBtn from '../components/PlaySongBtn';
+import AddToPlayQueue from '../components/AddToPlayQueue';
+import ShareLinkBtn from '../components/ShareLinkBtn';
 
 const YtPlaylistPage = () => {
-	const [musicContext, updateMusicContext] = useContext(MusicContext);
-	const { browseId } = useParams();
-	const [playlistData, setPlaylistData] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const playAllBtnRef = useRef();
+  const [musicContext, updateMusicContext] = useContext(MusicContext);
+  const { browseId } = useParams();
+  const [playlistData, setPlaylistData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const playAllBtnRef = useRef();
 
-	useEffect(async () => {
-		getPlaylistData(browseId);
-	}, []);
+  useEffect(async () => {
+    getPlaylistData(browseId);
+  }, []);
 
-	async function getPlaylistData(browseId) {
-		const data = await getPlaylistById(browseId);
-		console.log(data);
-		setPlaylistData(data);
-		setIsLoading(false);
-	}
+  async function getPlaylistData(browseId) {
+    const data = await getPlaylistById(browseId);
+    console.log(data);
+    setPlaylistData(data);
+    setIsLoading(false);
+  }
 
-	function playEntireList(songsArr) {
-		updateMusicContext({
-			queue: songsArr,
-			nowPlayingIndex: 0,
-			resetPlayer: true,
-		});
-		playAllBtnRef.current.blur();
-	}
+  function playEntireList(songsArr) {
+    updateMusicContext({
+      queue: songsArr,
+      nowPlayingIndex: 0,
+      resetPlayer: true,
+    });
+    playAllBtnRef.current.blur();
+  }
 
 	function getPlaylistThumbnailUrl(playlist) {
 		if (playlist?.hasOwnProperty("thumbnails")) {
