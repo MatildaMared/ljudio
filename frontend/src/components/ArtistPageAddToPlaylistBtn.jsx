@@ -29,7 +29,6 @@ function ArtistPageAddToPlaylistBtn({ songName, artistName }) {
 
 		// Iterate over the array
     for (const song of data.content) {
-      console.log(song);
 			// If the artist name of the song is the same
 			// as the current artist, update the context
 			// and break out of the loop

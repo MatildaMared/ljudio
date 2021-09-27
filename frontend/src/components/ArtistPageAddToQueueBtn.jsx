@@ -13,7 +13,7 @@ function ArtistPageAddToQueueBtn({ songName, artistName }) {
 		const timer = setTimeout(() => {
 			setQueueMessage("");
 			setIsActive(false);
-		}, 3000);
+		}, 2000);
 		return () => clearTimeout(timer);
 	}, [queueMessage]);
 
@@ -24,7 +24,6 @@ function ArtistPageAddToQueueBtn({ songName, artistName }) {
 
 		// Iterate over the array
 		for (const song of data.content) {
-			console.log(song);
 			// If the artist name of the song is the same
 			// as the current artist, update the context
 			// and break out of the loop
@@ -45,7 +44,7 @@ function ArtistPageAddToQueueBtn({ songName, artistName }) {
 	};
 
 	return (
-		<div>
+		<>
 			<button
 				className="queue__btn"
 				onClick={() => {
@@ -53,12 +52,12 @@ function ArtistPageAddToQueueBtn({ songName, artistName }) {
 					setQueueMessage("Added to Queue");
 					setIsActive(true);
 				}}>
-				<MdPlaylistAdd />
+				<MdPlaylistAdd className="queue__icon" />
 			</button>
 			<span className={isActive ? "queue-message" : "queue-message--hide"}>
 				{queueMessage || null}
 			</span>
-		</div>
+		</>
 	);
 }
 

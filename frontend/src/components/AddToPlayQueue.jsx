@@ -12,7 +12,7 @@ function AddToPlayQueue({ item }) {
 		const timer = setTimeout(() => {
 			setQueueMessage("");
 			setIsActive(false);
-		}, 3000);
+		}, 2000);
 		return () => clearTimeout(timer);
 	}, [queueMessage]);
 
@@ -30,7 +30,7 @@ function AddToPlayQueue({ item }) {
 	};
 
 	return (
-		<div>
+		<article className="queue">
 			<button
 				className="queue__btn"
 				onClick={() => {
@@ -38,12 +38,12 @@ function AddToPlayQueue({ item }) {
 					setQueueMessage("Added to Queue");
 					setIsActive(true);
 				}}>
-				<MdPlaylistAdd />
+				<MdPlaylistAdd className="queue__icon" />
 			</button>
 			<span className={isActive ? "queue-message" : "queue-message--hide"}>
 				{queueMessage || null}
 			</span>
-		</div>
+		</article>
 	);
 }
 

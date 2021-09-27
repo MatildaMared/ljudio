@@ -4,7 +4,6 @@ import { UserContext } from "../context/UserContext";
 import { addSongToPlaylist } from "../services/playlistService";
 
 function AddToPlaylist({ item }) {
-	console.log("Item is: ", item);
 	const [userContext, updateUserContext] = useContext(UserContext);
 	const [isActive, setIsActive] = useState(false);
 	const ref = useRef();
