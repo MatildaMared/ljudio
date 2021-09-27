@@ -55,7 +55,7 @@ const PlaylistPage = () => {
   }
 
   function playEntirePlaylist(songArr) {
-    console.log(songArr);
+    // console.log(songArr);
     updateMusicContext({
       queue: songArr,
       nowPlayingIndex: 0,
@@ -84,7 +84,6 @@ const PlaylistPage = () => {
               }}
             >
               <span>Play entire list </span>
-
               <MdPlayCircleFilled className="playlist__wrapper__heading__icon" />
             </button>
           </h1>
