@@ -4,7 +4,11 @@
 	background-color: rgba(255, 255, 255, 0.03);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 	transition: all 0.3s;
-  padding: 2rem;
+	padding: 2rem;
+
+	@media (max-width: 700px) {
+		padding: 1.25rem;
+	}
 
 	&__wrapper {
 		display: flex;
@@ -30,6 +34,10 @@
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.3s;
+
+		@media (max-width: 700px) {
+			font-size: 1rem;
+		}
 
 		&:hover {
 			color: var.$color-primary;
@@ -83,7 +91,7 @@
 	}
 
 	&__change-title {
-    margin-top: 1.5rem;
+		margin-top: 1.5rem;
 	}
 
 	&__change-title-heading {

@@ -1,90 +1,103 @@
-@use '../abstracts/variables' as var;
+@use "../abstracts/variables" as var;
 
 .playlists {
-  margin: 1rem 0;
-  padding: 2rem;
-  border-radius: 1rem;
-  background-color: rgba(255, 255, 255, .03);
+	margin: 1rem 0;
+	padding: 2rem;
+	border-radius: 1rem;
+	background-color: rgba(255, 255, 255, 0.03);
 
-  @media (max-width: 600px) {
-    padding: 2rem 0 0 0;
-    background-color: transparent;
+	@media (max-width: 600px) {
+		padding: 2rem 0 0 0;
+		background-color: transparent;
 
-    &__heading {
-      margin-left: 1rem;
-    }
-  }
+		&__heading {
+			margin-left: 1rem;
+		}
+	}
 
-  &__heading {
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
+	&__heading {
+		font-size: 2.2rem;
+		margin-bottom: 2rem;
 
-    &--secondary {
-      margin-left: 0;
-      font-size: 1.6rem;
-      margin-bottom: .5rem;
-      color: rgba(255, 255, 255, .5);
-      margin-bottom: 1rem;
-    }
-  }
+		@media (max-width: 700px) {
+			font-size: 1.8rem;
+		}
 
-  &__form {
-    margin-bottom: 2rem;
-    padding: 2rem;
-    background-color: rgba(255, 255, 255, .05);
-    border-radius: .5rem;
-  }
+		&--secondary {
+			margin-left: 0;
+			font-size: 1.6rem;
+			margin-bottom: 0.5rem;
+			color: rgba(255, 255, 255, 0.5);
+			margin-bottom: 1rem;
 
-  &__input {
-    background-color: rgba(255, 255, 255, .05);
-    outline: none;
-    border: none;
-    border-radius: .5rem;
-    font: inherit;
-    padding: 1rem;
-    width: 100%;
-    max-width: 35rem;
-    margin-right: 1rem;
-    color: rgba(255, 255, 255, .8);
-    transition: all .3s;
-    margin-bottom: .5rem;
+			@media (max-width: 700px) {
+				font-size: 1.3rem;
+			}
+		}
+	}
 
-    &:hover, &:focus {
-      background-color: rgba(255, 255, 255, .1);
-    }
-  }
+	&__form {
+		margin-bottom: 2rem;
+		padding: 2rem;
+		background-color: rgba(255, 255, 255, 0.05);
+		border-radius: 0.5rem;
+	}
 
-  &__add-btn {
-    background-color: var.$color-primary;
-    padding: 1rem;
-    font: inherit;
-    border: none;
-    outline: none;
-    border-radius: .5rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: all .3s;
+	&__input {
+		background-color: rgba(255, 255, 255, 0.05);
+		outline: none;
+		border: none;
+		border-radius: 0.5rem;
+		font: inherit;
+		padding: 1rem;
+		width: 100%;
+		max-width: 35rem;
+		margin-right: 1rem;
+		color: rgba(255, 255, 255, 0.8);
+		transition: all 0.3s;
+		margin-bottom: 0.5rem;
 
-    &:hover, &:focus {
-      border: 2px solid var.$color-primary;
-      background-color: rgba(255, 255, 255, .05);
-      color: var.$color-primary;
-    }
-  }
+		@media (max-width: 700px) {
+			max-width: auto;
+		}
 
-  &__list {
-    background-color: rgba(255, 255, 255, .05);
-    border-radius: .5rem;
-    padding-top: 2rem;
-    overflow: hidden;
+		&:hover,
+		&:focus {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+	}
 
-    & h2 {
-      margin-left: 2rem;
-      margin-bottom: 2rem;
-    }
-  }
+	&__add-btn {
+		background-color: var.$color-primary;
+		padding: 1rem;
+		font: inherit;
+		border: none;
+		outline: none;
+		border-radius: 0.5rem;
+		cursor: pointer;
+		border: 2px solid transparent;
+		transition: all 0.3s;
 
-  &__item {
+		&:hover,
+		&:focus {
+			border: 2px solid var.$color-primary;
+			background-color: rgba(255, 255, 255, 0.05);
+			color: var.$color-primary;
+		}
+	}
 
-  }
+	&__list {
+		background-color: rgba(255, 255, 255, 0.05);
+		border-radius: 0.5rem;
+		padding-top: 2rem;
+		overflow: hidden;
+
+		& h2 {
+			margin-left: 2rem;
+			margin-bottom: 2rem;
+		}
+	}
+
+	&__item {
+	}
 }
