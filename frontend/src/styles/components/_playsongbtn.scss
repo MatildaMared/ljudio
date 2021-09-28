@@ -1,14 +1,31 @@
 @use "../abstracts/variables" as var;
 
-.play__btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var.$color-primary;
-  margin: 0.5rem;
-  font-size: 2rem;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  outline: none;
+.play {
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    cursor: pointer;
+    background-color: var.$color-primary;
+    border-radius: 100rem;
+    border: none;
+    outline: none;
+    width: 2.2rem;
+    height: 2.2rem;
+    transition: all .3s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, .15);
+      .play__icon {
+        color: var.$color-primary;
+      }
+    }
+  }
+
+  &__icon {
+    color: rgba(0, 0, 0, .8);
+    font-size: 1.9rem;
+    transition: all .3s;
+  }
 }

@@ -30,6 +30,8 @@
 @use "./pages/queuepage";
 // Styles for SearchPage
 @use "./pages/searchpage";
+// Styles for SongPage
+@use "./pages/songpage";
 
 // ### LAYOUT COMPONENTS STYLES ###
 
@@ -81,6 +83,10 @@
 @use "./components/songslist";
 // Styles for ArtistsList
 @use "./components/artistslist";
+// Styles for PlaylistItem
+@use "./components/playlistitem";
+// Styles for SongsResults
+@use "./components/songsresults";
 
 // ### MODAL STYLES ###
 // Styles for warning-modal

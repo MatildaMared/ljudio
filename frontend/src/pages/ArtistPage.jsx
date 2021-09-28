@@ -1,122 +1,48 @@
-import React, { useEffect, useState, useContext } from "react";
-import { MusicContext } from "../context/MusicContext";
-import { useParams } from "react-router-dom";
-import { getArtistById, getSongsByString } from "../services/musicService";
-import ShareLinkBtn from "../components/ShareLinkBtn";
-import { MdPlayCircleFilled, MdPlaylistAdd } from "react-icons/md";
-import { getArtistNameFromSongObj } from "../utilities/musicUtils";
+import React, { useEffect, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { getArtistById } from "../services/musicService";
+import ArtistPageAddToPlaylistBtn from "../components/ArtistPageAddToPlaylistBtn";
+import ArtistPageAddToQueueBtn from "../components/ArtistPageAddToQueueBtn";
+import ArtistPagePlaySongBtn from "../components/ArtistPagePlaySongBtn";
+import ShareLinkBtn from "./../components/ShareLinkBtn";
+import { getBtoaString } from "./../utilities/musicUtils.js";
 
 const ArtistPage = () => {
-	const [musicContext, updateMusicContext] = useContext(MusicContext);
-	const [alertMsg, setAlertMsg] = useState("");
-	const [showAlert, setShowAlert] = useState(false);
+	const [isError, setIsError] = useState(false);
 	const [artist, setArtist] = useState(null);
 	const { browseId } = useParams();
 	const [artistData, setArtistData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
-	let timeout;
+	const history = useHistory();
 
 	useEffect(() => {
 		getArtistData(browseId);
 	}, []);
 
-	useEffect(() => {
-		timeout = setTimeout(() => {
-			setShowAlert(false);
-			setAlertMsg("");
-		}, 2000);
-
-		return () => clearTimeout(timeout);
-	}, [showAlert]);
-
 	async function getArtistData(browseId) {
 		const data = await getArtistById(browseId);
 		setArtistData(data);
 		setArtist(data.name);
+		if (data.error) {
+			setIsError(true);
+		}
 		setIsLoading(false);
 	}
 
-	async function onplayHandler(songName) {
-		console.log("Will try to play");
-		timeout && clearTimeout(timeout);
-		// Make a fetch request to return
-		// an array of songs by a search string
-		const data = await getSongsByString(`${songName} ${artist}`);
-
-		// Iterate over the array
-		for (const song of data.content) {
-			// If the artist name of the song is the same
-			// as the current artist, update the context
-			// and break out of the loop
-			console.log("Song is: ", song);
-			const artistName = getArtistNameFromSongObj(song);
-			console.log(artistName);
-			if (artistName.toLowerCase() === artist.toLowerCase()) {
-				console.log("Found song");
-				if (musicContext.queue.length === 0) {
-					console.log("Queue is empty, will play");
-					setAlertMsg("Playing");
-					setShowAlert(true);
-					updateMusicContext({
-						queue: [...musicContext.queue, song],
-						nowPlayingIndex: 0,
-					});
-				} else if (
-					musicContext.queue[musicContext.nowPlayingIndex]?.videoId ===
-					song?.videoId
-				) {
-					updateMusicContext({
-						resetPlayer: true,
-					});
-					return;
-				} else {
-					const newPlayQueue = [...musicContext.queue];
-					newPlayQueue.splice(musicContext.nowPlayingIndex, 0, song);
-					setAlertMsg("Playing");
-					setShowAlert(true);
-					updateMusicContext({
-						queue: newPlayQueue,
-						nowPlayingIndex: musicContext.nowPlayingIndex || 0,
-					});
-				}
-				break;
-			}
-		}
-	}
-
-	async function onAddHandler(songName) {
-		timeout && clearTimeout(timeout);
-		// Make a fetch request to return
-		// an array of songs by a search string
-		const data = await getSongsByString(songName);
-
-		// Iterate over the array
-		for (const song of data.content) {
-			// If the artist name of the song is the same
-			// as the current artist, update the context
-			// and break out of the loop
-			if (song.artist.name.toLowerCase() === artist.toLowerCase()) {
-				setAlertMsg("Added to queue");
-				setShowAlert(true);
-				if (musicContext.queue.length === 0) {
-					updateMusicContext({
-						queue: [song],
-						nowPlayingIndex: 0,
-					});
-				}
-				updateMusicContext({
-					queue: [...musicContext.queue, song],
-				});
-				break;
-			}
-		}
+	function onClickHandler(songName, artistName) {
+		const searchString = getBtoaString(songName, artistName);
+		history.push(`/song/${searchString}`);
 	}
 
 	return (
 		<div className="artist">
-			{isLoading ? (
-				<h1 className="artist__loading">Loading...</h1>
-			) : (
+			{isError && (
+				<h1 className="artist__error">
+					Could not find artist, please go back and try again...
+				</h1>
+			)}
+			{isLoading && <h1 className="artist__loading">Loading...</h1>}
+			{!isLoading && !isError && (
 				<div>
 					<header className="artist__header">
 						<div className="artist__header-wrapper">
@@ -136,9 +62,6 @@ const ArtistPage = () => {
 						<p className="artist__description-text">{artistData.description}</p>
 					</section>
 					<section className="artist__songs">
-						{showAlert && (
-							<span className="artist__song-alert">{alertMsg}</span>
-						)}
 						<h2 className="artist__songs-heading">Top Songs</h2>
 						<ul className="artist__list">
 							{artistData.products.songs.content.map((song) => (
@@ -146,22 +69,24 @@ const ArtistPage = () => {
 									className="artist__song-item"
 									key={song.name}
 									data-name={song.name}>
-									<p className="artist__song-title">{song.name}</p>
+									<p
+										className="artist__song-title"
+										onClick={() => onClickHandler(song.name, artist)}>
+										{song.name}
+									</p>
 									<div className="artist__song-btns">
-										<button
-											className="artist__play-btn"
-											onClick={() => {
-												onplayHandler(song.name);
-											}}>
-											<MdPlayCircleFilled className="artist__play-icon" />
-										</button>
-										<button
-											className="artist__add-btn"
-											onClick={() => {
-												onAddHandler(song.name);
-											}}>
-											<MdPlaylistAdd className="artist__add-icon" />
-										</button>
+										<ArtistPagePlaySongBtn
+											songName={song.name}
+											artistName={artist}
+										/>
+										<ArtistPageAddToQueueBtn
+											songName={song.name}
+											artistName={artist}
+										/>
+										<ArtistPageAddToPlaylistBtn
+											songName={song.name}
+											artistName={artist}
+										/>
 									</div>
 								</li>
 							))}

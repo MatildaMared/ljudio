@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { MdMoreHoriz } from "react-icons/md";
 import { UserContext } from "../context/UserContext";
 import { addSongToPlaylist } from "../services/playlistService";
+import { getSongsByString } from "../services/musicService";
 
-function AddToPlaylist({ item }) {
+function ArtistPageAddToPlaylistBtn({ songName, artistName }) {
 	const [userContext, updateUserContext] = useContext(UserContext);
 	const [isActive, setIsActive] = useState(false);
 	const ref = useRef();
@@ -21,9 +22,22 @@ function AddToPlaylist({ item }) {
 		};
 	}, [isActive]);
 
-	const addSongToThisPlaylist = async (playlist, song) => {
-		const res = await addSongToPlaylist(playlist, song);
-		setIsActive(false);
+	const addSongToThisPlaylist = async (playlist) => {
+		// Make a fetch request to return
+		// an array of songs by a search string
+		const data = await getSongsByString(`${songName} ${artistName}`);
+
+		// Iterate over the array
+    for (const song of data.content) {
+			// If the artist name of the song is the same
+			// as the current artist, update the context
+			// and break out of the loop
+			if (song.artist.name.toLowerCase() === artistName.toLowerCase()) {
+        const res = await addSongToPlaylist(playlist, song);
+        setIsActive(false);
+        return;
+			}
+		}
 	};
 
 	return (
@@ -47,7 +61,7 @@ function AddToPlaylist({ item }) {
 							{userContext.user.playlists.map((playlist) => (
 								<li
 									key={playlist._id}
-									onClick={() => addSongToThisPlaylist(playlist._id, item)}
+									onClick={() => addSongToThisPlaylist(playlist._id)}
 									className={
 										isActive
 											? "add-to-playlist__item"
@@ -64,4 +78,4 @@ function AddToPlaylist({ item }) {
 	);
 }
 
-export default AddToPlaylist;
+export default ArtistPageAddToPlaylistBtn;

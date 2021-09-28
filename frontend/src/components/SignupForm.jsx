@@ -41,10 +41,9 @@ function SignupForm() {
 
 		try {
 			const data = await createAccountFetch(obj);
-			console.log(data);
 
 			if (data.success) {
-				localStorage.setItem("token", data.user.token);
+				localStorage.setItem("token", data.token);
 				updateContext({
 					isAuthenticated: true,
 					user: data.user,
@@ -122,7 +121,7 @@ function SignupForm() {
 						Confirm password*
 					</label>
 				</div>
-				<div class='loginpage__fine-print'>* Required field</div>
+				<p className="loginpage__fine-print">* Required field</p>
 				<input
 					type="submit"
 					className="loginpage__btn"
