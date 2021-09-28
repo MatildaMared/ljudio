@@ -143,7 +143,7 @@ function HomePage() {
             </section>
 
             <h2 className="home-page__search__heading">
-              Previos search results
+              Previous search results
             </h2>
 
             {!isLoading && (
