@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "./../context/UserContext";
-import PlaySongBtn from "../components/PlaySongBtn";
 import { getAllMusicByString } from "../services/musicService";
 import { getPlaylistThumnails } from "../utilities/musicUtils";
 
@@ -72,10 +71,9 @@ function HomePage() {
     setIsLoading(false);
   }
 
-	if (searchResult) {
-		showSearchResults(searchResult);
-	}
-
+  if (searchResult) {
+    showSearchResults(searchResult);
+  }
 
   return (
     <div className="home-page">
@@ -93,59 +91,64 @@ function HomePage() {
           <article className="home-page__playlists">
             <h2 className="home-page__playlists__heading">Your playlists</h2>
 
-						{playlists.length === 0 && <p className="home-page__playlists__para">You don't have  any playlists yet! Why don't you create some?</p>}
-            {playlists.length > 0 && <section className="home-page__playlists__card">
-              {playlists &&
-                playlists.map((playlist) => {
-                  return (
-                    <div
-                      className="home-page__playlists__item"
-                      key={playlist._id}
-                    >
-                      <Link to={`/playlist/${playlist._id}`}>
-                        <div className="home-page__playlists__item__img-container">
-                          {playlist.songs[0] && (
-                            <img
-                              className="home-page__playlists__item__img-container__img"
-                              src={getPlaylistThumnails(playlist.songs[0])}
-                              alt={playlist.title}
-                            />
-                          )}
-                          {playlist.songs[1] && (
-                            <img
-                              className="home-page__playlists__item__img-container__img"
-                              src={getPlaylistThumnails(playlist.songs[1])}
-                              alt={playlist.title}
-                            />
-                          )}
-                          {playlist.songs[2] && (
-                            <img
-                              className="home-page__playlists__item__img-container__img"
-                              src={getPlaylistThumnails(playlist.songs[2])}
-                              alt={playlist.title}
-                            />
-                          )}
-                          {playlist.songs[3] && (
-                            <img
-                              className="home-page__playlists__item__img-container__img"
-                              src={getPlaylistThumnails(playlist.songs[3])}
-                              alt={playlist.title}
-                            />
-                          )}
-                        </div>
+            {playlists.length === 0 && (
+              <p className="home-page__playlists__para">
+                You don't have any playlists yet! Why don't you create some?
+              </p>
+            )}
+            {playlists.length > 0 && (
+              <section className="home-page__playlists__card">
+                {playlists &&
+                  playlists.map((playlist) => {
+                    return (
+                      <div
+                        className="home-page__playlists__item"
+                        key={playlist._id}
+                      >
+                        <Link to={`/playlist/${playlist._id}`}>
+                          <div className="home-page__playlists__item__img-container">
+                            {playlist.songs[0] && (
+                              <img
+                                className="home-page__playlists__item__img-container__img"
+                                src={getPlaylistThumnails(playlist.songs[0])}
+                                alt={playlist.title}
+                              />
+                            )}
+                            {playlist.songs[1] && (
+                              <img
+                                className="home-page__playlists__item__img-container__img"
+                                src={getPlaylistThumnails(playlist.songs[1])}
+                                alt={playlist.title}
+                              />
+                            )}
+                            {playlist.songs[2] && (
+                              <img
+                                className="home-page__playlists__item__img-container__img"
+                                src={getPlaylistThumnails(playlist.songs[2])}
+                                alt={playlist.title}
+                              />
+                            )}
+                            {playlist.songs[3] && (
+                              <img
+                                className="home-page__playlists__item__img-container__img"
+                                src={getPlaylistThumnails(playlist.songs[3])}
+                                alt={playlist.title}
+                              />
+                            )}
+                          </div>
 
-                        <p className="home-page__playlists__item__title">
-                          {playlist.title}
-                        </p>
-                        <p className="home-page__playlists__item__playlist">
-                          Playlist
-                        </p>
-                        {/* <PlaySongBtn /> */}
-                      </Link>
-                    </div>
-                  );
-                })}
-            </section>}
+                          <p className="home-page__playlists__item__title">
+                            {playlist.title}
+                          </p>
+                          <p className="home-page__playlists__item__playlist">
+                            Playlist
+                          </p>
+                        </Link>
+                      </div>
+                    );
+                  })}
+              </section>
+            )}
 
             {searchResult && (
               <>
@@ -156,8 +159,8 @@ function HomePage() {
                 {!isLoading && (
                   <section className="home-page__search">
                     <ul className="home-page__search__list">
-                      <Link to={`/search`}>
-                        <li className="home-page__search__list__item">
+                      <li className="home-page__search__list__item">
+                        <Link to={`/search`}>
                           <img
                             className="home-page__search__list__item__img"
                             src={imgData}
@@ -166,10 +169,11 @@ function HomePage() {
                           <p className="home-page__search__list__item__para">
                             {artistData}
                           </p>
-                        </li>
-                      </Link>
-                      <Link to={`/search`}>
-                        <li className="home-page__search__list__item">
+                        </Link>
+                      </li>
+
+                      <li className="home-page__search__list__item">
+                        <Link to={`/search`}>
                           <img
                             className="home-page__search__list__item__img"
                             src={secondImgData}
@@ -178,10 +182,11 @@ function HomePage() {
                           <p className="home-page__search__list__item__para">
                             {secondArtistData}
                           </p>
-                        </li>
-                      </Link>
-                      <Link to={`/search`}>
-                        <li className="home-page__search__list__item">
+                        </Link>
+                      </li>
+
+                      <li className="home-page__search__list__item">
+                        <Link to={`/search`}>
                           <img
                             className="home-page__search__list__item__img"
                             src={thirdImgData}
@@ -190,8 +195,8 @@ function HomePage() {
                           <p className="home-page__search__list__item__para">
                             {thirdArtistData}
                           </p>
-                        </li>
-                      </Link>
+                        </Link>
+                      </li>
                     </ul>
                   </section>
                 )}

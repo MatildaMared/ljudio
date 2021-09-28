@@ -57,7 +57,11 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
 
-            @media only screen and (max-width: 600px) {
+            @media only screen and (min-width: 600px) {
+                grid-template-columns: repeat(1, 1fr);
+              }
+
+              @media only screen and (max-width: 600px) {
                 grid-template-columns: repeat(1, 1fr);
               }
 
@@ -143,7 +147,11 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
 
-            @media only screen and (max-width: 600px) {
+            @media only screen and (min-width: 600px) {
+                grid-template-columns: repeat(1, 1fr);
+              }
+
+              @media only screen and (max-width: 600px) {
                 grid-template-columns: repeat(1, 1fr);
               }
 
@@ -181,7 +189,6 @@
             background-color: rgba(255, 255, 255, .03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 2rem;
-            margin: 2rem;
             border-radius: 0.5rem;
 
             &__img {
