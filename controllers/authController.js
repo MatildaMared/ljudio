@@ -21,6 +21,7 @@ async function signup(req, res, next) {
 				lastName: user.lastName,
 				email: user.email,
 				playlists: user.playlists,
+				followedPlaylists: user.followedPlaylists,
 			},
 		});
 	} catch (err) {
@@ -44,6 +45,7 @@ async function login(req, res, next) {
 		}
 
 		await user.populate("playlists");
+		await user.populate("followedPlaylists");
 
 		res.status(200).json({
 			success: true,
@@ -53,6 +55,7 @@ async function login(req, res, next) {
 				lastName: user.lastName,
 				email: user.email,
 				playlists: user.playlists,
+				followedPlaylists: user.followedPlaylists,
 			},
 		});
 	} catch (err) {

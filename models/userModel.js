@@ -33,6 +33,7 @@ const userSchema = Schema({
 			ref: "Playlist",
 		},
 	],
+	followedPlaylists: [{ type: Schema.Types.ObjectId, ref: "Playlist" }],
 });
 
 // Run this function before user is saved/re-saved

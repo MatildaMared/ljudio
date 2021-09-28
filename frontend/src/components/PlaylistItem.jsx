@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { MdDeleteForever, MdMoreVert } from "react-icons/md";
+import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { UserContext } from "../context/UserContext";
 import { removePlaylist } from "./../services/playlistService";
 import { changePlayListTitle } from "../services/newPlaylistService";
@@ -48,7 +48,7 @@ function PlaylistItem({ playlist }) {
 						/>
 					</button>
 					<button className="playlist-item__btn">
-						<MdMoreVert
+						<MdEdit
 							className="playlist-item__icon"
 							onClick={() => setShowMore(!showMore)}
 						/>
