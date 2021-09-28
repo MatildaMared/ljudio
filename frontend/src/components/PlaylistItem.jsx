@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
 import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { UserContext } from "../context/UserContext";
-import { removePlaylist } from "./../services/playlistService";
-import { changePlayListTitle } from "../services/newPlaylistService";
+import { removePlaylist, changePlayListTitle } from "./../services/playlistService";
 import { useHistory } from "react-router-dom";
 
 function PlaylistItem({ playlist }) {

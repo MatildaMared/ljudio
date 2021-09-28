@@ -20,6 +20,18 @@ function SearchBar() {
 		}
 	}, [activeType]);
 
+	//Save searchresults in local storage
+	// useEffect(() => {
+	// 	localStorage.setItem(musicContext.searchString, data)
+	// }, [musicContext.searchString]);
+
+
+	useEffect(() => {
+		if (musicContext.searchString.length > 0) {
+			fetchMusic();
+		}
+	}, [musicContext.searchString]);
+
 	function onSubmitHandler(e) {
 		e.preventDefault();
 		updateMusicContext({
@@ -27,12 +39,6 @@ function SearchBar() {
 		});
 		searchBtnRef.current.blur();
 	}
-
-	useEffect(() => {
-		if (musicContext.searchString.length > 0) {
-			fetchMusic();
-		}
-	}, [musicContext.searchString]);
 
 	async function fetchMusic() {
 		updateMusicContext({
@@ -43,6 +49,8 @@ function SearchBar() {
 
 		if (activeType === "all") {
 			data = await getAllMusicByString(musicContext.searchString);
+			console.log(data.content);
+			localStorage.setItem('searchstring', musicContext.searchString)
 		} else if (activeType === "songs") {
 			data = await getSongsByString(musicContext.searchString);
 		} else if (activeType === "artists") {

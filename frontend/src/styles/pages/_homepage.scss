@@ -1,9 +1,180 @@
 @use "../abstracts/variables" as var;
+
 .home-page {
-    margin: 1rem;
-    width: 100%;
+    margin: 1rem 0;
+	background-color: rgba(255, 255, 255, 0.03);
+	border-radius: 1rem;
+	overflow: hidden;
+
+    &__header {
+		display: flex;
+        flex-direction: column;
+		margin: 2rem 2rem 1rem 2rem;
+
+		&-wrapper {
+			flex: 1;
+		}
+	}
 
     &__heading {
         margin-bottom: 1rem;
+        font-size: 2rem;
+
+        &__para {
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__playlists {
+        position: relative;
+		margin: 0 2rem;
+		background-color: rgba(255, 255, 255, 0.05);
+		border-radius: 0.5rem;
+		margin-bottom: 2rem;
+
+        @media only screen and (max-width: 768px) {
+            margin: 0;
+          }
+
+        &__heading {
+            padding: 2rem;
+        }
+
+        &__btn {
+            background-color: var.$color-primary;
+            font-size: 2rem;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        &__card {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+
+            @media only screen and (max-width: 600px) {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 2rem;
+              }
+
+              @media only screen and (min-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+              }
+
+              @media only screen and (min-width: 1280px) {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+              }
+            
+              @media only screen and (min-width: 2560px) {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+              }
+        }
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin: 2rem;
+            border-radius: 0.5rem;
+
+            &__img-container {
+                display: grid;
+                grid-template-columns: repeat(2, 60px);
+                gap: 0;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.5rem;
+            }
+
+            &__img {
+                padding: 0;
+                margin: 0;
+            }
+
+            &__title {
+                color: var.$color-primary;
+                font-weight: 400;
+                font-size: 1.2rem;
+                padding-top: 1rem;
+            }
+
+            &__playlist {
+                text-decoration: none;
+                color: var.$color-light;
+                font-size: .7rem;
+            }
+        }    
+    }
+
+ 
+    &__search {
+        position: relative;
+		margin: 0 2rem;
+		border-radius: 0.5rem;
+		margin-bottom: 2rem;
+
+        
+        &__heading {
+            padding: 2rem;
+        }
+
+        &__list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+
+            @media only screen and (max-width: 600px) {
+                grid-template-columns: repeat(1, 1fr);
+              }
+
+              @media only screen and (min-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+              }
+
+              @media only screen and (min-width: 1280px) {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+              }
+            
+              @media only screen and (min-width: 2560px) {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+              }
+        }
+
+        &__list__item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin: 2rem;
+            border-radius: 0.5rem;
+
+            &__img {
+                height: 120px;
+                border-radius: 0.5rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 0;
+                margin: 0;
+            }
+
+            &__para {
+                margin: 0 2rem;
+                color: var.$color-primary;
+                font-weight: 400;
+                font-size: 1.2rem;
+                padding-top: 1rem;
+            }
+        }
     }
 }

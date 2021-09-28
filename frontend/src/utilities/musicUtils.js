@@ -41,3 +41,14 @@ export function getThumbNailUrlFromSongObj(song) {
 		}
 	}
 }
+
+//get pictures for playlists
+export function getPlaylistThumnails(playlist) {
+if (playlist?.hasOwnProperty("thumbnails")) {
+	if (playlist.thumbnails.length > 0) {
+	return playlist.thumbnails[0].url;
+	} else {
+	return playlist.thumbnails.url;
+	}
+}
+}
