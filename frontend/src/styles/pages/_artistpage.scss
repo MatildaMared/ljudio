@@ -4,16 +4,25 @@
 	margin: 1rem 0;
 	background-color: rgba(255, 255, 255, 0.03);
 	border-radius: 1rem;
-	overflow: hidden;
 
 	&__loading {
 		padding: 2rem;
+	}
+
+	&__error {
+		padding: 2rem;
+		font-size: 1.2rem;
 	}
 
 	&__header {
 		display: flex;
 		align-items: center;
 		margin: 2rem 2rem 1rem 2rem;
+
+		@media (max-width: 700px) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
 
 		&-wrapper {
 			flex: 1;
@@ -28,6 +37,10 @@
 		max-height: 10rem;
 		width: auto;
 		border-radius: 1rem;
+
+		@media (max-width: 700px) {
+			margin-top: 1rem;
+		}
 	}
 
 	&__description {
@@ -103,7 +116,7 @@
 	}
 
 	&__songs {
-    position: relative;
+		position: relative;
 		margin: 0 2rem;
 		background-color: rgba(255, 255, 255, 0.05);
 		border-radius: 0.5rem;
@@ -113,14 +126,13 @@
 	&__song-item {
 		display: flex;
 		align-items: center;
-		background-color: rgba(255, 255, 255, .03);
+		background-color: rgba(255, 255, 255, 0.03);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 		padding: 1rem 2rem;
-		overflow: hidden;
 
-    &:hover {
-      background-color: rgba(255, 255, 255, .05);
-    }
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.05);
+		}
 
 		&:first-of-type {
 			border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -136,6 +148,12 @@
 		font-size: 1.1rem;
 		font-weight: 500;
 		color: var.$color-primary-light;
+		cursor: pointer;
+		transition: all 0.3s;
+
+		&:hover {
+			color: var.$color-primary;
+		}
 	}
 
 	&__song-btns {
@@ -143,63 +161,4 @@
 		align-items: center;
 		position: relative;
 	}
-
-	&__play-icon {
-		color: var.$color-primary;
-		font-size: 2.1rem;
-	}
-
-	&__play-btn {
-    margin-right: .5rem;
-		display: flex;
-		align-items: center;
-		outline: none;
-		border: none;
-		background: transparent;
-
-		&:hover {
-			.artist__play-icon {
-				color: rgba(255, 255, 255, 0.2);
-			}
-		}
-	}
-
-	&__add-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		outline: none;
-		border: none;
-		background: rgba(255, 255, 255, 0.1);
-		border-radius: 100rem;
-		height: 1.9rem;
-		width: 1.9rem;
-
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.2);
-			.artist__add-icon {
-				color: rgba(255, 255, 255, 0.8);
-			}
-		}
-	}
-
-	&__add-icon {
-		font-size: 1.7rem;
-		color: var.$color-primary;
-	}
-
-  &__song-alert {
-    text-align: center;
-    min-width: 5rem;
-    position: absolute;
-    left: 50%;
-    margin-right: .5rem;
-    top: 50%;
-    background-color: #262626;
-    padding: 1rem 2rem;
-    border-radius: .5rem;
-    border: 2px solid var.$color-primary;
-    font-size: 1.2rem;
-    transform: translateX(-50%);
-  }
 }

@@ -1,126 +1,134 @@
 @use "../abstracts/variables" as var;
 
 .yt-playlists {
-  background-color: rgba(255, 255, 255, .03);
-  max-width: 100%;
-  border-radius: 1rem;
-  margin-bottom: 2rem;
-  overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.03);
+	max-width: 100%;
+	border-radius: 1rem;
+	margin-bottom: 2rem;
+	overflow: hidden;
 
-  &__header {
-    margin-bottom: 1rem;
-    margin-left: 2rem;
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
-  }
+	&__header {
+		margin-bottom: 1rem;
+		margin-left: 2rem;
+		font-size: 2.2rem;
+		margin-bottom: 2rem;
 
-  &__list {
-    background-color: rgba(255, 255, 255, .03);
-    padding-top: 2rem;
-    margin: 2rem;
-    overflow: hidden;
-    border-radius: .5rem;
-  }
+		@media (max-width: 700px) {
+			font-size: 1.8rem;
+		}
+	}
 
-  &__item {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
-    padding: 1.5rem 2rem;
-    background-color: rgba(255, 255, 255, .03);
-    transition: all .3s;
+	&__list {
+		background-color: rgba(255, 255, 255, 0.03);
+		padding-top: 2rem;
+		margin: 2rem;
+		overflow: hidden;
+		border-radius: 0.5rem;
+	}
 
-    &:hover {
-      background-color: rgba(255, 255, 255, .06);
-    }
+	&__item {
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		padding: 1.5rem 2rem;
+		background-color: rgba(255, 255, 255, 0.03);
+		transition: all 0.3s;
 
-    &:first-of-type {
-      border-top: 1px solid rgba(255, 255, 255, .1);
-    }
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.06);
+		}
 
-    &:last-of-type {
-      border-bottom: none;
-    }
-  }
+		&:first-of-type {
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+		}
 
-  &__info {
-    display: flex;
-    align-items: center;
-    flex: 1;
-  }
+		&:last-of-type {
+			border-bottom: none;
+		}
+	}
 
-  &__title {
-    color: var.$color-primary-light;
-    font-weight: 600;
-    font-size: 1.2rem;
-    opacity: .8;
-    transition: all .3s;
+	&__info {
+		display: flex;
+		align-items: center;
+		flex: 1;
+	}
 
-    &:hover {
-      opacity: 1;
-      color: var.$color-primary;
-    }
-  }
+	&__title {
+		color: var.$color-primary-light;
+		font-weight: 600;
+		font-size: 1.2rem;
+		opacity: 0.8;
+		transition: all 0.3s;
 
-  &__author {
-    margin-left: .25rem;
-    color: rgba(255, 255, 255, .6);
+    		@media (max-width: 700px) {
+			font-size: 1rem;
+		}
 
-    @media (max-width: 1200px) {
-      display: none;
-    }
+		&:hover {
+			opacity: 1;
+			color: var.$color-primary;
+		}
+	}
 
-    &::before {
-      content: "–";
-      margin-left: .25rem;
-      margin-right: .25rem;
-    }
-  }
+	&__author {
+		margin-left: 0.25rem;
+		color: rgba(255, 255, 255, 0.6);
 
-  &__icon {
-    font-size: 2.4rem;
-    color: var.$color-primary;
-    cursor: pointer;
-    transition: all .3s;
+		@media (max-width: 1200px) {
+			display: none;
+		}
 
-    &:hover {
-      color: rgba(255, 255, 255, .2);
-    }
-  }
+		&::before {
+			content: "–";
+			margin-left: 0.25rem;
+			margin-right: 0.25rem;
+		}
+	}
 
-  &__btns {
-    display: flex;
-    align-items: center;
-  }
+	&__icon {
+		font-size: 2.4rem;
+		color: var.$color-primary;
+		cursor: pointer;
+		transition: all 0.3s;
 
-  &__more {
-    background-color: rgba(255, 255, 255, .05);
-    margin-left: .5rem;
-    padding: 7px;
-    border-radius: 100rem;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: all .3s;
+		&:hover {
+			color: rgba(255, 255, 255, 0.2);
+		}
+	}
 
-    &:hover {
-      background-color: rgba(255, 255, 255, .2);
-    }
+	&__btns {
+		display: flex;
+		align-items: center;
+	}
 
-    &-icon {
-      font-size: 1.4rem;
-    }
-  }
+	&__more {
+		background-color: rgba(255, 255, 255, 0.05);
+		margin-left: 0.5rem;
+		padding: 7px;
+		border-radius: 100rem;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		transition: all 0.3s;
 
-  &__link {
-    color: inherit;
-  }
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.2);
+		}
 
-  &__thumbnail {
-    max-width: 4rem;
-    height: auto;
-    margin-right: 1rem;
-    border-radius: .5rem;
-    overflow: hidden;
-  }
+		&-icon {
+			font-size: 1.4rem;
+		}
+	}
+
+	&__link {
+		color: inherit;
+	}
+
+	&__thumbnail {
+		max-width: 4rem;
+		height: auto;
+		margin-right: 1rem;
+		border-radius: 0.5rem;
+		overflow: hidden;
+	}
 }

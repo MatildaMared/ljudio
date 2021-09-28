@@ -17,10 +17,17 @@
 	}
 
 	&__heading {
+		@media (max-width: 700px) {
+			font-size: 1.6rem;
+		}
 		&--secondary {
 			font-size: 2rem;
 			margin-bottom: 2rem;
-      padding: 0 2rem;
+			padding: 0 2rem;
+
+			@media (max-width: 700px) {
+				font-size: 1.6rem;
+			}
 		}
 	}
 
@@ -40,8 +47,18 @@
 		font-size: 1.2rem;
 		color: var.$color-primary-light;
 		font-weight: 500;
-    margin-bottom: .25rem;
-    transition: all .3s;
+		margin-bottom: 0.25rem;
+		transition: all 0.3s;
+		cursor: pointer;
+		transition: all 0.3s;
+
+		@media (max-width: 700px) {
+			font-size: 1rem;
+		}
+
+		&:hover {
+			color: var.$color-primary;
+		}
 	}
 
 	&__artist {
@@ -54,6 +71,10 @@
 		margin: 2rem;
 		overflow: hidden;
 		border-radius: 0.5rem;
+
+		@media (max-width: 700px) {
+			margin: 1rem;
+		}
 	}
 
 	&__item {
@@ -62,7 +83,7 @@
 		padding: 1rem 2rem;
 		background-color: rgba(255, 255, 255, 0.03);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all .3s;
+		transition: all 0.3s;
 
 		&:first-of-type {
 			border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -75,9 +96,9 @@
 		&:hover {
 			background-color: rgba(255, 255, 255, 0.06);
 
-      .yt-playlist__song {
-        color: var.$color-primary;
-      }
+			.yt-playlist__song {
+				color: var.$color-primary;
+			}
 		}
 	}
 

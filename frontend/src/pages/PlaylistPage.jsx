@@ -6,6 +6,7 @@ import { getPlaylist } from './../services/playlistService';
 import { MdDeleteForever, MdPlayCircleFilled } from 'react-icons/md';
 import { removeSongFromPlaylist } from './../services/playlistService';
 import PlaySongBtn from '../components/PlaySongBtn';
+import { getThumbNailUrlFromSongObj } from '../utilities/musicUtils';
 
 const PlaylistPage = () => {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -98,7 +99,7 @@ const PlaylistPage = () => {
                   <div className="playlist__wrapper__description__li__content">
                     {song.thumbnails && (
                       <img
-                        src={song.thumbnails[0].url}
+                        src={getThumbNailUrlFromSongObj(song)}
                         alt={song.name}
                         className="playlist__wrapper__description__img"
                       />

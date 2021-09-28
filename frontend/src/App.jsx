@@ -15,6 +15,7 @@ import PlaylistsPage from "./pages/PlaylistsPage";
 import PlaylistPage from "./pages/PlaylistPage";
 import YtPlaylistPage from "./pages/YtPlaylistPage";
 import QueuePage from "./pages/QueuePage";
+import SongPage from "./pages/SongPage";
 
 function App() {
 	return (
@@ -62,6 +63,11 @@ function App() {
 								<PrivateRoute
 									path="/yt-playlist/:browseId"
 									component={YtPlaylistPage}
+									layout={Layout}
+								/>
+								<PrivateRoute
+									path="/song/:btoaString"
+									component={SongPage}
 									layout={Layout}
 								/>
 							</Switch>

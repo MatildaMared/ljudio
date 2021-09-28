@@ -3,11 +3,14 @@
 .songslist {
 	background-color: rgba(255, 255, 255, 0.05);
 	border-radius: 0.5rem;
-	overflow: hidden;
 
 	&__heading {
 		font-size: 2.2rem;
 		padding: 2rem;
+
+		@media (max-width: 700px) {
+			font-size: 1.8rem;
+		}
 	}
 
 	&__item {
@@ -38,14 +41,21 @@
 	}
 
 	&__artist-name {
+		text-align: left;
 		&::before {
 			content: "–";
 			margin-right: 0.25rem;
 			margin-left: 0.25rem;
+
+			@media (max-width: 800px) {
+				content: "";
+				margin: 0;
+			}
 		}
 	}
 
 	&__song-name {
+		text-align: left;
 		color: var.$color-primary-light;
 		font-weight: 600;
 		transition: all 0.3s;
@@ -54,6 +64,12 @@
 	&__info {
 		display: flex;
 		align-items: center;
+
+		@media (max-width: 800px) {
+			align-items: flex-start;
+			flex-direction: column;
+			text-align: left;
+		}
 	}
 
 	&__icons {

@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from "react";
 import { MusicContext } from "./../context/MusicContext";
-import { MdDeleteForever, MdPlayCircleFilled } from "react-icons/md";
+import { MdDeleteForever, MdPlayCircleFilled, MdClear } from "react-icons/md";
 import { getArtistNameFromSongObj } from "./../utilities/musicUtils";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -9,6 +9,7 @@ function QueuePage() {
 	const musicQueue = musicContext.queue;
 	const nowPlayingIndex = musicContext.nowPlayingIndex;
 	const playAllBtnRef = useRef();
+	const removeAllBtnRef = useRef();
 
 	function handleDelete(itemId) {
 		if (musicQueue.length === 1) {
@@ -65,17 +66,34 @@ function QueuePage() {
 		playAllBtnRef.current.blur();
 	}
 
+	function onRemoveAllHandler() {
+		updateMusicContext({
+			nowPlayingIndex: null,
+			queue: [],
+		});
+		removeAllBtnRef.current.blur();
+	}
+
 	return (
 		<section className="queue-page">
 			<header className="queue-page__header">
 				<h1 className="queue-page__heading">Queue</h1>
-				<button
-					className="queue-page__play-all-btn"
-					onClick={onPlayAllHandler}
-					ref={playAllBtnRef}>
-					Play from beginning
-					<MdPlayCircleFilled className="queue-page__play-all-icon" />
-				</button>
+				<div className="queue-page__btns">
+					<button
+						className="queue-page__play-all-btn"
+						onClick={onPlayAllHandler}
+						ref={playAllBtnRef}>
+						Play from beginning
+						<MdPlayCircleFilled className="queue-page__play-all-icon" />
+					</button>
+					<button
+						className="queue-page__remove-all-btn"
+						onClick={onRemoveAllHandler}
+						ref={removeAllBtnRef}>
+						Remove all
+						<MdClear className="queue-page__remove-all-icon" />
+					</button>
+				</div>
 			</header>
 			<DragDropContext onDragEnd={onDragEndHandler}>
 				<Droppable droppableId="queue">

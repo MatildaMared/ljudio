@@ -15,6 +15,7 @@ async function signup(req, res, next) {
 
 		res.status(200).json({
 			success: true,
+			token: user.getToken(),
 			user: {
 				firstName: user.firstName,
 				lastName: user.lastName,
@@ -28,7 +29,6 @@ async function signup(req, res, next) {
 }
 
 async function login(req, res, next) {
-	console.log("In login");
 	try {
 		const { email, password } = req.body;
 
