@@ -57,5 +57,10 @@
 		font-size: 1.2rem;
 		font-weight: 600;
 		color: var.$color-primary-light;
+		margin-bottom: .25rem;
+	}
+
+	&__title {
+		color: rgba(255, 255, 255, 0.7);
 	}
 }
