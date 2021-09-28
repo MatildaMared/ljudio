@@ -234,8 +234,6 @@ async function removeSongFromPlaylist(req, res, next) {
 	try {
 		const playlistId = req.params.playlistId;
 		const videoId = req.params.videoId;
-		console.log("Playlist id is: ", playlistId);
-		console.log("Video id is: ", videoId);
 
 		// grabs the JWT token from the http request headers
 		const token = req.headers.authorization.split(" ")[1];
@@ -357,7 +355,6 @@ async function changeTitle(req, res, next) {
 
 async function followPlaylist(req, res, next) {
 	try {
-		console.log("Inside followPlaylist");
 		const playlistId = req.params.playlistId;
 
 		const token = req.headers.authorization.split(" ")[1];
@@ -417,6 +414,52 @@ async function followPlaylist(req, res, next) {
 
 async function unfollowPlaylist(req, res, next) {
 	console.log("Inside unFollow playlist");
+	try {
+		const playlistId = req.params.playlistId;
+		console.log(playlistId);
+
+		const token = req.headers.authorization.split(" ")[1];
+		const userId = await getUserIdFromToken(token);
+
+		// Return error if userId was null
+		if (userId === null) {
+			return next(new ErrorResponse("Unauthorized", 400));
+		}
+
+		// Tries to find user in database
+		const user = await User.findById(userId);
+
+		// Return error if user was not found
+		if (!user) {
+			return next(
+				new ErrorResponse(
+					"Could not find user in database, please try again...",
+					400
+				)
+			);
+		}
+
+		// Remove playlist from user
+		if (user.followedPlaylists.includes(playlistId)) {
+			const updatedPlaylists = user.followedPlaylists.filter((playlist) => {
+				return !playlist.equals(mongoose.Types.ObjectId(playlistId));
+			});
+			user.followedPlaylists = updatedPlaylists;
+		}
+
+		const updatedUser = await user.save();
+
+		res.status(200).json({
+			success: true,
+			user: {
+				firstName: updatedUser.firstName,
+				lastName: updatedUser.lastName,
+				email: updatedUser.email,
+				playlists: updatedUser.playlists,
+				followedPlaylists: updatedUser.followedPlaylists,
+			},
+		});
+	} catch (err) {}
 }
 
 module.exports = {

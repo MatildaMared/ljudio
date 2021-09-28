@@ -27,6 +27,6 @@ router.post("/:playlistId/changetitle", playlistController.changeTitle);
 router.get("/follow/:playlistId", playlistController.followPlaylist);
 
 // Unfollow another user playlist
-router.delete("/unfollow/:playlistId", playlistController.unfollowPlaylist);
+router.get("/unfollow/:playlistId", playlistController.unfollowPlaylist);
 
 module.exports = router;

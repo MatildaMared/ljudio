@@ -2,7 +2,11 @@ import React, { useEffect, useState, useContext, useRef } from "react";
 import { MusicContext } from "../context/MusicContext";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
-import { getPlaylist } from "./../services/playlistService";
+import {
+	getPlaylist,
+	followPlaylist,
+	unfollowPlaylist,
+} from "./../services/playlistService";
 import { MdDeleteForever, MdPlayCircleFilled } from "react-icons/md";
 import { removeSongFromPlaylist } from "./../services/playlistService";
 import PlaySongBtn from "../components/PlaySongBtn";
@@ -85,30 +89,20 @@ const PlaylistPage = () => {
 			console.log("Success, updating user context");
 			updateUserContext({
 				user: data.user,
-			});
+      });
+      setIsFollowingPlaylist(true);
 		}
 	}
-
-	async function followPlaylist(playlistId) {
-		const token = localStorage.getItem("token");
-
-		console.log(playlistId);
-
-		const response = await fetch(`/api/playlist/follow/${playlistId}`, {
-			method: "GET",
-			headers: {
-				Authorization: `Bearer ${token}`,
-				"Content-Type": "application/json",
-			},
-		});
-
-		const data = await response.json();
-		console.log(data);
-		return data;
-	}
-
 	async function onUnfollowPlaylistHandler() {
 		console.log("Will try to unfollow");
+		const data = await unfollowPlaylist(playlistId);
+		if (data.success) {
+			console.log("Success, updating user context");
+			updateUserContext({
+				user: data.user,
+      });
+      setIsFollowingPlaylist(false);
+		}
 	}
 
 	return (
