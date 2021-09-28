@@ -22,19 +22,25 @@ async function getUserIdFromToken(token) {
 }
 
 // Get single playlist from DB based on URL parameter
-function getPlaylist(req, res, next) {
+async function getPlaylist(req, res, next) {
 	try {
 		const playlistId = req.params.id;
-		Playlist.findById(playlistId, (err, playlist) => {
-			if (err) {
-				return next(
-					new ErrorResponse("Could not find a playlist with that ID...", 400)
-				);
-			}
-			res.status(200).json({
-				success: true,
-				playlist,
-			});
+		const playlist = await Playlist.findById(playlistId);
+
+		if (!playlist) {
+			return next(
+				new ErrorResponse("Could not find a playlist with that ID...", 400)
+			);
+		}
+
+		const owner = await User.findById(playlist.userId).select(
+			"firstName lastName"
+		);
+
+		res.status(200).json({
+			success: true,
+			playlist,
+			owner: `${owner.firstName} ${owner.lastName}`,
 		});
 	} catch (err) {
 		next(err);
@@ -413,10 +419,8 @@ async function followPlaylist(req, res, next) {
 }
 
 async function unfollowPlaylist(req, res, next) {
-	console.log("Inside unFollow playlist");
 	try {
 		const playlistId = req.params.playlistId;
-		console.log(playlistId);
 
 		const token = req.headers.authorization.split(" ")[1];
 		const userId = await getUserIdFromToken(token);

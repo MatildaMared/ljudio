@@ -7,7 +7,12 @@ import {
 	followPlaylist,
 	unfollowPlaylist,
 } from "./../services/playlistService";
-import { MdDeleteForever, MdPlayCircleFilled } from "react-icons/md";
+import {
+	MdDeleteForever,
+	MdPlayCircleFilled,
+	MdFavorite,
+	MdFavoriteBorder,
+} from "react-icons/md";
 import { removeSongFromPlaylist } from "./../services/playlistService";
 import PlaySongBtn from "../components/PlaySongBtn";
 import {
@@ -23,6 +28,7 @@ const PlaylistPage = () => {
 	const [playlistData, setPlaylistData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isOwner, setIsOwner] = useState(false);
+	const [ownerName, setOwnerName] = useState(null);
 	const [isFollowingPlaylist, setIsFollowingPlaylist] = useState(false);
 	const playAllBtnRef = useRef();
 
@@ -61,6 +67,7 @@ const PlaylistPage = () => {
 	async function getPlaylistData(playlistId) {
 		const data = await getPlaylist(playlistId);
 		setPlaylistData(data.playlist);
+		setOwnerName(data.owner);
 		setIsLoading(false);
 	}
 
@@ -89,8 +96,8 @@ const PlaylistPage = () => {
 			console.log("Success, updating user context");
 			updateUserContext({
 				user: data.user,
-      });
-      setIsFollowingPlaylist(true);
+			});
+			setIsFollowingPlaylist(true);
 		}
 	}
 	async function onUnfollowPlaylistHandler() {
@@ -100,80 +107,87 @@ const PlaylistPage = () => {
 			console.log("Success, updating user context");
 			updateUserContext({
 				user: data.user,
-      });
-      setIsFollowingPlaylist(false);
+			});
+			setIsFollowingPlaylist(false);
 		}
 	}
 
 	return (
-		<div className="playlist">
+		<section className="playlist-page">
 			{isLoading && <h3 className="playlist__loading">Loading...</h3>}
-			{isOwner && (
-				<h2 className="playlist__header">
-					You are the owner of this playlist!
-				</h2>
-			)}
 			{playlistData && (
-				<section className="playlist__wrapper">
-					<header className="playlist__wrapper__heading">
-						<h1 className="playlist__heading">{playlistData.title}</h1>
+				<div className="playlist-page__wrapper">
+					<header className="playlist-page__header">
+						<div>
+							<h1 className="playlist-page__heading">{playlistData.title}</h1>
+							{!isOwner && (
+								<p className="playlist-page__owner-text">
+									Made by <strong>{ownerName}</strong>
+								</p>
+							)}
+							{isFollowingPlaylist && (
+								<p className="playlist-page__following-text">
+									You are following this playlist! 💜
+								</p>
+							)}
+						</div>
 						<button
-							className="playlist__wrapper__heading__btn"
+							className="playlist-page__play-all-btn"
 							ref={playAllBtnRef}
 							onClick={() => {
 								playEntirePlaylist(playlistData.songs);
 							}}>
-							<h1>Play entire list </h1>
-							<MdPlayCircleFilled className="playlist__wrapper__heading__icon" />
+							Play entire list
+							<MdPlayCircleFilled className="playlist-page__play-all-icon" />
 						</button>
 					</header>
-					<div className="playlist__icons">
-						<ShareLinkBtn />
+					<div className="playlist-page__btns">
 						{!isOwner && !isFollowingPlaylist && (
 							<button
-								className="playlist__follow-btn"
+								className="playlist-page__follow-btn"
 								onClick={onFollowPlaylistHandler}>
 								Follow this playlist
+								<MdFavorite className="playlist-page__follow-icon" />
 							</button>
 						)}
 						{!isOwner && isFollowingPlaylist && (
 							<button
-								className="playlist__unfollow-btn"
+								className="playlist-page__unfollow-btn"
 								onClick={onUnfollowPlaylistHandler}>
 								Unfollow this playlist
+								<MdFavoriteBorder className="playlist-page__unfollow-icon" />
 							</button>
 						)}
+						<ShareLinkBtn />
 					</div>
 
-					<ul className="playlist__wrapper__description">
+					<ul className="playlist-page__list">
+						<h2 className="playlist-page__list-heading">Songs</h2>
 						{playlistData.songs &&
 							playlistData.songs.map((song) => (
-								<li
-									className="playlist__wrapper__description__li"
-									key={song.videoId}>
+								<li className="playlist-page__item" key={song.videoId}>
 									<div className="playlist__wrapper__description__li__content">
 										{song.thumbnails && (
 											<img
 												src={getThumbNailUrlFromSongObj(song)}
 												alt={song.name}
-												className="playlist__wrapper__description__img"
+												className="playlist-page__thumbnail"
 											/>
 										)}
 
-										<div className="playlist__wrapper__description__song">
-											<h3 className="playlist__wrapper__description__title">
-												{song.name}
-											</h3>
-											<h4 className="playlist__wrapper__description__artist">
+										<div className="playlist-page__song">
+											<h3 className="playlist-page__title">{song.name}</h3>
+											<h4 className="playlist-page__artist">
 												{getArtistNameFromSongObj(song)}
 											</h4>
 										</div>
 									</div>
-									<div className="playlist__btn">
+									<div className="playlist-page__btns">
 										<PlaySongBtn item={song} />
 										{isOwner && (
-											<button className="playlist__btn--delete">
+											<button className="playlist-page__delete-btn">
 												<MdDeleteForever
+													className="playlist-page__delete-icon"
 													onClick={() => removeSongHandler(song.videoId)}
 												/>
 											</button>
@@ -182,9 +196,9 @@ const PlaylistPage = () => {
 								</li>
 							))}
 					</ul>
-				</section>
+				</div>
 			)}
-		</div>
+		</section>
 	);
 };
 
