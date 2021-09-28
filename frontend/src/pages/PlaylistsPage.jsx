@@ -2,10 +2,9 @@ import React, { useContext, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from './../context/UserContext';
 import { MusicContext } from './../context/MusicContext';
-import { addPlaylist, removePlaylist } from './../services/playlistService';
+import { addPlaylist, removePlaylist, changePlayListTitle } from './../services/playlistService';
 import { MdDeleteForever, MdMoreVert } from 'react-icons/md';
 // import ChangePlaylistName from "../components/ChangePlaylistName";
-import { changePlayListTitle } from '../services/newPlaylistService';
 
 function PlaylistsPage() {
   const [userContext, updateUserContext] = useContext(UserContext);
