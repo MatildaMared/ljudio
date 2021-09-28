@@ -90,14 +90,21 @@
 		margin-bottom: 0.25rem;
 	}
 
-	&__play-all-icon {
+	&__btns {
+		display: flex;
+		align-items: center;
+	}
+
+	&__play-all-icon,
+	&__remove-all-icon {
 		font-size: 1.5rem;
 		margin-left: 0.5rem;
 		transition: all 0.2s;
 		color: rgba(0, 0, 0, 0.8);
 	}
 
-	&__play-all-btn {
+	&__play-all-btn,
+	&__remove-all-btn {
 		outline: none;
 		background-color: var.$color-primary;
 		padding: 0.5rem 0.75rem;
@@ -120,6 +127,28 @@
 				color: var.$color-primary;
 			}
 		}
+	}
+
+	&__remove-all-btn {
+		opacity: 0.8;
+		background-color: rgba(255, 255, 255, 0.03);
+		color: var.$color-primary;
+		border: 2px solid var.$color-primary;
+		margin-left: 1rem;
+
+		&:hover,
+		&:focus {
+			background-color: var.$color-primary;
+			color: rgba(0, 0, 0, 0.8);
+
+			.queue-page__remove-all-icon {
+				color: rgba(0, 0, 0, 0.8);
+			}
+		}
+	}
+
+	&__remove-all-icon {
+		color: var.$color-primary;
 	}
 
 	&__delete-icon {
