@@ -25,14 +25,14 @@ async function getUser(req, res, next) {
 		// Tries to find user in database
 		const user = await User.findById(userId);
 
-		
 		// If no user is found, return error response to user
 		if (!user) {
 			return next(new ErrorResponse("User not found... Please try again", 400));
 		}
-		
+
 		await user.populate("playlists");
-		
+		await user.populate("followedPlaylists");
+
 		res.status(200).json({
 			success: true,
 			user: {
@@ -41,6 +41,7 @@ async function getUser(req, res, next) {
 				lastName: user.lastName,
 				email: user.email,
 				playlists: user.playlists,
+				followedPlaylists: user.followedPlaylists,
 			},
 		});
 	} catch (err) {

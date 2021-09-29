@@ -17,10 +17,12 @@ async function signup(req, res, next) {
 			success: true,
 			token: user.getToken(),
 			user: {
+				id: user._id,
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email,
 				playlists: user.playlists,
+				followedPlaylists: user.followedPlaylists,
 			},
 		});
 	} catch (err) {
@@ -44,15 +46,18 @@ async function login(req, res, next) {
 		}
 
 		await user.populate("playlists");
+		await user.populate("followedPlaylists");
 
 		res.status(200).json({
 			success: true,
 			token: user.getToken(),
 			user: {
+				id: user._id,
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email,
 				playlists: user.playlists,
+				followedPlaylists: user.followedPlaylists,
 			},
 		});
 	} catch (err) {
