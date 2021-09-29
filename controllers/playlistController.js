@@ -100,7 +100,6 @@ async function addSongToPlaylist(req, res, next) {
     const playlistId = req.params.playlistId;
     const { song } = req.body;
 
-    console.log(playlistId);
     // grabs the JWT token from the http request headers
     const token = req.headers.authorization.split(' ')[1];
 
