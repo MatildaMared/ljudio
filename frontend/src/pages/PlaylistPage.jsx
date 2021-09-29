@@ -22,7 +22,7 @@ import {
 } from "../utilities/musicUtils";
 import ShareLinkBtn from "./../components/ShareLinkBtn";
 import AddToPlayQueue from "./../components/AddToPlayQueue";
-import { getBtoaString } from "../utilities/musicUtils";
+import { getBtoaString, getFallbackImage } from "../utilities/musicUtils";
 import ThumbnailImages from "../components/ThumbnailImages";
 
 const PlaylistPage = () => {
@@ -181,6 +181,7 @@ const PlaylistPage = () => {
 									{song.thumbnails && (
 										<img
 											src={getThumbNailUrlFromSongObj(song)}
+											onError={getFallbackImage}
 											alt={song.name}
 											className="playlist-page__img"
 										/>
