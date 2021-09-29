@@ -88,11 +88,6 @@
     transition: opacity 0.3s;
     z-index: 2000;
 
-    // @media (max-width: 1450px) {
-    //   left: -50px;
-    //   top: -50%;
-    // }
-
     &--hide {
       z-index: -1000;
     }
