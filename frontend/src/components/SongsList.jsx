@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import PlaySongBtn from "./PlaySongBtn";
 import AddToPlayQueue from "./AddToPlayQueue";
@@ -10,14 +10,15 @@ import { getSongsByString } from "../services/musicService";
 function SongsList({ songs }) {
   const [musicContext, updateMusicContext] = useContext(MusicContext);
   const history = useHistory();
-  //const params = new URLSearchParams("?next=");
-
-  console.log(songs);
+  const [showMoreResults, setShowMoreResults] = useState(false);
+  const [moreResults, setMoreResults] = useState([]);
 
   async function handleClick() {
     const string = `${musicContext.searchString}?next=${musicContext.fetchResult.next}`;
     const data = await getSongsByString(string);
-    console.log('data', data);
+    console.log("data", data);
+    setMoreResults(data.content);
+    setShowMoreResults(true);
   }
 
   function onClickHandler(songName, artistName) {
@@ -34,27 +35,52 @@ function SongsList({ songs }) {
         </button>
       </article>
 
-      <ul className="songslist__list">
-        {songs &&
-          songs.map((item) => (
-            <li className="songslist__item" key={item.videoId}>
-              <div className="songslist__info">
-                <p
-                  className="songslist__song-name"
-                  onClick={() => onClickHandler(item.name, item.artist.name)}
-                >
-                  {item.name}
-                </p>
-                <p className="songslist__artist-name">{item.artist.name}</p>
-              </div>
-              <div className="songslist__icons">
-                <PlaySongBtn item={item} />
-                <AddToPlayQueue item={item} />
-                <AddToPlaylist item={item} />
-              </div>
-            </li>
-          ))}
-      </ul>
+      {!showMoreResults && (
+        <ul className="songslist__list">
+          {songs &&
+            songs.map((item) => (
+              <li className="songslist__item" key={item.videoId}>
+                <div className="songslist__info">
+                  <p
+                    className="songslist__song-name"
+                    onClick={() => onClickHandler(item.name, item.artist.name)}
+                  >
+                    {item.name}
+                  </p>
+                  <p className="songslist__artist-name">{item.artist.name}</p>
+                </div>
+                <div className="songslist__icons">
+                  <PlaySongBtn item={item} />
+                  <AddToPlayQueue item={item} />
+                  <AddToPlaylist item={item} />
+                </div>
+              </li>
+            ))}
+        </ul>
+      )}
+      {showMoreResults && (
+        <ul className="songslist__list">
+          {moreResults &&
+            moreResults.map((item) => (
+              <li className="songslist__item" key={item.videoId}>
+                <div className="songslist__info">
+                  <p
+                    className="songslist__song-name"
+                    onClick={() => onClickHandler(item.name, item.artist.name)}
+                  >
+                    {item.name}
+                  </p>
+                  <p className="songslist__artist-name">{item.artist.name}</p>
+                </div>
+                <div className="songslist__icons">
+                  <PlaySongBtn item={item} />
+                  <AddToPlayQueue item={item} />
+                  <AddToPlaylist item={item} />
+                </div>
+              </li>
+            ))}
+        </ul>
+      )}
       <article className="songslist__footer">
         <button className="songslist__btn" onClick={() => handleClick()}>
           More results
