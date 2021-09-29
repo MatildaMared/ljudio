@@ -91,6 +91,7 @@ async function createPlaylist(req, res, next) {
 			success: true,
 			playlist,
 			user: {
+				id: updatedUser._id,
 				firstName: updatedUser.firstName,
 				lastName: updatedUser.lastName,
 				email: updatedUser.email,
@@ -160,6 +161,7 @@ async function addSongToPlaylist(req, res, next) {
 			success: true,
 			playlist,
 			user: {
+				id: user._id,
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email,
@@ -224,6 +226,7 @@ async function removePlaylist(req, res, next) {
 		res.status(200).json({
 			success: true,
 			user: {
+				id: updatedUser._id,
 				firstName: updatedUser.firstName,
 				lastName: updatedUser.lastName,
 				email: updatedUser.email,
@@ -300,6 +303,7 @@ async function removeSongFromPlaylist(req, res, next) {
 			success: true,
 			updatedPlaylist,
 			user: {
+				id: user._id,
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email,
@@ -347,6 +351,7 @@ async function changeTitle(req, res, next) {
 		res.status(200).json({
 			success: true,
 			user: {
+				id: user._id,
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email,
@@ -403,9 +408,13 @@ async function followPlaylist(req, res, next) {
 
 		const updatedUser = await user.save();
 
+		await updatedUser.populate("playlists");
+		await updatedUser.populate("followedPlaylists");
+
 		res.status(200).json({
 			success: true,
 			user: {
+				id: updatedUser._id,
 				firstName: updatedUser.firstName,
 				lastName: updatedUser.lastName,
 				email: updatedUser.email,
@@ -453,9 +462,13 @@ async function unfollowPlaylist(req, res, next) {
 
 		const updatedUser = await user.save();
 
+		await updatedUser.populate("playlists");
+		await updatedUser.populate("followedPlaylists");
+
 		res.status(200).json({
 			success: true,
 			user: {
+				id: updatedUser._id,
 				firstName: updatedUser.firstName,
 				lastName: updatedUser.lastName,
 				email: updatedUser.email,

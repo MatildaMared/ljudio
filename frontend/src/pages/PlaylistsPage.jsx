@@ -1,13 +1,15 @@
-import React, { useContext, useState, useRef } from 'react';
-import { UserContext } from './../context/UserContext';
-import { MusicContext } from './../context/MusicContext';
+import React, { useContext, useState, useRef } from "react";
+import { UserContext } from "./../context/UserContext";
+import { MusicContext } from "./../context/MusicContext";
 import { addPlaylist } from "./../services/playlistService";
 import PlaylistItem from "../components/PlaylistItem";
+import FollowedPlaylistItem from "../components/FollowedPlaylistItem";
 
 function PlaylistsPage() {
 	const [userContext, updateUserContext] = useContext(UserContext);
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
 	const [titleInput, setTitleInput] = useState("");
+	const followedPlaylists = userContext.user.followedPlaylists;
 	const inputRef = useRef();
 
 	function playSong(song) {
@@ -23,7 +25,6 @@ function PlaylistsPage() {
 	async function newPlaylistHandler(e) {
 		e.preventDefault();
 		const data = await addPlaylist(titleInput.trim());
-		console.log(data);
 		updateUserContext({
 			user: data.user,
 		});
@@ -35,7 +36,9 @@ function PlaylistsPage() {
 		<section className="playlists">
 			<h1 className="playlists__heading">Playlists</h1>
 			<form onSubmit={newPlaylistHandler} className="playlists__form">
-			<h2 className="playlists__heading playlists__heading--secondary">Create new playlist</h2>
+				<h2 className="playlists__heading playlists__heading--secondary">
+					Create new playlist
+				</h2>
 				<input
 					value={titleInput}
 					ref={inputRef}
@@ -54,12 +57,25 @@ function PlaylistsPage() {
 			</form>
 
 			{userContext.user?.playlists?.length > 0 && (
-					<ul className="playlists__list">
-          <h2 className="playlists__heading playlists__heading--secondary">My playlists</h2>
-						{userContext.user.playlists.map((playlist) => (
-							<PlaylistItem playlist={playlist} key={playlist._id} />
-						))}
-					</ul>
+				<ul className="playlists__list">
+					<h2 className="playlists__heading playlists__heading--secondary">
+						My playlists
+					</h2>
+					{userContext.user.playlists.map((playlist) => (
+						<PlaylistItem playlist={playlist} key={playlist._id} />
+					))}
+				</ul>
+			)}
+
+			{followedPlaylists?.length > 0 && (
+				<ul className="playlists__list">
+					<h2 className="playlists__heading playlists__heading--secondary">
+						Followed Playlists
+					</h2>
+					{followedPlaylists.map((playlist) => (
+						<FollowedPlaylistItem playlist={playlist} key={playlist._id} />
+					))}
+				</ul>
 			)}
 		</section>
 	);

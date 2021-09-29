@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { MusicContext } from "../context/MusicContext";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
@@ -20,6 +21,8 @@ import {
 	getThumbNailUrlFromSongObj,
 } from "../utilities/musicUtils";
 import ShareLinkBtn from "./../components/ShareLinkBtn";
+import AddToPlayQueue from "./../components/AddToPlayQueue";
+import { getBtoaString } from "../utilities/musicUtils";
 
 const PlaylistPage = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -31,6 +34,7 @@ const PlaylistPage = () => {
 	const [ownerName, setOwnerName] = useState(null);
 	const [isFollowingPlaylist, setIsFollowingPlaylist] = useState(false);
 	const playAllBtnRef = useRef();
+	const history = useHistory();
 
 	// on page load, get the playlist data
 	// from the database
@@ -39,10 +43,8 @@ const PlaylistPage = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log(userContext.user);
 		userContext.user.followedPlaylists.forEach((playlist) => {
 			if (playlistId === playlist._id) {
-				console.log("Found the playlist in user playlists");
 				setIsFollowingPlaylist(true);
 			}
 		});
@@ -69,12 +71,16 @@ const PlaylistPage = () => {
 		setPlaylistData(data.playlist);
 		setOwnerName(data.owner);
 		setIsLoading(false);
+		userContext.user.followedPlaylists.forEach((playlist) => {
+			if (playlistId === playlist._id) {
+				setIsFollowingPlaylist(true);
+			}
+		});
 	}
 
 	async function removeSongHandler(videoId) {
 		const playlistId = playlistData._id;
 		const data = await removeSongFromPlaylist(playlistId, videoId);
-		console.log(data);
 		setPlaylistData(data.updatedPlaylist);
 		updateUserContext({
 			user: data.user,
@@ -101,15 +107,18 @@ const PlaylistPage = () => {
 		}
 	}
 	async function onUnfollowPlaylistHandler() {
-		console.log("Will try to unfollow");
 		const data = await unfollowPlaylist(playlistId);
 		if (data.success) {
-			console.log("Success, updating user context");
 			updateUserContext({
 				user: data.user,
 			});
 			setIsFollowingPlaylist(false);
 		}
+	}
+
+	function onClickHandler(songName, artistName) {
+		const searchString = getBtoaString(songName, artistName);
+		history.push(`/song/${searchString}`);
 	}
 
 	return (
@@ -166,24 +175,32 @@ const PlaylistPage = () => {
 						{playlistData.songs &&
 							playlistData.songs.map((song) => (
 								<li className="playlist-page__item" key={song.videoId}>
-									<div className="playlist__wrapper__description__li__content">
-										{song.thumbnails && (
-											<img
-												src={getThumbNailUrlFromSongObj(song)}
-												alt={song.name}
-												className="playlist-page__thumbnail"
-											/>
-										)}
+									{song.thumbnails && (
+										<img
+											src={getThumbNailUrlFromSongObj(song)}
+											alt={song.name}
+											className="playlist-page__img"
+										/>
+									)}
 
-										<div className="playlist-page__song">
-											<h3 className="playlist-page__title">{song.name}</h3>
-											<h4 className="playlist-page__artist">
-												{getArtistNameFromSongObj(song)}
-											</h4>
-										</div>
+									<div className="playlist-page__song">
+										<h3
+											className="playlist-page__title"
+											onClick={() =>
+												onClickHandler(
+													song.name,
+													getArtistNameFromSongObj(song)
+												)
+											}>
+											{song.name}
+										</h3>
+										<h4 className="playlist-page__artist">
+											{getArtistNameFromSongObj(song)}
+										</h4>
 									</div>
 									<div className="playlist-page__btns">
 										<PlaySongBtn item={song} />
+										<AddToPlayQueue item={song} />
 										{isOwner && (
 											<button className="playlist-page__delete-btn">
 												<MdDeleteForever

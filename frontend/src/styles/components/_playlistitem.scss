@@ -6,6 +6,10 @@
 	transition: all 0.3s;
 	padding: 2rem;
 
+	&--followed {
+		padding: 1rem 2rem;
+	}
+
 	@media (max-width: 700px) {
 		padding: 1.25rem;
 	}

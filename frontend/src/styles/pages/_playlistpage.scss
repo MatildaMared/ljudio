@@ -14,15 +14,15 @@
 	&__wrapper {
 		background-color: rgba(255, 255, 255, 0.03);
 		border-radius: 0.5rem;
-		padding-bottom: 2rem;
+		padding: 2rem;
 	}
 
 	&__header {
-		padding: 2rem;
 		border-radius: 0.5rem 0.5rem 0 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		margin-bottom: 1rem;
 
 		@media (max-width: 400px) {
 			font-size: 1.4rem;
@@ -32,7 +32,7 @@
 	&__owner-text {
 		color: var.$color-primary-light;
 		margin-bottom: 1rem;
-    margin-top: .25rem;
+		margin-top: 0.25rem;
 	}
 
 	&__play-all-icon {
@@ -70,7 +70,6 @@
 	&__follow-btn,
 	&__unfollow-btn {
 		margin-right: 1rem;
-		margin-left: 2rem;
 		padding: 0.6rem 1rem;
 		font: inherit;
 		border: none;
@@ -101,7 +100,7 @@
 	}
 
 	&__list {
-		margin: 2rem 2rem 0 2rem;
+		margin-top: 2rem;
 		background-color: rgba(255, 255, 255, 0.03);
 		border-radius: 0.3rem;
 		line-height: 1.3;
@@ -123,46 +122,51 @@
 		justify-content: space-between;
 		border-top: 1px solid rgba(255, 255, 255, 0.1);
 
-		&__content {
-			display: flex;
-			align-items: center;
-			padding: 0.4rem 0;
-			margin: 0.6rem 0;
-		}
-
 		&:hover {
 			background-color: rgba(255, 255, 255, 0.03);
 		}
+	}
 
-		&__img {
-			border-radius: 0.2rem;
+	&__img {
+		border-radius: 0.5rem;
 
-			@media (max-width: 370px) {
-				display: none;
-			}
+		@media (max-width: 370px) {
+			display: none;
+		}
+	}
+
+	&__song {
+		flex: 1;
+	}
+
+	&__title,
+	&__artist {
+		margin-left: 0.9rem;
+	}
+
+	&__title {
+		margin-bottom: 0.3rem;
+		font-size: 1.1rem;
+		cursor: pointer;
+		color: var.$color-primary-light;
+		transition: all 0.3s;
+
+		&:hover {
+			color: var.$color-primary;
 		}
 
-		&__title,
-		&__artist {
-			margin-left: 0.9rem;
-		}
-
-		&__title {
-			margin-bottom: 0.3rem;
-
-			@media (max-width: 500px) {
-				font-size: 0.9rem;
-			}
-		}
-
-		&__artist {
-			color: var.$color-light;
-			font-weight: 300;
+		@media (max-width: 500px) {
 			font-size: 0.9rem;
+		}
+	}
 
-			@media (max-width: 500px) {
-				font-size: 0.8rem;
-			}
+	&__artist {
+		color: rgba(255, 255, 255, 0.8);
+		font-weight: 300;
+		font-size: 0.9rem;
+
+		@media (max-width: 500px) {
+			font-size: 0.8rem;
 		}
 	}
 
@@ -171,14 +175,15 @@
 		align-items: center;
 	}
 
-	&--delete {
+	&__delete-btn {
+		margin-left: 0.5rem;
 		border: none;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border-radius: 100rem;
-		width: 2rem;
-		height: 2rem;
+		width: 2.4rem;
+		height: 2.4rem;
 		background-color: rgba(255, 255, 255, 0.05);
 		border: 2px solid transparent;
 		margin-right: 1rem;
@@ -187,7 +192,17 @@
 		transition: all 0.3s;
 
 		&:hover {
-			color: rgb(185, 82, 125);
+			background-color: rgba(255, 255, 255, 0.15);
+
+			.playlist-page__delete-icon {
+				color: rgb(185, 82, 125);
+			}
 		}
+	}
+
+	&__delete-icon {
+		font-size: 1.6rem;
+		color: rgba(255, 255, 255, 0.6);
+		transition: all 0.3s;
 	}
 }
