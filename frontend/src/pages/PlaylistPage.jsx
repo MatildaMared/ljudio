@@ -79,9 +79,11 @@ const PlaylistPage = () => {
 		});
 	}
 
-	async function removeSongHandler(videoId) {
+	async function removeSongHandler(songId) {
+		console.log("Will try to remove song");
 		const playlistId = playlistData._id;
-		const data = await removeSongFromPlaylist(playlistId, videoId);
+		console.log(songId);
+		const data = await removeSongFromPlaylist(playlistId, songId);
 		setPlaylistData(data.updatedPlaylist);
 		updateUserContext({
 			user: data.user,
@@ -175,7 +177,7 @@ const PlaylistPage = () => {
 						<h2 className="playlist-page__list-heading">Songs</h2>
 						{playlistData.songs &&
 							playlistData.songs.map((song) => (
-								<li className="playlist-page__item" key={song.videoId}>
+								<li className="playlist-page__item" key={song.id}>
 									{song.thumbnails && (
 										<img
 											src={getThumbNailUrlFromSongObj(song)}
@@ -206,7 +208,7 @@ const PlaylistPage = () => {
 											<button className="playlist-page__delete-btn">
 												<MdDeleteForever
 													className="playlist-page__delete-icon"
-													onClick={() => removeSongHandler(song.videoId)}
+													onClick={() => removeSongHandler(song.id)}
 												/>
 											</button>
 										)}

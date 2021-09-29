@@ -16,7 +16,7 @@ router.delete("/:id", playlistController.removePlaylist);
 
 // Remove song from playlist
 router.delete(
-	"/:playlistId/:videoId",
+	"/:playlistId/:songId",
 	playlistController.removeSongFromPlaylist
 );
 

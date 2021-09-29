@@ -29,6 +29,7 @@ export async function addSongToPlaylist(playlistId, song) {
 	});
 
 	const data = await response.json();
+	console.log(data);
 	return data;
 }
 
@@ -51,10 +52,10 @@ export async function getPlaylist(playlistId) {
 	return data;
 }
 
-export async function removeSongFromPlaylist(playlistId, videoId) {
+export async function removeSongFromPlaylist(playlistId, songId) {
 	const token = localStorage.getItem("token");
 
-	const response = await fetch(`/api/playlist/${playlistId}/${videoId}`, {
+	const response = await fetch(`/api/playlist/${playlistId}/${songId}`, {
 		method: "DELETE",
 		headers: {
 			Authorization: `Bearer ${token}`,

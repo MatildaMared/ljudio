@@ -147,6 +147,8 @@ async function addSongToPlaylist(req, res, next) {
 			);
 		}
 
+		song.id = new mongoose.Types.ObjectId();
+
 		// Push song into playlist songs array
 		playlist.songs.push(song);
 
@@ -242,7 +244,7 @@ async function removePlaylist(req, res, next) {
 async function removeSongFromPlaylist(req, res, next) {
 	try {
 		const playlistId = req.params.playlistId;
-		const videoId = req.params.videoId;
+		const songId = req.params.songId;
 
 		// grabs the JWT token from the http request headers
 		const token = req.headers.authorization.split(" ")[1];
@@ -284,9 +286,9 @@ async function removeSongFromPlaylist(req, res, next) {
 		// Create new array based on playlist.songs
 		// and filter out the song that is supposed to
 		// be deleted
-		const updatedSongs = playlist.songs.filter(
-			(song) => song.videoId !== videoId
-		);
+		const updatedSongs = playlist.songs.filter((song) => {
+			return !song.id.equals(mongoose.Types.ObjectId(songId));
+		});
 
 		// Set playlist.songs equal to the filtered array
 		playlist.songs = updatedSongs;
