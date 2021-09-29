@@ -16,6 +16,7 @@ function SignupForm() {
 	const [errorMessage, setErrorMessage] = useState("");
 	const history = useHistory();
 	const location = useLocation();
+	const [errorArray, setErrorArray] = useState([]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -53,6 +54,11 @@ function SignupForm() {
 				}
 			} else {
 				setShow(true);
+				let array = data.error.split(',');
+				let updateArray = array.map(item=>{
+					return item.replace('...','');
+				})
+				setErrorArray(updateArray);
 				setErrorMessage(data.error);
 			}
 		} catch (err) {
@@ -130,7 +136,9 @@ function SignupForm() {
 			</form>
 			
 			<ErrorModal title="Error" onClose={() => setShow(false)} show={show}>
-				<p>{errorMessage}</p>
+				{errorArray.length > 0 && errorArray.map((error, index)=>(
+					<p key={index}>{error}</p>
+				))}
 			</ErrorModal>
 		</section>
 	);
