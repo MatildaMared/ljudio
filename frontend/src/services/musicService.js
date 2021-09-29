@@ -1,6 +1,6 @@
 // Help function to make a fetch request based on a provided url
 // Returns the result
-async function fetchDataByUrl(url) {
+export async function fetchDataByUrl(url) {
 	try {
 		const response = await fetch(url);
 		return await response.json();
@@ -18,7 +18,8 @@ export async function getAllMusicByString(string) {
 // Get result with multiple songs based on a search string
 export async function getSongsByString(string) {
 	const fetchUrl = `https://yt-music-api.herokuapp.com/api/yt/songs/${string}`;
-	return fetchDataByUrl(fetchUrl);
+	console.log('url', fetchUrl);
+	return fetchDataByUrl(fetchUrl);	
 }
 
 // Get a single artist by ID

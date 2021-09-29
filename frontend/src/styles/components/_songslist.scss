@@ -4,12 +4,39 @@
 	background-color: rgba(255, 255, 255, 0.05);
 	border-radius: 0.5rem;
 
+	&__header {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: stretch;
+	}
+
 	&__heading {
 		font-size: 2.2rem;
 		padding: 2rem;
 
 		@media (max-width: 700px) {
 			font-size: 1.8rem;
+		}
+	}
+
+	&__btn {
+		margin: 1rem;
+		padding: 0.75rem 1.5rem;
+		outline: none;
+		border: 2px solid transparent;
+		cursor: pointer;
+		border-radius: 0.5rem;
+		font: inherit;
+		font-size: 0.9rem;
+		background-color: var.$color-primary;
+		transition: all 0.3s;
+
+		&:focus,
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.03);
+			border: 2px solid var.$color-primary;
+			color: var.$color-primary;
 		}
 	}
 
@@ -75,5 +102,9 @@
 	&__icons {
 		display: flex;
 		align-items: center;
+	}
+
+	&__footer {
+		background-color: rgba(255, 255, 255, 0.05);
 	}
 }
