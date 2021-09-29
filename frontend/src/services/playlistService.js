@@ -15,22 +15,21 @@ export async function addPlaylist(title) {
 }
 
 export async function addSongToPlaylist(playlistId, song) {
-	const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
-	const response = await fetch(`/api/playlist/${playlistId}`, {
-		method: "POST",
-		headers: {
-			Authorization: `Bearer ${token}`,
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			song: song,
-		}),
-	});
+  const response = await fetch(`/api/playlist/${playlistId}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      song: song,
+    }),
+  });
 
-	const data = await response.json();
-	console.log(data);
-	return data;
+  const data = await response.json();
+  return data;
 }
 
 export async function removePlaylist(playlistId) {

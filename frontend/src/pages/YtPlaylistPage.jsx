@@ -32,7 +32,6 @@ const YtPlaylistPage = () => {
 
 	async function getPlaylistData(browseId) {
 		const data = await getPlaylistById(browseId);
-		console.log(data);
 		setPlaylistData(data);
 		setIsLoading(false);
 	}
