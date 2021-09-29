@@ -71,9 +71,7 @@ function AddToPlaylist({ item }) {
                   key={playlist._id}
                   onClick={() => {
                     addSongToThisPlaylist(playlist._id, item);
-                    setAddedToPlaylistMessage(
-                      `${item.name} added to ${playlist.title}`
-                    );
+                    setAddedToPlaylistMessage(`Added to playlist`);
                     setIsActive(true);
                   }}
                   className={

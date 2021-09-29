@@ -74,8 +74,8 @@
 
   &__message {
     position: absolute;
-    left: 100%;
-    top: -20%;
+    left: -50px;
+    top: -50%;
     text-align: center;
     width: 100%;
     width: 8rem;
@@ -87,6 +87,11 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: opacity 0.3s;
     z-index: 2000;
+
+    // @media (max-width: 1450px) {
+    //   left: -50px;
+    //   top: -50%;
+    // }
 
     &--hide {
       z-index: -1000;
