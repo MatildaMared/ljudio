@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "./../context/UserContext";
 import { getAllMusicByString } from "../services/musicService";
 import { getPlaylistThumnails } from "../utilities/musicUtils";
+import ThumbnailImages from "../components/ThumbnailImages";
 
 function HomePage() {
   const [userContext, updateUserContext] = useContext(UserContext);
@@ -106,37 +107,7 @@ function HomePage() {
                         key={playlist._id}
                       >
                         <Link to={`/playlist/${playlist._id}`}>
-                          <div className="home-page__playlists__item__img-container">
-                            {playlist.songs[0] && (
-                              <img
-                                className="home-page__playlists__item__img-container__img"
-                                src={getPlaylistThumnails(playlist.songs[0])}
-                                alt={playlist.title}
-                              />
-                            )}
-                            {playlist.songs[1] && (
-                              <img
-                                className="home-page__playlists__item__img-container__img"
-                                src={getPlaylistThumnails(playlist.songs[1])}
-                                alt={playlist.title}
-                              />
-                            )}
-                            {playlist.songs[2] && (
-                              <img
-                                className="home-page__playlists__item__img-container__img"
-                                src={getPlaylistThumnails(playlist.songs[2])}
-                                alt={playlist.title}
-                              />
-                            )}
-                            {playlist.songs[3] && (
-                              <img
-                                className="home-page__playlists__item__img-container__img"
-                                src={getPlaylistThumnails(playlist.songs[3])}
-                                alt={playlist.title}
-                              />
-                            )}
-                          </div>
-
+                          <ThumbnailImages playlist={playlist} />
                           <p className="home-page__playlists__item__title">
                             {playlist.title}
                           </p>

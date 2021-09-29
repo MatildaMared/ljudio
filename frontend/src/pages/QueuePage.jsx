@@ -54,7 +54,6 @@ function QueuePage() {
 			return;
 		}
 		if (nowPlayingIndex === null) {
-			console.log("nowPlaying is not");
 			updateMusicContext({
 				nowPlayingIndex: 0,
 			});

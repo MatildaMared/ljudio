@@ -105,75 +105,69 @@ async function createPlaylist(req, res, next) {
 }
 
 async function addSongToPlaylist(req, res, next) {
-	try {
-		const playlistId = req.params.playlistId;
-		const { song } = req.body;
+  try {
+    const playlistId = req.params.playlistId;
+    const { song } = req.body;
 
-		console.log(playlistId);
-		// grabs the JWT token from the http request headers
-		const token = req.headers.authorization.split(" ")[1];
+    // grabs the JWT token from the http request headers
+    const token = req.headers.authorization.split(' ')[1];
 
-		// gets userId based on decoded jwt
-		const userId = await getUserIdFromToken(token);
+    // gets userId based on decoded jwt
+    const userId = await getUserIdFromToken(token);
 
-		// Return error if jwt token could not be decoded
-		if (userId === null) {
-			return next(new ErrorResponse("Unauthorized", 400));
-		}
+    // Return error if jwt token could not be decoded
+    if (userId === null) {
+      return next(new ErrorResponse('Unauthorized', 400));
+    }
 
-		// Finds user in database
-		const user = await User.findById(userId);
+    // Finds user in database
+    const user = await User.findById(userId);
 
-		// Return error if user was not found
-		if (!user) {
-			return next(
-				new ErrorResponse(
-					"Could not find user in database, please try again...",
-					400
-				)
-			);
-		}
+    // Return error if user was not found
+    if (!user) {
+      return next(
+        new ErrorResponse(
+          'Could not find user in database, please try again...',
+          400
+        )
+      );
+    }
 
-		// Finds playlist in database
-		const playlist = await Playlist.findById(playlistId);
+    // Finds playlist in database
+    const playlist = await Playlist.findById(playlistId);
 
-		// Return error if playlist was not found
-		if (!playlist) {
-			return next(
-				new ErrorResponse(
-					"Could not find playlist in database, please try again...",
-					400
-				)
-			);
-		}
+    // Return error if playlist was not found
+    if (!playlist) {
+      return next(
+        new ErrorResponse(
+          'Could not find playlist in database, please try again...',
+          400
+        )
+      );
+    }
 
-		song.id = new mongoose.Types.ObjectId();
+    // Push song into playlist songs array
+    playlist.songs.push(song);
 
-		// Push song into playlist songs array
-		playlist.songs.push(song);
+    // Save changes to database
+    await playlist.save();
 
-		// Save changes to database
-		await playlist.save();
+    // Populate playlists array inside user document
+    await user.populate('playlists');
 
-		// Populate playlists array inside user document
-		await user.populate("playlists");
-		await user.populate("followedPlaylists");
-
-		res.status(200).json({
-			success: true,
-			playlist,
-			user: {
-				id: user._id,
-				firstName: user.firstName,
-				lastName: user.lastName,
-				email: user.email,
-				playlists: user.playlists,
-				followedPlaylists: user.followedPlaylists,
-			},
-		});
-	} catch (err) {
-		next(err);
-	}
+    res.status(200).json({
+      success: true,
+      playlist,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        playlists: user.playlists,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
 }
 
 async function removePlaylist(req, res, next) {
