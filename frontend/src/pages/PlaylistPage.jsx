@@ -198,7 +198,7 @@ const PlaylistPage = () => {
 											{song.name}
 										</h3>
 										<h4 className="playlist-page__artist">
-											{getArtistNameFromSongObj(song)}
+											{getArtistNameFromSongObj(song) || "Unknown"}
 										</h4>
 									</div>
 									<div className="playlist-page__btns">
