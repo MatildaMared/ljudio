@@ -1,117 +1,138 @@
-@use "../abstracts/variables" as var;
+@use '../abstracts/variables' as var;
 
 .add-to-playlist {
-	position: relative;
+  position: relative;
 
-	&__list {
-		position: absolute;
-		right: 100%;
-		top: -100%;
-		background-color: #353535;
-		border-radius: 0.5rem;
-		max-height: 15rem;
-		min-width: 15rem;
-		overflow-y: scroll;
-		z-index: 10000;
+  &__list {
+    position: absolute;
+    right: 100%;
+    top: -100%;
+    background-color: #353535;
+    border-radius: 0.5rem;
+    max-height: 15rem;
+    min-width: 15rem;
+    overflow-y: scroll;
+    z-index: 10000;
 
-		&::-webkit-scrollbar {
-			width: 12px;
-		}
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
 
-		&::-webkit-scrollbar-track {
-			background: #303030;
-		}
+    &::-webkit-scrollbar-track {
+      background: #303030;
+    }
 
-		&::-webkit-scrollbar-thumb {
-			background-color: var.$color-primary;
-			border-radius: 20px;
-			border: 3px solid #303030;
-		}
-	}
+    &::-webkit-scrollbar-thumb {
+      background-color: var.$color-primary;
+      border-radius: 20px;
+      border: 3px solid #303030;
+    }
+  }
 
-	&__heading {
-		padding: 1rem;
-		font-size: 1.2rem;
+  &__heading {
+    padding: 1rem;
+    font-size: 1.2rem;
     cursor: default;
-	}
+  }
 
-	&__btn {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: rgba(255, 255, 255, 0.1);
-		width: 2.2rem;
-		height: 2.2rem;
-		border-radius: 100rem;
-		margin: 0.5rem;
-		font-size: 2rem;
-		border: none;
-		outline: none;
-		transition: all 0.3s;
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 100rem;
+    margin: 0.5rem;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    transition: all 0.3s;
 
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.15);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
 
-			.add-to-playlist__icon {
-				color: var.$color-primary;
-			}
-		}
+      .add-to-playlist__icon {
+        color: var.$color-primary;
+      }
+    }
 
-		&--active {
-			background-color: var.$color-primary;
-			.add-to-playlist__icon {
-				color: rgba(0, 0, 0, 0.8);
-			}
+    &--active {
+      background-color: var.$color-primary;
+      .add-to-playlist__icon {
+        color: rgba(0, 0, 0, 0.8);
+      }
 
-			&:hover {
-				background-color: var.$color-primary-light;
-				.add-to-playlist__icon {
-					color: rgba(0, 0, 0, 0.8);
-				}
-			}
-		}
-	}
+      &:hover {
+        background-color: var.$color-primary-light;
+        .add-to-playlist__icon {
+          color: rgba(0, 0, 0, 0.8);
+        }
+      }
+    }
+  }
 
-	&__icon {
-		color: rgba(255, 255, 255, 0.5);
-		transition: all 0.3s;
-	}
+  &__message {
+    position: absolute;
+    left: -50px;
+    top: -50%;
+    text-align: center;
+    width: 100%;
+    width: 8rem;
+    font-size: 0.9rem;
+    padding: 0.25rem;
+    background-color: rgba(39, 39, 39);
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: opacity 0.3s;
+    z-index: 2000;
 
-	&__list {
-		transition: all 0.3s;
-	}
+    &--hide {
+      z-index: -1000;
+    }
+  }
 
-	&__item {
-		background-color: rgba(255, 255, 255, 0.03);
-		display: block;
-		width: 100%;
-		max-width: 16rem;
-		z-index: 10000;
-		padding: 1rem 1.3rem;
-		font-size: 1rem;
-		color: rgba(255, 255, 255, 0.5);
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-		transition: all 0.3s;
-		cursor: pointer;
+  &__icon {
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+  }
 
-		&:first-of-type {
-			border-top: 1px solid rgba(255, 255, 255, 0.1);
-		}
+  &__list {
+    transition: all 0.3s;
+  }
 
-		&:last-of-type {
-			border-bottom: none;
-		}
+  &__item {
+    background-color: rgba(255, 255, 255, 0.03);
+    display: block;
+    width: 100%;
+    max-width: 16rem;
+    z-index: 10000;
+    padding: 1rem 1.3rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+    cursor: pointer;
 
-		&--hide {
-			height: 0;
-		}
+    &:first-of-type {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.06);
+    &:last-of-type {
+      border-bottom: none;
+    }
 
-			.add-to-playlist__title {
-				color: var.$color-primary;
-			}
-		}
-	}
+    &--hide {
+      height: 0;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.06);
+
+      .add-to-playlist__title {
+        color: var.$color-primary;
+      }
+    }
+  }
 }
