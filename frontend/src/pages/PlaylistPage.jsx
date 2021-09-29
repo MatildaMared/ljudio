@@ -23,6 +23,7 @@ import {
 import ShareLinkBtn from "./../components/ShareLinkBtn";
 import AddToPlayQueue from "./../components/AddToPlayQueue";
 import { getBtoaString } from "../utilities/musicUtils";
+import ThumbnailImages from "../components/ThumbnailImages";
 
 const PlaylistPage = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -99,7 +100,6 @@ const PlaylistPage = () => {
 	async function onFollowPlaylistHandler() {
 		const data = await followPlaylist(playlistId);
 		if (data.success) {
-			console.log("Success, updating user context");
 			updateUserContext({
 				user: data.user,
 			});
@@ -127,16 +127,12 @@ const PlaylistPage = () => {
 			{playlistData && (
 				<div className="playlist-page__wrapper">
 					<header className="playlist-page__header">
-						<div>
+						<ThumbnailImages playlist={playlistData} />
+						<div className="playlist-page__info">
 							<h1 className="playlist-page__heading">{playlistData.title}</h1>
 							{!isOwner && (
 								<p className="playlist-page__owner-text">
 									Made by <strong>{ownerName}</strong>
-								</p>
-							)}
-							{isFollowingPlaylist && (
-								<p className="playlist-page__following-text">
-									You are following this playlist! 💜
 								</p>
 							)}
 						</div>
@@ -150,6 +146,11 @@ const PlaylistPage = () => {
 							<MdPlayCircleFilled className="playlist-page__play-all-icon" />
 						</button>
 					</header>
+					{isFollowingPlaylist && (
+						<p className="playlist-page__following-text">
+							You are following this playlist! 💜
+						</p>
+					)}
 					<div className="playlist-page__btns">
 						{!isOwner && !isFollowingPlaylist && (
 							<button

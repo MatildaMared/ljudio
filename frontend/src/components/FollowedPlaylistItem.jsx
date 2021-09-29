@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { MdPlayArrow } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import { MusicContext } from "../context/MusicContext";
+import ThumbnailImages from "./ThumbnailImages";
 
 function FollowedPlaylistItem({ playlist }) {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -18,6 +19,7 @@ function FollowedPlaylistItem({ playlist }) {
 	return (
 		<li className="playlist-item playlist-item--followed">
 			<div className="playlist-item__wrapper">
+				<ThumbnailImages playlist={playlist} />
 				<h1
 					className="playlist-item__title"
 					onClick={() => history.push(`/playlist/${playlist._id}`)}>

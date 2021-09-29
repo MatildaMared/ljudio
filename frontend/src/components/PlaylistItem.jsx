@@ -7,6 +7,8 @@ import {
 } from "./../services/playlistService";
 import { useHistory } from "react-router-dom";
 import { MusicContext } from "../context/MusicContext";
+import { getThumbNailUrlFromSongObj } from "../utilities/musicUtils";
+import ThumbnailImages from './ThumbnailImages';
 
 function PlaylistItem({ playlist }) {
 	const [userContext, updateUserContext] = useContext(UserContext);
@@ -47,6 +49,7 @@ function PlaylistItem({ playlist }) {
 	return (
 		<li className="playlist-item">
 			<div className="playlist-item__wrapper">
+				<ThumbnailImages playlist={playlist} />
 				<h1
 					className="playlist-item__title"
 					onClick={() => history.push(`/playlist/${playlist._id}`)}>

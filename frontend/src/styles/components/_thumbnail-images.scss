@@ -1,0 +1,14 @@
+.thumbnail-images {
+	width: 4rem;
+	height: 4rem;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+  border-radius: .5rem;
+  overflow: hidden;
+  grid-gap: 3px;
+
+  &__placeholder {
+    background-color: rgba(255, 255, 255, .05);
+  }
+}
