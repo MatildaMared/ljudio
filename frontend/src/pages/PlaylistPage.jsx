@@ -48,7 +48,6 @@ const PlaylistPage = () => {
   async function removeSongHandler(videoId) {
     const playlistId = playlistData._id;
     const data = await removeSongFromPlaylist(playlistId, videoId);
-    console.log(data);
     setPlaylistData(data.updatedPlaylist);
     updateUserContext({
       user: data.user,

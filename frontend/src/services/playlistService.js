@@ -17,9 +17,6 @@ export async function addPlaylist(title) {
 export async function addSongToPlaylist(playlistId, song) {
   const token = localStorage.getItem('token');
 
-  console.log(song.name, song.videoId);
-  console.log(playlistId);
-
   const response = await fetch(`/api/playlist/${playlistId}`, {
     method: 'POST',
     headers: {

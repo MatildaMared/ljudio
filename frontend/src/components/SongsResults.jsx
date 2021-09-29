@@ -1,8 +1,5 @@
 import React, { useContext } from "react";
 import { MusicContext } from "../context/MusicContext";
-import PlaySongBtn from "./PlaySongBtn";
-import AddToPlayQueue from "../components/AddToPlayQueue";
-import AddToPlaylist from "./AddToPlaylist";
 import SongsList from "./SongsList";
 
 function SongsResults() {

@@ -23,7 +23,6 @@ function PlaylistsPage() {
 	async function newPlaylistHandler(e) {
 		e.preventDefault();
 		const data = await addPlaylist(titleInput.trim());
-		console.log(data);
 		updateUserContext({
 			user: data.user,
 		});
