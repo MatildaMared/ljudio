@@ -24,6 +24,10 @@
 		margin: 2rem;
 		overflow: hidden;
 		border-radius: 0.5rem;
+
+		@media (max-width: 700px) {
+			margin: 0;
+		}
 	}
 
 	&__item {
@@ -60,7 +64,7 @@
 		opacity: 0.8;
 		transition: all 0.3s;
 
-    		@media (max-width: 700px) {
+		@media (max-width: 700px) {
 			font-size: 1rem;
 		}
 

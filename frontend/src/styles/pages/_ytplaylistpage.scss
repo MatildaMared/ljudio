@@ -4,7 +4,11 @@
 	background-color: rgba(255, 255, 255, 0.03);
 	margin: 1rem 0;
 	border-radius: 1rem;
-	overflow: hidden;
+
+	@media (max-width: 700px) {
+		margin: 0;
+		background-color: transparent;
+	}
 
 	&__loading {
 		padding: 2rem;
@@ -14,6 +18,10 @@
 		display: flex;
 		align-items: center;
 		padding: 2rem;
+
+		@media (max-width: 700px) {
+			padding: 1rem;
+		}
 	}
 
 	&__heading {
@@ -33,6 +41,7 @@
 
 	&__info {
 		flex: 1;
+		margin-left: 1rem;
 	}
 
 	&__thumbnail {
@@ -69,11 +78,10 @@
 		background-color: rgba(255, 255, 255, 0.05);
 		padding-top: 2rem;
 		margin: 2rem;
-		overflow: hidden;
 		border-radius: 0.5rem;
 
 		@media (max-width: 700px) {
-			margin: 1rem;
+			margin: 0rem;
 		}
 	}
 
@@ -111,6 +119,10 @@
 		display: flex;
 		align-items: center;
 
+		@media (max-width: 700px) {
+			margin-left: 1rem;
+		}
+
 		.yt-playlist__icon {
 			margin-left: 0.5rem;
 			color: rgba(0, 0, 0, 0.6);
@@ -138,5 +150,10 @@
 	&__share-btn {
 		margin-left: 2rem;
 		margin-bottom: 2rem;
+
+		@media (max-width: 700px) {
+			margin-left: 1rem;
+			margin-bottom: 1rem;
+		}
 	}
 }

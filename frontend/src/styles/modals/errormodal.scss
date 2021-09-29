@@ -13,10 +13,11 @@
     
 
     &__content {
-        width: 30vw;
-        background-color: var.$color-light-gray;
+        width: fit-content;
+        background-color: #181818;
         color: var.$color-primary;
         border-radius: 0.5rem;
+        border: 2px solid var.$color-primary;
     }
 
     &__header {
@@ -28,9 +29,11 @@
     }
 
     &__body {
-        padding: 1.5rem;
-        border-top: 1px solid var.$color-light;
-        border-bottom: 1px solid var.$color-light;    
+        padding: 0 1.5rem;
+        color: rgba(255, 255, 255, .8);
+        & p {
+            margin-bottom: .5rem;
+        }
     }
 
     &__footer {

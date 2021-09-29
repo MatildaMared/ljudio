@@ -65,7 +65,9 @@ const Player = () => {
 
 		if (nowPlayingIndex !== null && queue.length > 0) {
 			setCurrentSongObj(queue[nowPlayingIndex]);
-			setArtistName(getArtistNameFromSongObj(queue[nowPlayingIndex]));
+			setArtistName(
+				getArtistNameFromSongObj(queue[nowPlayingIndex]) || "Unknown"
+			);
 			setSongName(queue[nowPlayingIndex]?.name);
 
 			if (!queue[nowPlayingIndex + 1]) {
@@ -75,7 +77,9 @@ const Player = () => {
 			}
 
 			if (queue[nowPlayingIndex + 1]) {
-				setNextArtistName(getArtistNameFromSongObj(queue[nowPlayingIndex + 1]));
+				setNextArtistName(
+					getArtistNameFromSongObj(queue[nowPlayingIndex + 1]) || "Unknown"
+				);
 				setNextSongName(queue[nowPlayingIndex + 1]?.name);
 			}
 		}
@@ -255,79 +259,79 @@ const Player = () => {
 					onPause={onVideoPause}
 				/>
 				{queue.length > 0 && (
-				<div className="player__btns">
-					{/* Volume Buttons */}
-					<section className="player__volume-btns">
-						{/* Volume Down */}
-						<button onClick={volumeDown} className="player__btn">
-							<MdVolumeDown className="player__icon" />
-						</button>
-						{/* Volume Mute Toggler */}
-						<button onClick={volumeMute} className="player__btn">
-							{isMuted === true ? (
-								<MdVolumeOff className="player__icon" />
+					<div className="player__btns">
+						{/* Volume Buttons */}
+						<section className="player__volume-btns">
+							{/* Volume Down */}
+							<button onClick={volumeDown} className="player__btn">
+								<MdVolumeDown className="player__icon" />
+							</button>
+							{/* Volume Mute Toggler */}
+							<button onClick={volumeMute} className="player__btn">
+								{isMuted === true ? (
+									<MdVolumeOff className="player__icon" />
+								) : (
+									<MdVolumeMute className="player__icon" />
+								)}
+							</button>
+							{/* Volume Up */}
+							<button onClick={volumeUp} className="player__btn">
+								<MdVolumeUp className="player__icon" />
+							</button>
+							{volumeMessage && (
+								<span className="player__volume-message" ref={volumeMessageRef}>
+									{volumeMessage}
+								</span>
+							)}
+						</section>
+						{/* Player Buttons */}
+						<section className="player__player-btns">
+							{/* Previous Song Button */}
+							<button onClick={previousSong} className="player__btn">
+								<MdSkipPrevious className="player__icon" />
+							</button>
+							{/* Play/Pause Button */}
+							<PlayPauseBtn isPlaying={isPlaying} play={play} pause={pause} />
+							{/* Next Song Button */}
+							<button onClick={nextSong} className="player__btn">
+								<MdSkipNext className="player__icon" />
+							</button>
+						</section>
+						{/* Video On/Off Toggler */}
+						<button
+							className="player__btn player__video-toggler"
+							onClick={toggleVideo}>
+							<p>{videoOn ? "Video on" : "Video off"}</p>
+							{videoOn ? (
+								<FaToggleOn className="player__icon player__icon--on" />
 							) : (
-								<MdVolumeMute className="player__icon" />
+								<FaToggleOff className="player__icon player__icon--off" />
 							)}
 						</button>
-						{/* Volume Up */}
-						<button onClick={volumeUp} className="player__btn">
-							<MdVolumeUp className="player__icon" />
-						</button>
-						{volumeMessage && (
-							<span className="player__volume-message" ref={volumeMessageRef}>
-								{volumeMessage}
-							</span>
-						)}
-					</section>
-					{/* Player Buttons */}
-					<section className="player__player-btns">
-						{/* Previous Song Button */}
-						<button onClick={previousSong} className="player__btn">
-							<MdSkipPrevious className="player__icon" />
-						</button>
-						{/* Play/Pause Button */}
-						<PlayPauseBtn isPlaying={isPlaying} play={play} pause={pause} />
-						{/* Next Song Button */}
-						<button onClick={nextSong} className="player__btn">
-							<MdSkipNext className="player__icon" />
-						</button>
-					</section>
-					{/* Video On/Off Toggler */}
-					<button
-						className="player__btn player__video-toggler"
-						onClick={toggleVideo}>
-						<p>{videoOn ? "Video on" : "Video off"}</p>
-						{videoOn ? (
-							<FaToggleOn className="player__icon player__icon--on" />
-						) : (
-							<FaToggleOff className="player__icon player__icon--off" />
-						)}
-					</button>
-				</div>
+					</div>
 				)}
 				{/* Song Progress Bar */}
 				{queue.length > 0 && (
-				<section className="player__progress">
-					<span className="player__current-time">
-						{getTimeInMinutes(currentTime)}
-					</span>
-					<input
-						type="range"
-						min="0"
-						max={videoLength || 0}
-						value={currentTime || 0}
-						className="player__slider"
-						id="myRange"
-						onChange={(e) => {
-							setCurrentTime(e.target.value);
-							player.seekTo(e.target.value);
-						}}
-					/>
-					<span className="player__remaining-time">
-						{getTimeInMinutes(videoLength - currentTime)}
-					</span>
-				</section>
+					<section className="player__progress">
+						<span className="player__current-time">
+							{getTimeInMinutes(currentTime)}
+						</span>
+						<input
+							type="range"
+							min="0"
+							max={videoLength || 0}
+							value={currentTime || 0}
+							className="player__slider"
+							id="myRange"
+							onChange={(e) => {
+								setCurrentTime(e.target.value);
+								player.seekTo(e.target.value);
+							}}
+						/>
+						<span className="player__remaining-time">
+							{getTimeInMinutes(videoLength - currentTime)}
+						</span>
+					</section>
 				)}
 				{/* Information about next song */}
 				{nextArtistName && (

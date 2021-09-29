@@ -12,6 +12,7 @@ import PlaySongBtn from "../components/PlaySongBtn";
 import AddToPlayQueue from "../components/AddToPlayQueue";
 import ShareLinkBtn from "../components/ShareLinkBtn";
 import AddToPlaylist from "../components/AddToPlaylist";
+import YtThumbnailImages from "../components/YtThumbnailImages";
 
 const YtPlaylistPage = () => {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -25,9 +26,12 @@ const YtPlaylistPage = () => {
 		getPlaylistData(browseId);
 	}, []);
 
+	useEffect(async () => {
+		console.log(playlistData);
+	}, [playlistData]);
+
 	async function getPlaylistData(browseId) {
 		const data = await getPlaylistById(browseId);
-		console.log(data);
 		setPlaylistData(data);
 		setIsLoading(false);
 	}
@@ -63,10 +67,11 @@ const YtPlaylistPage = () => {
 			) : (
 				<>
 					<header className="yt-playlist__header">
-						<img
+						{/* <img
 							className="yt-playlist__thumbnail"
 							src={getPlaylistThumbnailUrl(playlistData)}
-						/>
+						/> */}
+						<YtThumbnailImages playlist={playlistData} />
 						<div className="yt-playlist__info">
 							<h1 className="yt-playlist__heading">{playlistData.title}</h1>
 							<p className="yt-playlist__owner">by {playlistData.owner}</p>

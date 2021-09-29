@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MusicContext } from "../context/MusicContext";
 import { MdPlayCircleFilled, MdMoreHoriz } from "react-icons/md";
 import { getPlaylistById } from "./../services/musicService";
+import ThumbnailImages from "./../components/ThumbnailImages";
 
 function PlaylistsResults() {
 	const [musicContext, updateMusicContext] = useContext(MusicContext);
@@ -29,19 +30,12 @@ function PlaylistsResults() {
 		}
 	}
 
-	console.log(playlists);
-
 	return (
 		<section className="yt-playlists">
 			<ul className="yt-playlists__list">
 				<h1 className="yt-playlists__header">YouTube Playlists</h1>
 				{playlists.map((playlist) => (
 					<li className="yt-playlists__item" key={playlist.browseId}>
-						<img
-							src={getPlaylistThumbnailUrl(playlist)}
-							alt={playlist.title}
-							className="yt-playlists__thumbnail"
-						/>
 						<div className="yt-playlists__info">
 							<Link
 								to={`/yt-playlist/${playlist.browseId}`}

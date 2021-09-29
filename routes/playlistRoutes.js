@@ -1,26 +1,32 @@
-const { Router } = require('express');
-const playlistController = require('../controllers/playlistController');
+const { Router } = require("express");
+const playlistController = require("../controllers/playlistController");
 const router = new Router();
 
 // Create new playlist
-router.post('/', playlistController.createPlaylist);
+router.post("/", playlistController.createPlaylist);
 
 // Get playlist by ID
-router.get('/:id', playlistController.getPlaylist);
+router.get("/:id", playlistController.getPlaylist);
 
 // Add song to playlist
-router.post('/:playlistId', playlistController.addSongToPlaylist);
+router.post("/:playlistId", playlistController.addSongToPlaylist);
 
 // Remove playlist
-router.delete('/:id', playlistController.removePlaylist);
+router.delete("/:id", playlistController.removePlaylist);
 
 // Remove song from playlist
 router.delete(
-  '/:playlistId/:videoId',
-  playlistController.removeSongFromPlaylist
+	"/:playlistId/:songId",
+	playlistController.removeSongFromPlaylist
 );
 
-//Change the title of a playlist
+// Change the title of a playlist
 router.post("/:playlistId/changetitle", playlistController.changeTitle);
+
+// Follow another user playlist
+router.get("/follow/:playlistId", playlistController.followPlaylist);
+
+// Unfollow another user playlist
+router.get("/unfollow/:playlistId", playlistController.unfollowPlaylist);
 
 module.exports = router;

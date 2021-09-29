@@ -24,7 +24,6 @@ function SongPage() {
 
 	async function getSongData() {
 		const data = await getSongsByString(searchString);
-		console.log(data);
 		if (!data) {
 			setIsError(true);
 			setIsLoading(false);

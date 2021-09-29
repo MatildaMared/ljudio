@@ -5,7 +5,7 @@ import ArtistPageAddToPlaylistBtn from "../components/ArtistPageAddToPlaylistBtn
 import ArtistPageAddToQueueBtn from "../components/ArtistPageAddToQueueBtn";
 import ArtistPagePlaySongBtn from "../components/ArtistPagePlaySongBtn";
 import ShareLinkBtn from "./../components/ShareLinkBtn";
-import { getBtoaString } from "./../utilities/musicUtils.js";
+import { getBtoaString, getFallbackImage } from "./../utilities/musicUtils.js";
 
 const ArtistPage = () => {
 	const [isError, setIsError] = useState(false);
@@ -54,6 +54,7 @@ const ArtistPage = () => {
 								src={artistData.thumbnails[0].url}
 								alt={artistData.name}
 								className="artist__image"
+								onError={getFallbackImage}
 							/>
 						)}
 					</header>
@@ -104,6 +105,7 @@ const ArtistPage = () => {
 										</div>
 										<img
 											src={album.thumbnails[0].url}
+											onError={getFallbackImage}
 											alt={album.name}
 											className="artist__album-thumbnail"></img>
 									</li>
