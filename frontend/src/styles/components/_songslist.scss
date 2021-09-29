@@ -1,79 +1,79 @@
-@use "./../abstracts/variables" as var;
+@use './../abstracts/variables' as var;
 
 .songslist {
-	background-color: rgba(255, 255, 255, 0.05);
-	border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
 
-	&__heading {
-		font-size: 2.2rem;
-		padding: 2rem;
+  &__heading {
+    font-size: 2.2rem;
+    padding: 2rem;
 
-		@media (max-width: 700px) {
-			font-size: 1.8rem;
-		}
-	}
+    @media (max-width: 700px) {
+      font-size: 1.8rem;
+    }
+  }
 
-	&__item {
-		padding: 1rem 2rem;
-		background-color: rgba(255, 255, 255, 0.03);
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		transition: all 0.3s;
+  &__item {
+    padding: 1rem 2rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s;
 
-		&:first-of-type {
-			border-top: 1px solid rgba(255, 255, 255, 0.1);
-		}
+    &:first-of-type {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-		&:last-of-type {
-			border-bottom: none;
-		}
+    &:last-of-type {
+      border-bottom: none;
+    }
 
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.05);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
 
-			.songslist__song-name {
-				color: var.$color-primary;
-			}
-		}
-	}
+      .songslist__song-name {
+        color: var.$color-primary;
+      }
+    }
+  }
 
-	&__artist-name {
-		text-align: left;
-		&::before {
-			content: "–";
-			margin-right: 0.25rem;
-			margin-left: 0.25rem;
+  &__artist-name {
+    text-align: left;
+    &::before {
+      content: '–';
+      margin-right: 0.25rem;
+      margin-left: 0.25rem;
 
-			@media (max-width: 800px) {
-				content: "";
-				margin: 0;
-			}
-		}
-	}
+      @media (max-width: 800px) {
+        content: '';
+        margin: 0;
+      }
+    }
+  }
 
-	&__song-name {
-		text-align: left;
-		color: var.$color-primary-light;
-		font-weight: 600;
-		transition: all 0.3s;
-	}
+  &__song-name {
+    text-align: left;
+    color: var.$color-primary-light;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
 
-	&__info {
-		display: flex;
-		align-items: center;
+  &__info {
+    display: flex;
+    align-items: center;
 
-		@media (max-width: 800px) {
-			align-items: flex-start;
-			flex-direction: column;
-			text-align: left;
-		}
-	}
+    @media (max-width: 800px) {
+      align-items: flex-start;
+      flex-direction: column;
+      text-align: left;
+    }
+  }
 
-	&__icons {
-		display: flex;
-		align-items: center;
-	}
+  &__icons {
+    display: flex;
+    align-items: center;
+  }
 }
