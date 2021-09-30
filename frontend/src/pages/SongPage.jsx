@@ -4,6 +4,7 @@ import {
 	decodeBtoaString,
 	getArtistNameFromSongObj,
 	getThumbNailUrlFromSongObj,
+	getFallbackImage,
 } from "../utilities/musicUtils";
 import { getSongsByString } from "../services/musicService";
 import PlaySongBtn from "../components/PlaySongBtn";
@@ -51,6 +52,7 @@ function SongPage() {
 					<article className="song__item">
 						<img
 							src={getThumbNailUrlFromSongObj(songData)}
+							onError={getFallbackImage}
 							alt="Album cover image"
 							className="song__thumbnail"
 						/>
