@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
-import PlaySongBtn from "./PlaySongBtn";
-import AddToPlayQueue from "./AddToPlayQueue";
-import AddToPlaylist from "./AddToPlaylist";
-import { getBtoaString } from "../utilities/musicUtils";
-import { MusicContext } from "../context/MusicContext";
-import { getSongsByString } from "../services/musicService";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import PlaySongBtn from './PlaySongBtn';
+import AddToPlayQueue from './AddToPlayQueue';
+import AddToPlaylist from './AddToPlaylist';
+import { getBtoaString } from '../utilities/musicUtils';
 
 function SongsList({ songs }) {
   const history = useHistory();

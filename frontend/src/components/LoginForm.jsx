@@ -27,6 +27,7 @@ function LoginForm() {
     try {
       const data = await loginFetch(obj);
       if (data.success) {
+        localStorage.clear();
         localStorage.setItem('token', data.token);
         updateUserContext({
           user: data.user,

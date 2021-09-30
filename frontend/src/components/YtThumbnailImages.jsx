@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getFallbackImage } from "../utilities/musicUtils";
 
 function YtThumbnailImages({ playlist }) {
 	const [firstThumbnail, setFirstThumbnail] = useState(null);
@@ -15,10 +16,10 @@ function YtThumbnailImages({ playlist }) {
 
 	function getFirstThumbnail(content) {
 		if (content[0]?.hasOwnProperty("thumbnails")) {
-      if (content[0].thumbnails.length > 0) {
-        return content[0].thumbnails[0].url;
+			if (content[0].thumbnails.length > 0) {
+				return content[0].thumbnails[0].url;
 			} else {
-        return content[0].thumbnails.url;
+				return content[0].thumbnails.url;
 			}
 		}
 	}
@@ -57,6 +58,7 @@ function YtThumbnailImages({ playlist }) {
 					src={firstThumbnail}
 					alt="Album cover image"
 					className="thumbnail-images__thumbnail"
+					onError={getFallbackImage}
 				/>
 			) : (
 				<div className="thumbnail-images__placeholder"></div>
@@ -66,6 +68,7 @@ function YtThumbnailImages({ playlist }) {
 					src={secondThumbnail}
 					alt="Album cover image"
 					className="thumbnail-images__thumbnail"
+					onError={getFallbackImage}
 				/>
 			) : (
 				<div className="thumbnail-images__placeholder"></div>
@@ -75,6 +78,7 @@ function YtThumbnailImages({ playlist }) {
 					src={thirdThumbnail}
 					alt="Album cover image"
 					className="thumbnail-images__thumbnail"
+					onError={getFallbackImage}
 				/>
 			) : (
 				<div className="thumbnail-images__placeholder"></div>
@@ -84,6 +88,7 @@ function YtThumbnailImages({ playlist }) {
 					src={fourthThumbnail}
 					alt="Album cover image"
 					className="thumbnail-images__thumbnail"
+					onError={getFallbackImage}
 				/>
 			) : (
 				<div className="thumbnail-images__placeholder"></div>

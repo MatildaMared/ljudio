@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getFallbackImage } from "./../utilities/musicUtils";
 
 function ThumbnailImages({ playlist }) {
 	const [firstThumbnail, setFirstThumbnail] = useState(null);
@@ -57,6 +58,7 @@ function ThumbnailImages({ playlist }) {
 					src={firstThumbnail}
 					alt="Album cover image"
 					className="thumbnail-images__thumbnail"
+					onError={getFallbackImage}
 				/>
 			) : (
 				<div className="thumbnail-images__placeholder"></div>
@@ -66,6 +68,7 @@ function ThumbnailImages({ playlist }) {
 					src={secondThumbnail}
 					alt="Album cover image"
 					className="thumbnail-images__thumbnail"
+					onError={getFallbackImage}
 				/>
 			) : (
 				<div className="thumbnail-images__placeholder"></div>
@@ -75,6 +78,7 @@ function ThumbnailImages({ playlist }) {
 					src={thirdThumbnail}
 					alt="Album cover image"
 					className="thumbnail-images__thumbnail"
+					onError={getFallbackImage}
 				/>
 			) : (
 				<div className="thumbnail-images__placeholder"></div>
@@ -84,6 +88,7 @@ function ThumbnailImages({ playlist }) {
 					src={fourthThumbnail}
 					alt="Album cover image"
 					className="thumbnail-images__thumbnail"
+					onError={getFallbackImage}
 				/>
 			) : (
 				<div className="thumbnail-images__placeholder"></div>

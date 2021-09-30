@@ -44,6 +44,7 @@ function SignupForm() {
 			const data = await createAccountFetch(obj);
 
 			if (data.success) {
+				localStorage.clear();
 				localStorage.setItem("token", data.token);
 				updateContext({
 					isAuthenticated: true,
