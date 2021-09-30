@@ -1,6 +1,6 @@
 Ljudio
 
-An audio/video player named Ljudio. You can make your one playlists, follow other users playlist, queue your favourite songs and much more.
+An audio/video player named Ljudio. You can make your own playlists, follow other users playlists, queue your favourite songs and much more.
 Sign up at "/login" and enter a world of great songs and beautiful layout.
 
 Instructions for running code
