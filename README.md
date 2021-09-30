@@ -8,6 +8,9 @@ run "npm install" on both backend (root folder) and frontend
 run "node server" on backend
 run "npm run dev" on frontend
 
+Trello Board
+https://trello.com/b/Bssdmfe4/ljudio
+
 Who wrote the code
 Matilda, Sara, Sofia, Patrik
 
