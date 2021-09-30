@@ -1,5 +1,13 @@
-@use "./../abstracts/variables" as var;
+@use './../abstracts/variables' as var;
 
 .songs-results {
   margin-bottom: 2rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 1rem;
+
+  @media (max-width: 700px) {
+    padding: 0;
+    background-color: transparent;
+  }
 }
