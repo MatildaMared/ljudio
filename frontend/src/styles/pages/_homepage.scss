@@ -79,6 +79,13 @@
 			border-radius: 0.5rem;
 			text-align: center;
 
+      & a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
 			&__title {
 				color: var.$color-primary-light;
 				font-weight: 600;
