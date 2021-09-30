@@ -13,8 +13,6 @@ function Footer() {
 			<p className="footer__copyright">
 				&copy; 2021 Sara, Sofia, Patrik & Matilda
 			</p>
-			{/* <button className="footer__btn">Button Primary</button> */}
-			{/* <button className="footer__btn footer__btn--secondary">Button Secondary</button> */}
 		</footer>
 	);
 }

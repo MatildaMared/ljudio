@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { UserContext } from "./../context/UserContext";
-import { getAllMusicByString } from "../services/musicService";
-import { getPlaylistThumnails } from "../utilities/musicUtils";
-import ThumbnailImages from "../components/ThumbnailImages";
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { UserContext } from './../context/UserContext';
+import { getAllMusicByString } from '../services/musicService';
+import { getPlaylistThumnails } from '../utilities/musicUtils';
+import ThumbnailImages from '../components/ThumbnailImages';
 
 function HomePage() {
   const [userContext, updateUserContext] = useContext(UserContext);
@@ -18,14 +18,14 @@ function HomePage() {
 
   //Get videoId from Local Storage
   const [searchResult, setSearchResult] = useState(
-    localStorage.getItem("searchstring") || ""
+    localStorage.getItem('searchstring') || ''
   );
 
   //Greeting per time of day
   const date = new Date();
   let hours = date.getHours();
   let timeOfDay =
-    hours < 12 ? "Morning" : hours <= 18 && hours >= 12 ? "Afternoon" : "Night";
+    hours < 12 ? 'Morning' : hours <= 18 && hours >= 12 ? 'Afternoon' : 'Night';
 
   //get full data from previous search results
   async function showSearchResults(searchstring) {
@@ -69,13 +69,12 @@ function HomePage() {
                 {playlists &&
                   playlists.map((playlist) => {
                     return (
-                      
                       <div
                         className="home-page__playlists__item"
                         key={playlist._id}
                       >
                         <Link to={`/playlist/${playlist._id}`}>
-                        <ThumbnailImages playlist={playlist}/>
+                          <ThumbnailImages playlist={playlist} />
                           <p className="home-page__playlists__item__title">
                             {playlist.title}
                           </p>
