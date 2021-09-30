@@ -8,18 +8,18 @@ import ThumbnailImages from "../components/ThumbnailImages";
 function HomePage() {
 	const [userContext, updateUserContext] = useContext(UserContext);
 	const playlists = userContext.user.playlists;
-	const [artistData, setArtistData] = useState([]);
-	const [imgData, setImgData] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [secondArtistData, setSecondArtistData] = useState(null);
-	const [secondImgData, setSecondImgData] = useState(null);
-	const [thirdArtistData, setThirdArtistData] = useState(null);
-	const [thirdImgData, setThirdImgData] = useState(null);
+	// const [artistData, setArtistData] = useState([]);
+	// const [imgData, setImgData] = useState([]);
+	// const [isLoading, setIsLoading] = useState(true);
+	// const [secondArtistData, setSecondArtistData] = useState(null);
+	// const [secondImgData, setSecondImgData] = useState(null);
+	// const [thirdArtistData, setThirdArtistData] = useState(null);
+	// const [thirdImgData, setThirdImgData] = useState(null);
 
-	//Get videoId from Local Storage
-	const [searchResult, setSearchResult] = useState(
-		localStorage.getItem("searchstring") || ""
-	);
+	// //Get videoId from Local Storage
+	// const [searchResult, setSearchResult] = useState(
+	// 	localStorage.getItem("searchstring") || ""
+	// );
 
 	//Greeting per time of day
 	const date = new Date();
@@ -27,54 +27,54 @@ function HomePage() {
 	let timeOfDay =
 		hours < 12 ? "Morning" : hours <= 18 && hours >= 12 ? "Afternoon" : "Night";
 
-	//get full data from previous search results
-	async function showSearchResults(searchstring) {
-		const data = await getAllMusicByString(searchstring);
-		setArtistData(data.content[0].name);
-		setImgData(getFirstThumbnail(data));
-		setSecondArtistData(data.content[1].name);
-		setSecondImgData(getSecondThumbnail(data));
-		setThirdArtistData(data.content[2].name);
-		setThirdImgData(getThirdThumbnail(data));
-		setIsLoading(false);
-	}
+	// //get full data from previous search results
+	// async function showSearchResults(searchstring) {
+	// 	const data = await getAllMusicByString(searchstring);
+	// 	setArtistData(data.content[0].name);
+	// 	setImgData(getFirstThumbnail(data));
+	// 	setSecondArtistData(data.content[1].name);
+	// 	setSecondImgData(getSecondThumbnail(data));
+	// 	setThirdArtistData(data.content[2].name);
+	// 	setThirdImgData(getThirdThumbnail(data));
+	// 	setIsLoading(false);
+	// }
 
-	if (searchResult) {
-		showSearchResults(searchResult);
-	}
+	// if (searchResult) {
+	// 	showSearchResults(searchResult);
+	// }
 
-	//get first pictur for searchresult
-	function getFirstThumbnail(data) {
-		if (data.content[0]?.hasOwnProperty("thumbnails")) {
-			if (data.content[0].thumbnails > 0) {
-				return data.content[0].thumbnails.url;
-			} else {
-				return data.content[0].thumbnails[0].url;
-			}
-		}
-	}
+	// //get first pictur for searchresult
+	// function getFirstThumbnail(data) {
+	// 	if (data.content[0]?.hasOwnProperty("thumbnails")) {
+	// 		if (data.content[0].thumbnails > 0) {
+	// 			return data.content[0].thumbnails.url;
+	// 		} else {
+	// 			return data.content[0].thumbnails[0].url;
+	// 		}
+	// 	}
+	// }
 
-	//get second picture for searchresult
-	function getSecondThumbnail(data) {
-		if (data.content[1]?.hasOwnProperty("thumbnails")) {
-			if (data.content[1].thumbnails > 0) {
-				return data.content[1].thumbnails.url;
-			} else {
-				return data.content[1].thumbnails[0].url;
-			}
-		}
-	}
+	// //get second picture for searchresult
+	// function getSecondThumbnail(data) {
+	// 	if (data.content[1]?.hasOwnProperty("thumbnails")) {
+	// 		if (data.content[1].thumbnails > 0) {
+	// 			return data.content[1].thumbnails.url;
+	// 		} else {
+	// 			return data.content[1].thumbnails[0].url;
+	// 		}
+	// 	}
+	// }
 
-	//get third picture for searchresult
-	function getThirdThumbnail(data) {
-		if (data.content[2]?.hasOwnProperty("thumbnails")) {
-			if (data.content[2].thumbnails > 0) {
-				return data.content[2].thumbnails.url;
-			} else {
-				return data.content[2].thumbnails[0].url;
-			}
-		}
-	}
+	// //get third picture for searchresult
+	// function getThirdThumbnail(data) {
+	// 	if (data.content[2]?.hasOwnProperty("thumbnails")) {
+	// 		if (data.content[2].thumbnails > 0) {
+	// 			return data.content[2].thumbnails.url;
+	// 		} else {
+	// 			return data.content[2].thumbnails[0].url;
+	// 		}
+	// 	}
+	// }
 
 	return (
 		<div className="home-page">
@@ -120,7 +120,7 @@ function HomePage() {
 						)}
 					</article>
 
-					{searchResult && (
+					{/* {searchResult && (
 						<article className="home-page__previous-search">
 							<h2 className="home-page__search__heading">
 								Previous search results
@@ -175,8 +175,8 @@ function HomePage() {
 									</ul>
 								</section>
 							)}
-						</article>
-					)}
+						</article> */}
+					{/* )} */}
 				</section>
 			)}
 		</div>
