@@ -341,9 +341,6 @@ async function changeTitle(req, res, next) {
 			returnOriginal: false,
 		});
 
-		// Save changes in user to database
-		//const updatedUser = await user.save();
-
 		// Populate the playlists array before sending data back to user
 		await user.populate("playlists");
 		await user.populate("followedPlaylists");
