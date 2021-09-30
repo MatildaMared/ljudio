@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { UserContext } from "./../context/UserContext";
-import { getAllMusicByString } from "../services/musicService";
-import { getPlaylistThumnails } from "../utilities/musicUtils";
-import ThumbnailImages from "../components/ThumbnailImages";
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { UserContext } from './../context/UserContext';
+import { getAllMusicByString } from '../services/musicService';
+import { getPlaylistThumnails } from '../utilities/musicUtils';
+import ThumbnailImages from '../components/ThumbnailImages';
 
 function HomePage() {
   const [userContext, updateUserContext] = useContext(UserContext);
@@ -18,47 +18,14 @@ function HomePage() {
 
   //Get videoId from Local Storage
   const [searchResult, setSearchResult] = useState(
-    localStorage.getItem("searchstring") || ""
+    localStorage.getItem('searchstring') || ''
   );
 
   //Greeting per time of day
   const date = new Date();
   let hours = date.getHours();
   let timeOfDay =
-    hours < 12 ? "Morning" : hours <= 18 && hours >= 12 ? "Afternoon" : "Night";
-
-  //get first pictur for searchresult
-  function getFirstThumbnail(data) {
-    if (data.content[0]?.hasOwnProperty("thumbnails")) {
-      if (data.content[0].thumbnails > 0) {
-        return data.content[0].thumbnails.url;
-      } else {
-        return data.content[0].thumbnails[0].url;
-      }
-    }
-  }
-
-  //get second picture for searchresult
-  function getSecondThumbnail(data) {
-    if (data.content[1]?.hasOwnProperty("thumbnails")) {
-      if (data.content[1].thumbnails > 0) {
-        return data.content[1].thumbnails.url;
-      } else {
-        return data.content[1].thumbnails[0].url;
-      }
-    }
-  }
-
-  //get third picture for searchresult
-  function getThirdThumbnail(data) {
-    if (data.content[2]?.hasOwnProperty("thumbnails")) {
-      if (data.content[2].thumbnails > 0) {
-        return data.content[2].thumbnails.url;
-      } else {
-        return data.content[2].thumbnails[0].url;
-      }
-    }
-  }
+    hours < 12 ? 'Morning' : hours <= 18 && hours >= 12 ? 'Afternoon' : 'Night';
 
   //get full data from previous search results
   async function showSearchResults(searchstring) {
