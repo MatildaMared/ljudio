@@ -8,16 +8,18 @@ import { MusicContext } from "../context/MusicContext";
 import { getSongsByString } from "../services/musicService";
 
 function SongsList({ songs }) {
-  const [musicContext, updateMusicContext] = useContext(MusicContext);
   const history = useHistory();
+  const [musicContext, updateMusicContext] = useContext(MusicContext);
   const [showMoreResults, setShowMoreResults] = useState(false);
   const [moreResults, setMoreResults] = useState([]);
 
   async function handleClick() {
     const string = `${musicContext.searchString}?next=${musicContext.fetchResult.next}`;
     const data = await getSongsByString(string);
-    console.log("data", data);
     setMoreResults(data.content);
+    updateMusicContext({
+      fetchResult: data,
+    });
     setShowMoreResults(true);
   }
 
@@ -28,13 +30,7 @@ function SongsList({ songs }) {
 
   return (
     <section className="songslist">
-      <article className="songslist__header">
-        <h2 className="songslist__heading">Songs</h2>
-        <button className="songslist__btn" onClick={() => handleClick()}>
-          More results
-        </button>
-      </article>
-
+      <h2 className="songslist__heading">Songs</h2>
       {!showMoreResults && (
         <ul className="songslist__list">
           {songs &&
@@ -82,9 +78,11 @@ function SongsList({ songs }) {
         </ul>
       )}
       <article className="songslist__footer">
-        <button className="songslist__btn" onClick={() => handleClick()}>
-          More results
-        </button>
+        {musicContext.fetchResult.next && (
+          <button className="songslist__btn" onClick={() => handleClick()}>
+            More results
+          </button>
+        )}
       </article>
     </section>
   );
