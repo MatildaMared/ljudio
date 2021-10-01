@@ -27,6 +27,7 @@ const Player = () => {
 	const volumeMessageRef = useRef();
 	const [isMuted, setIsMuted] = useState(false);
 	const [videoOn, setVideoOn] = useState(false);
+	const [currentVolume, setCurrentVolume] = useState(100);
 	const [previousVolume, setPreviousVolume] = useState(100);
 	const [artistName, setArtistName] = useState(null);
 	const [nextArtistName, setNextArtistName] = useState(null);
@@ -148,6 +149,7 @@ const Player = () => {
 	function play() {
 		player.playVideo();
 		setIsPlaying(true);
+		console.log("Play");
 	}
 
 	function pause() {
@@ -155,7 +157,7 @@ const Player = () => {
 		setIsPlaying(false);
 	}
 
-	function volumeUp() {
+	/*function volumeUp() {
 		clearTimeout(volumeMessageTimeout);
 		const currentVolume = player.getVolume();
 		player.setVolume(currentVolume + 10);
@@ -166,9 +168,9 @@ const Player = () => {
 		} else {
 			setVolumeMessage(`Volume: ${currentVolume + 10}`);
 		}
-	}
+	}*/
 
-	function volumeDown() {
+	/*function volumeDown() {
 		clearTimeout(volumeMessageTimeout);
 		const currentVolume = player.getVolume();
 		player.setVolume(currentVolume - 10);
@@ -179,18 +181,57 @@ const Player = () => {
 			setPreviousVolume(player.getVolume());
 			setVolumeMessage(`Volume: ${currentVolume - 10}`);
 		}
+	}*/
+
+	// function volumeChange() {
+	// 	clearTimeout(volumeMessageTimeout);
+	// 	setPreviousVolume(player.getVolume());
+	// 	console.log(currentVolume);
+
+	// 	if (currentVolume <= 0) {
+	// 		setIsMuted(true);
+	// 		setVolumeMessage("Muted");
+	// 	}
+	// 	else if (currentVolume >= 100) {
+	// 		setVolumeMessage(`Volume max`);
+	// 	}
+	// 	else {
+	// 		setIsMuted(false);
+	// 		setVolumeMessage("Unmuted");
+	// 	}
+	// }
+
+	function changeVolume(volume) {
+		clearTimeout(volumeMessageTimeout);
+		setPreviousVolume(player.getVolume());
+		console.log(currentVolume);
+
+		if (volume <= 0) {
+			setIsMuted(true);
+			setVolumeMessage("Muted");
+		}
+		else if (volume >= 100) {
+			setVolumeMessage(`Volume max`);
+		}
+		else if (isMuted == true) {
+			setIsMuted(false);
+			setVolumeMessage("Unmuted");
+		}
 	}
 
 	// Mute/Unmute function
 	function volumeMute() {
 		clearTimeout(volumeMessageTimeout);
+		console.log(player);
 		if (isMuted) {
 			player.setVolume(previousVolume);
+			setCurrentVolume(previousVolume);
 			setIsMuted(false);
 			setVolumeMessage("Unmuted");
 		} else {
 			setPreviousVolume(player.getVolume());
 			player.setVolume(0);
+			setCurrentVolume(0);
 			setIsMuted(true);
 			setVolumeMessage("Muted");
 		}
@@ -257,27 +298,42 @@ const Player = () => {
 					onPlay={onVideoPlay}
 					onEnd={onVideoEnd}
 					onPause={onVideoPause}
+					//onVolumeChange={volumeChange}
 				/>
 				{queue.length > 0 && (
 					<div className="player__btns">
 						{/* Volume Buttons */}
 						<section className="player__volume-btns">
 							{/* Volume Down */}
-							<button onClick={volumeDown} className="player__btn">
+							{/*<button onClick={volumeDown} className="player__btn">
 								<MdVolumeDown className="player__icon" />
-							</button>
+							</button>*/}
 							{/* Volume Mute Toggler */}
 							<button onClick={volumeMute} className="player__btn">
 								{isMuted === true ? (
 									<MdVolumeOff className="player__icon" />
 								) : (
-									<MdVolumeMute className="player__icon" />
+									<MdVolumeUp className="player__icon" />
 								)}
 							</button>
+							{/* Volume Bar */}
+							<input
+								type="range"
+								min="0"
+								max="100"
+								value={currentVolume || 0}
+								className="player__volumeslider"
+								id="volumeRange"
+								onChange={(e) => {
+									setCurrentVolume(e.target.value);
+									player.setVolume(e.target.value);
+									changeVolume(e.target.value);
+								}}
+							/>
 							{/* Volume Up */}
-							<button onClick={volumeUp} className="player__btn">
+							{/*<button onClick={volumeUp} className="player__btn">
 								<MdVolumeUp className="player__icon" />
-							</button>
+							</button>*/}
 							{volumeMessage && (
 								<span className="player__volume-message" ref={volumeMessageRef}>
 									{volumeMessage}
