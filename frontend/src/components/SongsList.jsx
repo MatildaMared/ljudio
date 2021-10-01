@@ -21,6 +21,7 @@ function SongsList({ songs }) {
     updateMusicContext({
       fetchResult: data,
     });
+    window.scrollTo(0, 0);
   }
 
   function onClickHandler(songName, artistName) {
