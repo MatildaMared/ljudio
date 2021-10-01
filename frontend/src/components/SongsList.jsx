@@ -1,10 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useContext, useState} from 'react';
+import { MusicContext } from '../context/MusicContext';
 import { useHistory } from 'react-router-dom';
 import PlaySongBtn from './PlaySongBtn';
 import AddToPlayQueue from './AddToPlayQueue';
 import AddToPlaylist from './AddToPlaylist';
 import { getBtoaString } from '../utilities/musicUtils';
+import { getSongsByString } from '../services/musicService';
 
 function SongsList({ songs }) {
   const history = useHistory();
@@ -16,10 +17,10 @@ function SongsList({ songs }) {
     const string = `${musicContext.searchString}?next=${musicContext.fetchResult.next}`;
     const data = await getSongsByString(string);
     setMoreResults(data.content);
+    setShowMoreResults(true);
     updateMusicContext({
       fetchResult: data,
     });
-    setShowMoreResults(true);
   }
 
   function onClickHandler(songName, artistName) {
